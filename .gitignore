@@ -1,2 +1,11 @@
-/target
-/.idea
+/target/
+/.idea/
+/out/
+
+/shelf/
+/workspace.xml
+
+/httpRequests/
+
+/dataSources/
+/dataSources.local.xml
