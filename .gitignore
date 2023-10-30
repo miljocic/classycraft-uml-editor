@@ -1,5 +1,6 @@
-/target
-/.idea
+/target/
+/.idea/
+/out/
 # Default ignored files
 /shelf/
 /workspace.xml
