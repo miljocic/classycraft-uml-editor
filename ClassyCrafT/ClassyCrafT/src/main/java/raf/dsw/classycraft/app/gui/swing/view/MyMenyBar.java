@@ -10,9 +10,9 @@ public class MyMenyBar extends JMenuBar {
     public MyMenyBar(){
         JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
-        ExitAction ea = new ExitAction();
-        fileMenu.add(ea);
-        add(fileMenu);
+        fileMenu.add(MainFrame.getInstance().getActionManager().getExitAction());
+
+
     }
 
 }

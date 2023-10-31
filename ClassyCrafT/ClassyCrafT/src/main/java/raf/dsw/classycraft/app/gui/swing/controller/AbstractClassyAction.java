@@ -13,9 +13,7 @@ public abstract class AbstractClassyAction extends AbstractAction {
         Icon icon = null;
 
         if (imageURL != null) {
-            Image img = new ImageIcon(imageURL).getImage();
-            Image newImg = img.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-            icon = new ImageIcon(newImg);
+            icon = new ImageIcon(imageURL);
         }
         else {
             System.err.println("Resource not found: " + fileName);

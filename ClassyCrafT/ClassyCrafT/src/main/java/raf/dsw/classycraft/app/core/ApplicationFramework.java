@@ -1,8 +1,14 @@
 package raf.dsw.classycraft.app.core;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
+@Getter
+@Setter
 public class ApplicationFramework {
+
+    protected Gui gui;
 
     private static ApplicationFramework instance;
 
@@ -12,8 +18,9 @@ public class ApplicationFramework {
 
     }
 
-    public void initialize(){
-        MainFrame.getInstance().setVisible(true);
+    public void run(){this.gui.start();}
+    public void initialize(Gui gui ){
+        this.gui = gui;
     }
 
     public static ApplicationFramework getInstance(){
