@@ -9,6 +9,7 @@ import lombok.Setter;
 public class ActionManager {
 
     private ExitAction exitAction;
+    private NewProjectAction newProjectAction;
     private AboutUsAction aboutUsAction;
 
     public ActionManager() {
@@ -16,8 +17,11 @@ public class ActionManager {
     }
 
     private void initialiseActions(){
-    exitAction = new ExitAction();
-    aboutUsAction = new AboutUsAction();
+
+        exitAction = new ExitAction();
+        newProjectAction = new NewProjectAction();
+        aboutUsAction = new AboutUsAction();
+
 
 
     }

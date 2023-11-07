@@ -55,7 +55,17 @@ public class AboutUsAction extends AbstractClassyAction {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(panel);
         frame.pack();
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+
         frame.setVisible(true);
+
+
+
+
 
     }
 }

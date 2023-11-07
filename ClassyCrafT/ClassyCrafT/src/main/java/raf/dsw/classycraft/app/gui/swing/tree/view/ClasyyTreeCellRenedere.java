@@ -1,4 +1,4 @@
 package raf.dsw.classycraft.app.gui.swing.tree.view;
 
-public class ClassyTreeImplementation {
+public class ClasyyTreeCellRenedere {
 }

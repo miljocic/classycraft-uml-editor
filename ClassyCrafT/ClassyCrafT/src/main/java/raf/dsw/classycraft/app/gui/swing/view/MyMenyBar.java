@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.gui.swing.controller.ExitAction;
 import raf.dsw.classycraft.app.gui.swing.controller.AboutUsAction;
+import raf.dsw.classycraft.app.gui.swing.controller.NewProjectAction;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,7 @@ public class MyMenyBar extends JMenuBar {
         JMenu fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
         fileMenu.add(MainFrame.getInstance().getActionManager().getExitAction());
+        fileMenu.add(MainFrame.getInstance().getActionManager().getNewProjectAction());
 
         //Kreiranje Edit opcije
         JMenu editMenu = new JMenu("Edit");
@@ -22,13 +24,16 @@ public class MyMenyBar extends JMenuBar {
         //Kreiranje AboutUs akcije
         AbstractAction aboutUsAction = new AboutUsAction();
         JMenuItem aboutUsMenuItem = new JMenuItem(aboutUsAction);
-
+        NewProjectAction newProjectAction = new NewProjectAction();
+        JMenuItem newProjectMenuItem = new JMenuItem(newProjectAction);
         //Dodavanje AboutUs akcije na Edit menu
         editMenu.add(aboutUsMenuItem);
+        editMenu.add(newProjectAction);
 
         //Dodavanje File i Edit na menu bar
         add(fileMenu);
         add(editMenu);
+
     }
 
 }

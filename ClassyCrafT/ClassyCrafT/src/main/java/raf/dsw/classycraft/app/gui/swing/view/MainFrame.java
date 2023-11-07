@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class MainFrame extends JFrame {
     private ActionManager actionManager;
     private JMenuBar menu;
     private JToolBar toolBar;
+    private ClassyTree classyTree;
 
     private MainFrame(){
 
