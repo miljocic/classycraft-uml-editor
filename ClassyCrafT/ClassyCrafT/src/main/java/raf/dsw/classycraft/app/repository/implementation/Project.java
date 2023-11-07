@@ -8,7 +8,6 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 @Setter
 public class Project extends ClassyNode {
 
-
     private String authorName;
     private String directory;
 
