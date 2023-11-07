@@ -15,6 +15,10 @@ public class AboutUsAction extends AbstractClassyAction {
     }
 
     @Override
+    public Icon loadIcon(String fileName) {
+        return super.loadIcon(fileName);
+    }
+
     public void loadIcon() {
         // Za sada nije rečeno definisana ikona, time je i prazna
     }
