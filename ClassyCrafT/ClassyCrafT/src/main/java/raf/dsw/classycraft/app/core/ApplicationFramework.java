@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 public class ApplicationFramework {
 
     protected Gui gui;
+    protected ClassyRepository classyRepository;
 
     private static ApplicationFramework instance;
 
@@ -19,8 +20,9 @@ public class ApplicationFramework {
     }
 
     public void run(){this.gui.start();}
-    public void initialize(Gui gui ){
+    public void initialize(Gui gui, ClassyRepository classyRepository ){
         this.gui = gui;
+        this.classyRepository = classyRepository;
     }
 
     public static ApplicationFramework getInstance(){
