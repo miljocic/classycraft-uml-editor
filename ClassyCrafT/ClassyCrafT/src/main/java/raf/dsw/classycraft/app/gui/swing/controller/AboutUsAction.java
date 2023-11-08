@@ -56,6 +56,7 @@ public class AboutUsAction extends AbstractClassyAction {
         frame.getContentPane().add(panel);
         frame.pack();
 
+        //Setovanje na sredinu monitora
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
