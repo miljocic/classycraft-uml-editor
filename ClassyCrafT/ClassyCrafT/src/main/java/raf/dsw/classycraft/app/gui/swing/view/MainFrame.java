@@ -6,13 +6,15 @@ import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
-import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
+import raf.dsw.classycraft.app.logg.messages.ErrorType;
+import raf.dsw.classycraft.app.logg.messages.Message;
+import raf.dsw.classycraft.app.observer.ISubscriber;
 
 import javax.swing.*;
 import java.awt.*;
 @Getter
 @Setter
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
 
 
 
@@ -20,15 +22,12 @@ public class MainFrame extends JFrame {
     private ActionManager actionManager;
     private JMenuBar menu;
     private JToolBar toolBar;
-    private ClassyTree classyTree;
-
-
-
+    private ClassyTree tree;
 
     private void initialize(){
 
         actionManager = new ActionManager();
-        classyTree = new ClassyTreeImplementation();
+        tree = new ClassyTreeImplementation();
         initializeGui();
     }
     private void initializeGui(){
@@ -49,7 +48,7 @@ public class MainFrame extends JFrame {
         add(toolBar, BorderLayout.NORTH);
 
         //Dodavanje sidebara za JTree:
-        JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
+        JTree projectExplorer = tree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
         JPanel desktop = new JPanel();
 
         JScrollPane scroll=new JScrollPane(projectExplorer);
@@ -77,4 +76,16 @@ public class MainFrame extends JFrame {
         return instance;
     }
 
+    @Override
+    public void update(Object notification) {
+        int update;
+        String[] dugme = {"U redu"};
+        if (((Message) notification).getErrorType().equals(ErrorType.ERROR))
+            update = JOptionPane.ERROR_MESSAGE;
+        else if(((Message) notification).getErrorType().equals(ErrorType.NO_PROJECT_SELECTED))
+            update = JOptionPane.INFORMATION_MESSAGE;
+        else
+            update = JOptionPane.WARNING_MESSAGE;
+        this.add(new JOptionPane(JOptionPane.showOptionDialog(this, ((Message)notification).getText(), "Greska", JOptionPane.YES_NO_CANCEL_OPTION, update, null, dugme, dugme[0])), BorderLayout.CENTER);
+    }
 }

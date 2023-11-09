@@ -17,5 +17,6 @@ public enum ErrorType {
     CANNOT_DELETE_FILE,
     RESOURCE_NOT_FOUND,
     COMPONENT_NOT_SELECTED,
-    SAVE_ERROR
+    SAVE_ERROR,
+
 }

@@ -5,9 +5,12 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
 public class ProjectExplorer extends ClassyNodeComposite {
 
+    // Parent == null
+
     public ProjectExplorer(String name) {
         super(name, null);
     }
+
     @Override
     public void addChild(ClassyNode child) {
         if (child != null &&  child instanceof Project){
@@ -16,5 +19,10 @@ public class ProjectExplorer extends ClassyNodeComposite {
                 this.getChildren().add(project);
             }
         }
+    }
+
+    @Override
+    public void deleteChild(ClassyNode child) {
+
     }
 }

@@ -23,6 +23,7 @@ public abstract class ClassyNodeComposite extends ClassyNode{
     }
 
     public abstract void addChild(ClassyNode child);
+    public abstract void deleteChild(ClassyNode child);
 
     public ClassyNode getChildByName(String name) {
         for (ClassyNode child: this.getChildren()) {

@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.tree;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
@@ -11,12 +13,12 @@ import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import java.util.Random;
-
+@Getter
+@Setter
 public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyTreeView treeView;
     private DefaultTreeModel treeModel;
-
 
     @Override
     public ClassyTreeView generateTree(ProjectExplorer projectExplorer) {

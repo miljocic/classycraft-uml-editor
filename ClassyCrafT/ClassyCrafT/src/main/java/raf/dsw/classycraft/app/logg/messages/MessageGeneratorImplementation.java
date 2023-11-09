@@ -1,13 +1,17 @@
 package raf.dsw.classycraft.app.logg.messages;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 public class MessageGeneratorImplementation implements MessageGenerator{
 
     private Message message;
-    private List<ISubscriber> subslist; //lista za cuvanje subscribera
+    private List<ISubscriber> subslist = new ArrayList<>(); //lista za cuvanje subscribera
     @Override
     public void generateMessage(ErrorType errorType) {
 
@@ -68,6 +72,6 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
         private void createMessage(String tekst, ErrorType errorType) {
         this.message = new Message(tekst, errorType);
-        notifySubscribers(this);
+        notifySubscribers(this.message);
     }
 }

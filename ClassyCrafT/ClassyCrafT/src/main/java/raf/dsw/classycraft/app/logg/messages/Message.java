@@ -2,7 +2,6 @@ package raf.dsw.classycraft.app.logg.messages;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
