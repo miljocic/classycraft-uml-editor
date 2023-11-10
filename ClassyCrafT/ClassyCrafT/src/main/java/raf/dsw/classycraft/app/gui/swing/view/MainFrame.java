@@ -84,7 +84,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         String[] dugme = {"U redu"};
         if (((Message) notification).getErrorType().equals(ErrorType.ERROR))
             update = JOptionPane.ERROR_MESSAGE;
-        else if(((Message) notification).getErrorType().equals(ErrorType.NO_PROJECT_SELECTED))
+        else if(((Message) notification).getErrorType().equals(ErrorType.NODE_NOT_SELECTED))
             update = JOptionPane.INFORMATION_MESSAGE;
         else
             update = JOptionPane.WARNING_MESSAGE;

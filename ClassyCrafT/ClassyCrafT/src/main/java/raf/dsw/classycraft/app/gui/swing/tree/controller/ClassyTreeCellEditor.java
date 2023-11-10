@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.tree.controller;
 
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
+import raf.dsw.classycraft.app.logg.messages.ErrorType;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellEditor;
@@ -43,6 +45,25 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
         clicked.setName(e.getActionCommand());
 
+        if (!(clickedOn instanceof ClassyTreeItem))
+            return;
+
+        //Ime ne moze biti prazno!
+        if(edit.getText().equals("")) {
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NAME_CANNOT_BE_EMPTY);
+            return;
+        }
+        clicked.setName(edit.getText());
+        stopCellEditing();
+
+
+
     }
+
+    @Override
+    public boolean stopCellEditing() {
+        return super.stopCellEditing();
+    }
+
 
 }
