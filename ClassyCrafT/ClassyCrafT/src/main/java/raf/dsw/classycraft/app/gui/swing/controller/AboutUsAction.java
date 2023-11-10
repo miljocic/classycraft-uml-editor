@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.awt.event.ActionEvent;
 
@@ -10,6 +11,8 @@ public class AboutUsAction extends AbstractClassyAction {
 
     //Konstruktor
     public AboutUsAction() {
+        putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));
+        putValue(SMALL_ICON, loadIcon("/images/aboutUs.png"));
         putValue(Action.NAME, "About Us");
         putValue(Action.SHORT_DESCRIPTION, "Informacije o timu");
     }

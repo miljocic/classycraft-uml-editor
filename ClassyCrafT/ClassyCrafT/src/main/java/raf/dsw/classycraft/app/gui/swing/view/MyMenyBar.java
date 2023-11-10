@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
 import raf.dsw.classycraft.app.gui.swing.controller.AboutUsAction;
+import raf.dsw.classycraft.app.gui.swing.controller.DeleteAction;
 import raf.dsw.classycraft.app.gui.swing.controller.NewAction;
 
 import javax.swing.*;
@@ -25,9 +26,12 @@ public class MyMenyBar extends JMenuBar {
         JMenuItem aboutUsMenuItem = new JMenuItem(aboutUsAction);
         NewAction newAction = new NewAction();
         JMenuItem newProjectMenuItem = new JMenuItem(newAction);
+        DeleteAction deleteAction = new DeleteAction();
+
         //Dodavanje AboutUs akcije na Edit menu
         editMenu.add(aboutUsMenuItem);
         editMenu.add(newAction);
+        editMenu.add(deleteAction);
 
         //Dodavanje File i Edit na menu bar
         add(fileMenu);

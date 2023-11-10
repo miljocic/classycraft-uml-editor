@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.logg.messages.Message;
 import raf.dsw.classycraft.app.observer.ISubscriber;
+import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JMenuBar menu;
     private JToolBar toolBar;
     private ClassyTree tree;
+    private JTree projectExplorer;
 
     private void initialize(){
 
@@ -88,4 +90,5 @@ public class MainFrame extends JFrame implements ISubscriber {
             update = JOptionPane.WARNING_MESSAGE;
         this.add(new JOptionPane(JOptionPane.showOptionDialog(this, ((Message)notification).getText(), "Greska", JOptionPane.YES_NO_CANCEL_OPTION, update, null, dugme, dugme[0])), BorderLayout.CENTER);
     }
+
 }

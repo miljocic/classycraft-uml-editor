@@ -7,6 +7,10 @@ import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.repository.factory.ClassyNodeFactory;
+import raf.dsw.classycraft.app.repository.factory.Utils;
+import raf.dsw.classycraft.app.repository.implementation.Diagram;
+import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
@@ -42,15 +46,15 @@ public class ClassyTreeImplementation implements ClassyTree{
         
     }
 
+    @Override
+    public void delete(ClassyTreeItem child) {
+
+    }
+
     private ClassyNode createChild(ClassyNode parent) {
-            /*
-            Daje random broj kao iz GeruMapa, mozda probamo da bude:
-            Projekat 1, Projekat 2, Projekat 3...
-             */
-        if(parent instanceof ProjectExplorer){
-            return new Project("Project"+ new Random().nextInt(100), parent);
-        }
-        return null;
+
+        ClassyNodeFactory nodeFactory = Utils.getFactory(parent);
+        return nodeFactory.getClassyNode(parent);
     }
 
     @Override

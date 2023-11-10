@@ -18,7 +18,7 @@ public class ClassyTreeItem  extends DefaultMutableTreeNode {
 
     @Override
     public String toString() {
-        return classyNode.getName();
+            return classyNode.getName();
     }
 
     public void setName(String name) {

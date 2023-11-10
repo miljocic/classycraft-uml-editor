@@ -42,7 +42,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         } else if (ErrorType.RESOURCE_NOT_FOUND.equals(errorType)) {
             createMessage("Ne postoji putanja!", errorType);
         } else if (ErrorType.COMPONENT_NOT_SELECTED.equals(errorType)) {
-            createMessage("Nije selektovana ni jedna komponenta!", errorType);
+            createMessage("Nije selektovana nijedna komponenta!", errorType);
         } else if (ErrorType.SAVE_ERROR.equals(errorType)) {
             createMessage("Greska pri cuvanju podataka", errorType);
         }

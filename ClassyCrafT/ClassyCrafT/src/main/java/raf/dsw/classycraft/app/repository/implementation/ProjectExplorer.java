@@ -23,6 +23,10 @@ public class ProjectExplorer extends ClassyNodeComposite {
 
     @Override
     public void deleteChild(ClassyNode child) {
-
+        Project project = (Project) child;
+        if(this.getChildren().contains(project))
+        {
+            this.getChildren().remove(project);
+        }
     }
 }

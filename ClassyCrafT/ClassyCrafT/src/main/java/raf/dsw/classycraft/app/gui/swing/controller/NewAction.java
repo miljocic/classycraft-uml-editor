@@ -32,5 +32,7 @@ public class NewAction extends AbstractClassyAction{
         }
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getTree().getSelectedNode();
         MainFrame.getInstance().getTree().addChild(selected);
+
+
     }
 }
