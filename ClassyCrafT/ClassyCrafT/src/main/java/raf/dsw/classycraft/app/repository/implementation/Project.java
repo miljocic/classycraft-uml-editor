@@ -9,9 +9,9 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 @Setter
 public class Project extends ClassyNodeComposite {
 
-    private static int counter=1;
     private String authorName;
     private String directory;
+
 
 
 //    public Project(String name, ClassyNode parent, String authorName, String directory) {
@@ -46,4 +46,14 @@ public class Project extends ClassyNodeComposite {
             this.getChildren().remove(paket);
         }
     }
+
+    public void setAuthor(String author) {
+        this.authorName = author;
+        //notifySubscriber(this);
+    }
+
+    public void setFilePath(String directory) {
+        this.directory = directory;
+    }
+
 }

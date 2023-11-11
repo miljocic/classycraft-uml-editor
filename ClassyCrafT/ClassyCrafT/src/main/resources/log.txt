@@ -50,3 +50,5 @@
 [CANNOT_ADD_CHILD] [null] - [Na dijagram se ne moze dalje dodavati]
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[NAME_CANNOT_BE_EMPTY] [null] - [Ime ne moze biti prazno!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]

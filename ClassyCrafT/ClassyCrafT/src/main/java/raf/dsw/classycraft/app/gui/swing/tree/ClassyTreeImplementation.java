@@ -46,6 +46,8 @@ public class ClassyTreeImplementation implements ClassyTree{
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
+
+
         
     }
 
@@ -88,6 +90,10 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
     private ClassyNode createChild(ClassyNode parent) {
+
+        /*
+        serijalizacija
+         */
 
         ClassyNodeFactory nodeFactory = Utils.getFactory(parent);
         return nodeFactory.getClassyNode(parent);

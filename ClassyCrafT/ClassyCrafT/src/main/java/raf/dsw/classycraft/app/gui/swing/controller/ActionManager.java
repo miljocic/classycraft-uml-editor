@@ -12,6 +12,7 @@ public class ActionManager {
     private NewAction newAction;
     private AboutUsAction aboutUsAction;
     private DeleteAction deleteAction;
+    private AuthorAction authorAction;
 
     public ActionManager() {
         initialiseActions();
@@ -23,6 +24,7 @@ public class ActionManager {
         newAction = new NewAction();
         aboutUsAction = new AboutUsAction();
         deleteAction = new DeleteAction();
+        authorAction = new AuthorAction();
 
 
     }

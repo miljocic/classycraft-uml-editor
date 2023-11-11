@@ -53,6 +53,11 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NAME_CANNOT_BE_EMPTY);
             return;
         }
+
+        /*
+        Node already exists
+         */
+
         clicked.setName(edit.getText());
         stopCellEditing();
 
