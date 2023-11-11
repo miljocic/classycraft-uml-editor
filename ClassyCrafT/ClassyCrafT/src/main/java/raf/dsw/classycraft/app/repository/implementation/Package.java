@@ -1,11 +1,21 @@
 package raf.dsw.classycraft.app.repository.implementation;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
-public class Package extends ClassyNodeComposite {  // ima JFPane i neke tabove
+@Getter
+@Setter
+
+public class Package extends ClassyNodeComposite {
+
+    private static int counter = 1;
+
     public Package(String name, ClassyNode parent) {
         super(name, parent);
+        setName(name+counter);
+        counter++;
     }
 
     @Override

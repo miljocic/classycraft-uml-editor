@@ -27,8 +27,8 @@ public class AuthorAction extends AbstractClassyAction{
         }
 
         if(selected.getClassyNode() instanceof Project){
-            String newAuthor = JOptionPane.showInputDialog("Enter author name:");
-            ((Project)selected.getClassyNode()).setAuthor(newAuthor);
+            String newAuthor = JOptionPane.showInputDialog("Promeni autora projekta:");
+            ((Project)selected.getClassyNode()).setAuthorName(newAuthor);
         }
 
     }

@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.controller.ActionManager;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTree;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
+import raf.dsw.classycraft.app.gui.swing.worskspace.WorkSpaceImplementation;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.logg.messages.Message;
 import raf.dsw.classycraft.app.observer.ISubscriber;
@@ -13,6 +14,9 @@ import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class MainFrame extends JFrame implements ISubscriber {
@@ -25,11 +29,16 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JToolBar toolBar;
     private ClassyTree tree;
     private JTree projectExplorer;
+    private JSplitPane splitPane;
+    private List<PackageView> packageViewList;
+    private WorkSpaceImplementation workspace;
+
 
     private void initialize(){
 
         actionManager = new ActionManager();
         tree = new ClassyTreeImplementation();
+        packageViewList = new ArrayList<PackageView>();
         initializeGui();
     }
     private void initializeGui(){
@@ -53,12 +62,16 @@ public class MainFrame extends JFrame implements ISubscriber {
         JTree projectExplorer = tree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
         JPanel desktop = new JPanel();
 
+        workspace = new WorkSpaceImplementation();
+
         JScrollPane scroll=new JScrollPane(projectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-        getContentPane().add(split,BorderLayout.CENTER);
-        split.setDividerLocation(250);
-        split.setOneTouchExpandable(true);
+
+        splitPane =new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        getContentPane().add(splitPane,BorderLayout.CENTER);
+        splitPane.setDividerLocation(250);
+        splitPane.setOneTouchExpandable(true);
+
 
     }
 
