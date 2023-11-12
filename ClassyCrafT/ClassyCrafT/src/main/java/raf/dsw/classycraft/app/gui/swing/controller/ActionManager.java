@@ -13,6 +13,7 @@ public class ActionManager {
     private AboutUsAction aboutUsAction;
     private DeleteAction deleteAction;
     private AuthorAction authorAction;
+    private MyMouseListener myMouseListener;
 
     public ActionManager() {
         initialiseActions();
@@ -25,6 +26,7 @@ public class ActionManager {
         aboutUsAction = new AboutUsAction();
         deleteAction = new DeleteAction();
         authorAction = new AuthorAction();
+        myMouseListener = new MyMouseListener();
 
 
     }

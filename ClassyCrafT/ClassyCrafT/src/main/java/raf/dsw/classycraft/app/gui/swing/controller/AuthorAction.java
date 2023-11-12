@@ -24,6 +24,8 @@ public class AuthorAction extends AbstractClassyAction{
         if(selected == null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_NOT_SELECTED);
             return;
+        }else if(!(selected.getClassyNode() instanceof Project)){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.PROJECT_NOT_SELECTED);
         }
 
         if(selected.getClassyNode() instanceof Project){

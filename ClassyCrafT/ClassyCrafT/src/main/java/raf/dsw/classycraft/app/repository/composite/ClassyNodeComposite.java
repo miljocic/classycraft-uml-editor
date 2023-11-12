@@ -34,5 +34,7 @@ public abstract class ClassyNodeComposite extends ClassyNode{
         return null;
     }
 
-
+    public List<ClassyNode> getChildren() {
+        return children;
+    }
 }

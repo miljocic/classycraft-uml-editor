@@ -2,15 +2,21 @@ package raf.dsw.classycraft.app.repository.implementation;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.observer.IPublisher;
+import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
+
+
 
 @Getter
 @Setter
 
-public class Package extends ClassyNodeComposite {
+public class Package extends ClassyNodeComposite implements IPublisher{
 
     private static int counter = 1;
+    private String author;
+    private Project parentProject;
 
     public Package(String name, ClassyNode parent) {
         super(name, parent);
@@ -36,15 +42,28 @@ public class Package extends ClassyNodeComposite {
 
     @Override
     public void deleteChild(ClassyNode child) {
-        Package paket = (Package) child;
-        if(this.getChildren().contains(paket))
-        {
-            this.getChildren().remove(paket);
+        if (child != null && this.getChildren().contains(child)) {
+            this.getChildren().remove(child);
         }
-        Diagram diagram = (Diagram) child;
-        if(this.getChildren().contains(diagram))
-        {
-            this.getChildren().remove(diagram);
+    }
+    @Override
+    public void addSubscriber(ISubscriber sub) {
+        if (sub == null || subs.contains(sub)) return;
+        subs.add(sub);
+    }
+
+    @Override
+    public void removeSubscriber(ISubscriber sub) {
+        if (sub == null || !(subs.contains((sub)))) return;
+        subs.remove(sub);
+    }
+
+    @Override
+    public void notifySubscribers(Object notification) {
+        if (notification == null || subs.isEmpty()) return;
+        for (ISubscriber s : subs) {
+            s.update(this);
+
         }
     }
 }

@@ -2,103 +2,76 @@ package raf.dsw.classycraft.app.gui.swing.view;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
-import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
+
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
-import raf.dsw.classycraft.app.repository.implementation.Project;
+import raf.dsw.classycraft.app.repository.implementation.Package;
+
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Getter
 @Setter
 
-public class PackageView extends JPanel {
+public class PackageView extends JPanel implements ISubscriber {
 
     private JTabbedPane jtp;
-    private List<DiagramView> tabs ;
     private JLabel projectName;
     private JLabel author;
-    private ClassyNodeComposite paket;
-    private Project project;
+    private Package paket;
 
-    public PackageView(){
-
-        jtp = new JTabbedPane();
+    public PackageView() {
+        this.paket = (Package) MainFrame.getInstance().getTree().getSelectedNode().getClassyNode();
+        this.paket.addSubscriber(this);
+        this.projectName = new JLabel(this.paket.getName());
+        this.author = new JLabel(this.paket.getAuthor());
+        this.jtp = new JTabbedPane(SwingConstants.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
         add(jtp);
-
-        projectName = new JLabel();
-        projectName.setVisible(true);
+        for (ClassyNode node : paket.getChildren()) {
+            if (node instanceof Diagram) {
+                addTab((Diagram) node);
+            }
+        }
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(projectName);
-
-        author = new JLabel();
-        author.setVisible(true);
         add(author);
-
-        tabs = new ArrayList<>();
-
-        BoxLayout boxL = new BoxLayout(this,BoxLayout.Y_AXIS);
-        setLayout(boxL);
-
+        add(jtp);
     }
+    private void addTab(Diagram diagram) {
+        DiagramView diagramView = new DiagramView(diagram);
+        jtp.addTab(diagram.getName(), diagramView);
+    }
+    public DiagramView getDiagramView() {
+        return (DiagramView) jtp.getSelectedComponent();
+    }
+    @Override
+    public void update(Object notification) {
+        if (notification instanceof Package) {
+            Package paket = (Package) notification;
 
-    public void openTabForDiagram(Diagram diagram) {
-        if (diagram != null) {
-            DiagramView diagramView = new DiagramView(diagram);
-            tabs.add(diagramView);
-            jtp.add(diagram.getName(), diagramView);
+            projectName.setText("Projekat: " + paket.getName());
+            author.setText("Autor: " + paket.getAuthor());
+
+            this.revalidate();
+            this.repaint();
+        } else if (notification instanceof Diagram) {
+            // Update diagrams in the tabbed pane
+            Diagram updatedDiagram = (Diagram) notification;
+            revalidateTabbedPane(updatedDiagram);
         }
     }
-
-    public void closeTabForDiagram(Diagram diagram) {
-        if (diagram != null) {
-            int indexToRemove = -1;
-            for (int i = 0; i < tabs.size(); i++) {
-                if (tabs.get(i).getDiagram().equals(diagram)) {
-                    indexToRemove = i;
-                    break;
-                }
+    private void revalidateTabbedPane(Diagram updatedDiagram) {
+        for (int i = 0; i < jtp.getTabCount(); i++) {
+            DiagramView diagramView = (DiagramView) jtp.getComponentAt(i);
+            Diagram diagram = diagramView.getDiagram();
+            if (diagram.equals(updatedDiagram)) {
+                jtp.remove(i);
+                addTab(updatedDiagram);
+                break;
             }
-            if (indexToRemove != -1) {
-                tabs.remove(indexToRemove);
-                jtp.remove(indexToRemove);
-            }
         }
-    }
-
-    public void reloadTabs(ClassyNodeComposite selected){
-
-
-        tabs.clear();
-        jtp.removeAll();
-        this.paket = selected;
-//        project.addSubscriber(this);
-        for(ClassyNode child :  paket.getChildren()){
-            DiagramView diagramView = new DiagramView((Diagram) child);
-            tabs.add(diagramView);
-
-        }
-
-
-
-        for(DiagramView tabN : tabs){
-            jtp.add(tabN.getDiagram().getName(),tabN);
-        }
-
-        Project p = (Project) project;
-        this.author.setText(p.getAuthorName());
-        this.projectName.setText(project.getName());
-        jtp.setVisible(true);
 
     }
-
-
-
-
-
-    /*
-    umesto project potrebno mzd paket
-     */
-
 }

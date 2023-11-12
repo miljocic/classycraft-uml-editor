@@ -29,6 +29,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Nije selektovana nijedna komponenta!", errorType);
         } else if (ErrorType.NODE_CANNOT_BE_RENAMED.equals(errorType)) {
             createMessage("Ova komponenta ne moze da se preimenuje!", errorType);
+        } else if(ErrorType.PROJECT_NOT_SELECTED.equals(errorType)) {
+            createMessage("Nije selektovan Projekat!", errorType);
         } else if (ErrorType.NAME_CANNOT_BE_EMPTY.equals(errorType)) {
             createMessage("Ime ne moze biti prazno!", errorType);
         } else if (ErrorType.CANNOT_DELETE_FILE.equals(errorType)) {
@@ -61,8 +63,12 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         }
     }
 
+    @Override
+    public void notifySubscriber(Object notification) {
 
-        private void createMessage(String tekst, ErrorType errorType) {
+    }
+
+    private void createMessage(String tekst, ErrorType errorType) {
         this.message = new Message(tekst, errorType);
         notifySubscribers(this.message);
     }

@@ -30,7 +30,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTree tree;
     private JTree projectExplorer;
     private JSplitPane splitPane;
-    private List<PackageView> packageViewList;
+    private List<PackageView> packageViews;
     private WorkSpaceImplementation workspace;
 
 
@@ -38,7 +38,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         actionManager = new ActionManager();
         tree = new ClassyTreeImplementation();
-        packageViewList = new ArrayList<PackageView>();
+        packageViews = new ArrayList<PackageView>();
         initializeGui();
     }
     private void initializeGui(){
@@ -90,6 +90,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         }
         return instance;
     }
+
 
     @Override
     public void update(Object notification) {
