@@ -1,16 +1,28 @@
 package raf.dsw.classycraft.app.gui.swing.view;
 
-import raf.dsw.classycraft.app.controller.ExitAction;
-
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class MyToolBar extends JToolBar {
     public MyToolBar(){
         super(HORIZONTAL);
         setFloatable(false);
 
-        ExitAction ea = new ExitAction();
-        add(ea);
+        add(MainFrame.getInstance().getActionManager().getExitAction());
+
+//        ExitAction ea = new ExitAction();
+//        add(ea);
+
+        add(MainFrame.getInstance().getActionManager().getNewAction());
+
+        add(MainFrame.getInstance().getActionManager().getDeleteAction());
+
+        add(MainFrame.getInstance().getActionManager().getAboutUsAction());
+
+        add(MainFrame.getInstance().getActionManager().getAuthorAction());
+
+
+
+//        AboutUsAction aboutUsAction = new AboutUsAction();
+//        add(aboutUsAction);
     }
 }
