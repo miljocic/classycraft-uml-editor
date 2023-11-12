@@ -8,7 +8,7 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 @Setter
 public class Diagram extends ClassyNode {
 
-    private int counter=1;
+    private static int counter=1;
     public Diagram(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);

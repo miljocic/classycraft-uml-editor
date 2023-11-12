@@ -9,9 +9,8 @@ import raf.dsw.classycraft.app.gui.swing.tree.view.ClassyTreeView;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
-import raf.dsw.classycraft.app.repository.factory.ClassyNodeFactory;
+import raf.dsw.classycraft.app.repository.composite.NodeType;
 import raf.dsw.classycraft.app.repository.factory.Utils;
-import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
@@ -19,7 +18,10 @@ import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
-import java.util.Random;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 @Getter
 @Setter
 public class ClassyTreeImplementation implements ClassyTree{
@@ -38,17 +40,81 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void addChild(ClassyTreeItem parent) {
 
-        if (!(parent.getClassyNode() instanceof ClassyNodeComposite))
-            return;
 
-        ClassyNode child = createChild(parent.getClassyNode());
-        parent.add(new ClassyTreeItem(child));
-        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+        if (parent.getClassyNode() instanceof ProjectExplorer ){
+            ClassyNode child = this.createChild(parent.getClassyNode(), NodeType.PROJECT);
+            parent.add(new ClassyTreeItem(child));
+            ((ProjectExplorer) parent.getClassyNode()).addChild(child);
+            treeView.expandPath(treeView.getSelectionPath());
+            SwingUtilities.updateComponentTreeUI(treeView);
+        }
 
+        else if (parent.getClassyNode() instanceof Project ){
+            ClassyNode child = this.createChild(parent.getClassyNode(), NodeType.PACKAGE);
+            parent.add(new ClassyTreeItem(child));
+            ((Project) parent.getClassyNode()).addChild(child);
+            treeView.expandPath(treeView.getSelectionPath());
+            SwingUtilities.updateComponentTreeUI(treeView);
+        }
+
+        else if(parent.getClassyNode() instanceof Package ){
+            choosePackageChild(parent);
+        }
 
         
+    }
+
+    private  void choosePackageChild(ClassyTreeItem parent) {
+
+        JFrame packageOption = new JFrame("Izaberite paket ili dijagram");
+        packageOption.setLocationRelativeTo(null);
+        packageOption.setSize(new Dimension(400, 250));
+        packageOption.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        packageOption.setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+
+        JButton diagramBtn = new JButton("dijagram");
+        diagramBtn.setPreferredSize(new Dimension(100, 30));
+        JButton packageBtn = new JButton("paket");
+        packageBtn.setPreferredSize(new Dimension(100, 30));
+
+        panel.add(diagramBtn, gbc);
+        gbc.gridy = 1;
+        panel.add(packageBtn, gbc);
+        packageOption.add(panel);
+        packageOption.setVisible(true);
+
+        diagramBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                ClassyNode child = createChild(parent.getClassyNode(), NodeType.DIAGRAM);
+                parent.add(new ClassyTreeItem(child));
+                ((Package) parent.getClassyNode()).addChild(child);
+                treeView.expandPath(treeView.getSelectionPath());
+                SwingUtilities.updateComponentTreeUI(treeView);
+                packageOption.setVisible(false);
+            }
+
+
+        });
+
+        packageBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                ClassyNode child = createChild(parent.getClassyNode(), NodeType.PACKAGE);
+                parent.add(new ClassyTreeItem(child));
+                ((Package) parent.getClassyNode()).addChild(child);
+                treeView.expandPath(treeView.getSelectionPath());
+                SwingUtilities.updateComponentTreeUI(treeView);
+                packageOption.setVisible(false);
+            }
+
+
+        });
     }
 
     @Override
@@ -89,14 +155,10 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     }
 
-    private ClassyNode createChild(ClassyNode parent) {
+    private ClassyNode createChild(ClassyNode parent, NodeType type) {
 
-        /*
-        serijalizacija
-         */
+        return Utils.getFactory(type).getClassyNode(parent);
 
-        ClassyNodeFactory nodeFactory = Utils.getFactory(parent);
-        return nodeFactory.getClassyNode(parent);
     }
 
     @Override

@@ -13,7 +13,7 @@ public class AuthorAction extends AbstractClassyAction{
 
     public AuthorAction() {
         putValue(NAME, "Author");
-        putValue(SMALL_ICON, loadIcon("/pencil.png"));
+        putValue(SMALL_ICON, loadIcon("/images/pencil.png"));
         putValue(SHORT_DESCRIPTION, "Change project author");
     }
 
