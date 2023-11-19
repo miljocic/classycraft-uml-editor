@@ -69,3 +69,4 @@
 [PROJECT_NOT_SELECTED] [null] - [Nije selektovan Projekat!]
 [CANNOT_DELETE_PROJECT_EXPLORER] [null] - [Ne moze da se obrise Project Explorer!]
 [PROJECT_NOT_SELECTED] [null] - [Nije selektovan Projekat!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
