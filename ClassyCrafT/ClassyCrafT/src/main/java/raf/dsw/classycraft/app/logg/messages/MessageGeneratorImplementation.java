@@ -53,6 +53,7 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
     @Override
     public void removeSubscriber(ISubscriber sub) {
+        if (sub == null && !(subslist.contains(sub)) && subslist.isEmpty()) return;
         subslist.remove(sub);
     }
 
@@ -65,7 +66,10 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
     @Override
     public void notifySubscriber(Object notification) {
-
+        if (notification == null || subslist.isEmpty()) return;
+        for (ISubscriber s: subslist){
+            s.update(this.message);
+        }
     }
 
     private void createMessage(String tekst, ErrorType errorType) {
