@@ -30,12 +30,14 @@ public class Package extends ClassyNodeComposite implements IPublisher{
             Package paket = (Package) child;
             if (!this.getChildren().contains(paket)){
                 this.getChildren().add(paket);
+                notifySubscribers(this);
             }
         }
         else if (child != null &&  child instanceof Diagram ){
             Diagram diagram = (Diagram) child;
             if (!this.getChildren().contains(diagram)){
                 this.getChildren().add(diagram);
+                notifySubscribers(this);
             }
         }
     }
@@ -44,6 +46,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
     public void deleteChild(ClassyNode child) {
         if (child != null && this.getChildren().contains(child)) {
             this.getChildren().remove(child);
+            notifySubscribers(this);
         }
     }
     @Override

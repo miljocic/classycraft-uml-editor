@@ -45,7 +45,7 @@ public abstract class ClassyNode implements IPublisher {
     }
 
     @Override
-    public void notifySubscriber(Object notification) {
+    public void notifySubscribers(Object notification) {
         if(subs == null) return;
         for(ISubscriber sub : subs){
             sub.update(notification);

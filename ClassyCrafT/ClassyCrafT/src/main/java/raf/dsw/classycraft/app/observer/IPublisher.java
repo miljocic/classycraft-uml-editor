@@ -6,5 +6,4 @@ public interface IPublisher {
     void removeSubscriber(ISubscriber sub);
     void notifySubscribers(Object notification);
 
-    void notifySubscriber(Object notification);
 }

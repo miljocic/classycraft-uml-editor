@@ -59,18 +59,12 @@ public class MessageGeneratorImplementation implements MessageGenerator{
 
     @Override
     public void notifySubscribers(Object notification) {
-        for (ISubscriber sub : subslist) {
-            sub.update(notification);
-        }
-    }
-
-    @Override
-    public void notifySubscriber(Object notification) {
         if (notification == null || subslist.isEmpty()) return;
         for (ISubscriber s: subslist){
             s.update(this.message);
         }
     }
+
 
     private void createMessage(String tekst, ErrorType errorType) {
         this.message = new Message(tekst, errorType);
