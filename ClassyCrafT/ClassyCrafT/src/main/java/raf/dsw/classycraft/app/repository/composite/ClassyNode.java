@@ -51,5 +51,4 @@ public abstract class ClassyNode implements IPublisher {
             sub.update(notification);
         }
     }
-
 }

@@ -54,6 +54,18 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             return;
         }
 
+        String newName = e.getActionCommand();
+        ClassyTreeItem parentItem = (ClassyTreeItem) clicked.getParent();
+        if (parentItem != null) {
+            for (int i = 0; i < parentItem.getChildCount(); i++) {
+                ClassyTreeItem childItem = (ClassyTreeItem) parentItem.getChildAt(i);
+                if (childItem != clicked && childItem.toString().equals(newName)) {
+                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_ALREADY_EXISTS);
+                    return;
+                }
+            }
+        }
+
         /*
         Node already exists
          */
