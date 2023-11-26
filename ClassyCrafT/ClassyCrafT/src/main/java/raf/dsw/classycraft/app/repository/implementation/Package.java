@@ -28,6 +28,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
     public void addChild(ClassyNode child) {
         if (child != null &&  child instanceof Package ){
             Package paket = (Package) child;
+            paket.setParentProject(this.parentProject);
             if (!this.getChildren().contains(paket)){
                 this.getChildren().add(paket);
                 notifySubscribers(this);
@@ -49,24 +50,9 @@ public class Package extends ClassyNodeComposite implements IPublisher{
             notifySubscribers(this);
         }
     }
-    @Override
-    public void addSubscriber(ISubscriber sub) {
-        if (sub == null || subs.contains(sub)) return;
-        subs.add(sub);
+
+    public String getAuthor() {
+        return parentProject.getAuthorName();
     }
 
-    @Override
-    public void removeSubscriber(ISubscriber sub) {
-        if (sub == null || !(subs.contains((sub)))) return;
-        subs.remove(sub);
-    }
-
-    @Override
-    public void notifySubscribers(Object notification) {
-        if (notification == null || subs.isEmpty()) return;
-        for (ISubscriber s : subs) {
-            s.update(this);
-
-        }
-    }
 }

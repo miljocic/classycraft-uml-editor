@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.repository.composite;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 
@@ -16,11 +15,13 @@ public abstract class ClassyNode implements IPublisher {
 
     protected List<ISubscriber> subs;
     private String name;
-    @ToString.Exclude private ClassyNode parent;
+    private ClassyNode parent;
+
 
     public ClassyNode(String name, ClassyNode parent) {
         this.name = name;
         this.parent = parent;
+        this.subs = new ArrayList<>();
     }
 
     @Override
@@ -32,24 +33,31 @@ public abstract class ClassyNode implements IPublisher {
         return false;
     }
 
+    public void setName(String name) {
+        this.name = name;
+        notifySubscribers(this);
+    }
+
     @Override
-    public void addSubscriber(ISubscriber sub) {
-        if(sub == null)
-            this.subs = new ArrayList<>();
+    public void addSubscriber(ISubscriber sub){
+//        if(sub == null)
+//            this.subs = new ArrayList<>();
         subs.add(sub);
     }
 
     @Override
-    public void removeSubscriber(ISubscriber sub) {
+    public void removeSubscriber(ISubscriber sub){
         subs.remove(sub);
     }
 
     @Override
-    public void notifySubscribers(Object notification) {
-        if(subs == null) return;
+    public void notifySubscribers(Object notification){
+//        if(subs == null) return;
         for(ISubscriber sub : subs){
             sub.update(notification);
         }
     }
+
+
 
 }

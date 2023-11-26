@@ -29,26 +29,7 @@ public class ProjectExplorer extends ClassyNodeComposite {
         {
             this.getChildren().remove(project);
         }
+
     }
 
-    @Override
-    public void addSubscriber(ISubscriber sub) {
-        if (sub == null || subs.contains(sub)) return;
-        subs.add(sub);
-    }
-
-    @Override
-    public void removeSubscriber(ISubscriber sub) {
-        if (sub == null || !(subs.contains((sub)))) return;
-        subs.remove(sub);
-    }
-
-    @Override
-    public void notifySubscribers(Object notification) {
-        if (notification == null || subs.isEmpty()) return;
-        for (ISubscriber s : subs) {
-            s.update(this);
-
-        }
-    }
 }

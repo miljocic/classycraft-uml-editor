@@ -17,7 +17,7 @@ import javax.swing.*;
 
 public class PackageView extends JPanel implements ISubscriber {
 
-    private JTabbedPane jtp;
+    private MyTabbedPane mtp;
     private JLabel projectName;
     private JLabel author;
     private Package paket;
@@ -27,25 +27,19 @@ public class PackageView extends JPanel implements ISubscriber {
         this.paket.addSubscriber(this);
         this.projectName = new JLabel(this.paket.getName());
         this.author = new JLabel(this.paket.getAuthor());
-        this.jtp = new JTabbedPane(SwingConstants.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-        add(jtp);
+        this.mtp = new MyTabbedPane(SwingConstants.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+
         for (ClassyNode node : paket.getChildren()) {
             if (node instanceof Diagram) {
-                addTab((Diagram) node);
+                revalidateTabbedPane((Diagram) node);
             }
         }
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(projectName);
         add(author);
-        add(jtp);
+        add(mtp);
     }
-    private void addTab(Diagram diagram) {
-        DiagramView diagramView = new DiagramView(diagram);
-        jtp.addTab(diagram.getName(), diagramView);
-    }
-    public DiagramView getDiagramView() {
-        return (DiagramView) jtp.getSelectedComponent();
-    }
+
     @Override
     public void update(Object notification) {
         if (notification instanceof Package) {
@@ -54,22 +48,20 @@ public class PackageView extends JPanel implements ISubscriber {
             projectName.setText("Projekat: " + paket.getName());
             author.setText("Autor: " + paket.getAuthor());
 
-            this.revalidate();
-            this.repaint();
-        } else if (notification instanceof Diagram) {
-            // Update diagrams in the tabbed pane
-            Diagram updatedDiagram = (Diagram) notification;
-            revalidateTabbedPane(updatedDiagram);
+        }  else if(notification instanceof Diagram) {
+            revalidateTabbedPane((Diagram) notification);
         }
     }
     private void revalidateTabbedPane(Diagram updatedDiagram) {
-        for (int i = 0; i < jtp.getTabCount(); i++) {
-            DiagramView diagramView = (DiagramView) jtp.getComponentAt(i);
-            Diagram diagram = diagramView.getDiagram();
-            if (diagram.equals(updatedDiagram)) {
-                jtp.remove(i);
-                addTab(updatedDiagram);
-                break;
+
+        if(paket.getChildren().contains(updatedDiagram)) {
+            this.mtp.addTab(updatedDiagram.getName(), new DiagramView(updatedDiagram));
+        } else {
+            System.out.println(mtp);
+            for(int i = 0; i < mtp.getTabCount(); i++) {
+                DiagramView diagramView = (DiagramView) mtp.getComponentAt(i);
+                if(diagramView.getDiagram().equals(updatedDiagram))
+                    mtp.remove(diagramView);
             }
         }
 

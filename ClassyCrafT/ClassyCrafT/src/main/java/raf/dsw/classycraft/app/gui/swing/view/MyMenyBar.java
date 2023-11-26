@@ -36,6 +36,7 @@ public class MyMenyBar extends JMenuBar {
         editMenu.add(deleteAction);
         editMenu.add(authorAction);
 
+
         //Dodavanje File i Edit na menu bar
         add(fileMenu);
         add(editMenu);
