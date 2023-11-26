@@ -59,6 +59,9 @@ public class MainFrame extends JFrame implements ISubscriber {
         toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
 
+        SideBar sideBar = new SideBar();
+        add(sideBar, BorderLayout.EAST);
+
         //Dodavanje sidebara za JTree:
         JTree projectExplorer = tree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
         projectExplorer.addMouseListener(actionManager.getMyMouseListener());
