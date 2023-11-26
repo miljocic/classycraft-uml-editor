@@ -14,7 +14,7 @@ public class AboutUsAction extends AbstractClassyAction {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));
         putValue(SMALL_ICON, loadIcon("/images/aboutUs.png"));
         putValue(Action.NAME, "About Us");
-        putValue(Action.SHORT_DESCRIPTION, "Informacije o timu");
+        putValue(Action.SHORT_DESCRIPTION, "Team information");
     }
 
     @Override
