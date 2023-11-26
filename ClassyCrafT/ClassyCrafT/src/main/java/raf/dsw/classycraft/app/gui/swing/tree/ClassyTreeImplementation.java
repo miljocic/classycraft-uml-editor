@@ -77,9 +77,9 @@ public class ClassyTreeImplementation implements ClassyTree{
         gbc.gridx = 0;
         gbc.gridy = 0;
 
-        JButton diagramBtn = new JButton("dijagram");
+        JButton diagramBtn = new JButton("Dijagram");
         diagramBtn.setPreferredSize(new Dimension(100, 30));
-        JButton packageBtn = new JButton("paket");
+        JButton packageBtn = new JButton("Paket");
         packageBtn.setPreferredSize(new Dimension(100, 30));
 
         panel.add(diagramBtn, gbc);

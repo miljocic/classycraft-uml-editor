@@ -65,11 +65,6 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
                 }
             }
         }
-
-        /*
-        Node already exists
-         */
-
         clicked.setName(edit.getText());
         stopCellEditing();
 

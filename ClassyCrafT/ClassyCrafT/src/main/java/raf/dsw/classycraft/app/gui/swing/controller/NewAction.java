@@ -8,6 +8,7 @@ import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
+import raf.dsw.classycraft.app.repository.implementation.Element;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,7 @@ public class NewAction extends AbstractClassyAction{
         }
 
         //nemoguce dodavanje dalje od diagrama!
-        if (selected.getClassyNode() instanceof Diagram){
+        if (selected.getClassyNode() instanceof Element){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_CHILD);
             return;
         }

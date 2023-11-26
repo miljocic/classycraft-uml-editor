@@ -20,9 +20,9 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         } else if (ErrorType.CANNOT_DELETE_PROJECT_EXPLORER.equals(errorType)) {
             createMessage("Ne moze da se obrise Project Explorer!", errorType);
         } else if (ErrorType.CANNOT_ADD_CHILD.equals(errorType)) {
-            createMessage("Na dijagram se ne moze dalje dodavati", errorType);
+            createMessage("Na element se ne moze dalje dodavati!", errorType);
         } else if (ErrorType.NODE_NOT_CREATED.equals(errorType)) {
-            createMessage("Komponenta nije kreirana", errorType);
+            createMessage("Komponenta nije kreirana!", errorType);
         } else if (ErrorType.NODE_ALREADY_EXISTS.equals(errorType)) {
             createMessage("Ova komponenta vec postoji!", errorType);
         } else if (ErrorType.NODE_NOT_SELECTED.equals(errorType)) {
@@ -34,11 +34,11 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         } else if (ErrorType.NAME_CANNOT_BE_EMPTY.equals(errorType)) {
             createMessage("Ime ne moze biti prazno!", errorType);
         } else if (ErrorType.CANNOT_DELETE_FILE.equals(errorType)) {
-            createMessage("Ovaj fajl ne moze da se obrise", errorType);
+            createMessage("Ovaj fajl ne moze da se obrise!", errorType);
         } else if (ErrorType.RESOURCE_NOT_FOUND.equals(errorType)) {
             createMessage("Ne postoji putanja!", errorType);
         } else if (ErrorType.SAVE_ERROR.equals(errorType)) {
-            createMessage("Greska pri cuvanju podataka", errorType);
+            createMessage("Greska pri cuvanju podataka!", errorType);
         }
 
     }

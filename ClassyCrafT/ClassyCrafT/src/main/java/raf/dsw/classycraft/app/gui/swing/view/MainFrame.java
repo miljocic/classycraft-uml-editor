@@ -22,7 +22,7 @@ import java.util.List;
 public class MainFrame extends JFrame implements ISubscriber {
 
 
-
+    private static MainFrame instance = null;
     //buduca polja za sve komponente view-a na glavnom prozoru
     private ActionManager actionManager;
     private JMenuBar menu;
@@ -39,6 +39,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         tree = new ClassyTreeImplementation();
         packageViews = new ArrayList<PackageView>();
+        setIconImage(new ImageIcon(getClass().getResource("/images/applogo.png")).getImage());
         initializeGui();
     }
     private void initializeGui(){
@@ -60,6 +61,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         //Dodavanje sidebara za JTree:
         JTree projectExplorer = tree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
+        projectExplorer.addMouseListener(actionManager.getMyMouseListener());
         JPanel desktop = new JPanel();
 
         workspace = new WorkSpaceImplementation();
@@ -74,13 +76,9 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
     }
-
-    private static MainFrame instance;
-
     private MainFrame(){
 
     }
-
     public static MainFrame getInstance()
     {
         if(instance == null)
