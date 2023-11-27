@@ -19,8 +19,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Greska: ", errorType);
         } else if (ErrorType.CANNOT_DELETE_PROJECT_EXPLORER.equals(errorType)) {
             createMessage("Ne moze da se obrise Project Explorer!", errorType);
-        } else if (ErrorType.CANNOT_ADD_CHILD.equals(errorType)) {
-            createMessage("Na element se ne moze dalje dodavati!", errorType);
+        } else if (ErrorType.CANNOT_ADD_HERE.equals(errorType)) {
+            createMessage("Dodavanja elemenata Dijagrama moguce samo preko SideBar-a!", errorType);
         } else if (ErrorType.NODE_NOT_CREATED.equals(errorType)) {
             createMessage("Komponenta nije kreirana!", errorType);
         } else if (ErrorType.NODE_ALREADY_EXISTS.equals(errorType)) {

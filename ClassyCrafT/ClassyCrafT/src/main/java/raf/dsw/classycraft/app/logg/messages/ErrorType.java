@@ -5,7 +5,7 @@ public enum ErrorType {
     //tipovi gresaka:
     ERROR,
     CANNOT_DELETE_PROJECT_EXPLORER,
-    CANNOT_ADD_CHILD,
+    CANNOT_ADD_HERE,
     NODE_NOT_CREATED,
     NODE_ALREADY_EXISTS,
     NODE_NOT_SELECTED,
@@ -16,5 +16,6 @@ public enum ErrorType {
     RESOURCE_NOT_FOUND,
     SAVE_ERROR,
     NODE_CANNOT_BE_DELETED,
+
 
 }

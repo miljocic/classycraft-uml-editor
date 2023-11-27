@@ -3,12 +3,10 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
-import raf.dsw.classycraft.app.repository.implementation.Element;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,8 +20,8 @@ public class NewAction extends AbstractClassyAction{
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                 KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         putValue(SMALL_ICON, loadIcon("/images/addproject.png"));
-        putValue(NAME, "New Project");
-        putValue(SHORT_DESCRIPTION, "New Project");
+        putValue(NAME, "New Action");
+        putValue(SHORT_DESCRIPTION, "New Project/Package/Diagram/DiagramElement");
     }
 
     @Override
@@ -38,21 +36,12 @@ public class NewAction extends AbstractClassyAction{
         }
 
         //nemoguce dodavanje dalje od diagrama!
-        if (selected.getClassyNode() instanceof Element){
-            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_CHILD);
+        if (selected.getClassyNode() instanceof Diagram){
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_HERE);
             return;
         }
-        else{
-            MainFrame.getInstance().getTree().addChild(selected);
-        }
 
 
-//        if((((ClassyTreeImplementation)MainFrame.getInstance().getTree()).getTreeView().getSelectionPath()== null)){
-//            ApplicationFramework.getInstance().getMessageGenerator().generateMessage( ErrorType.NO_PROJECT_SELECTED);
-//            return;
-//        }
-//        ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getTree().getSelectedNode();
-//        MainFrame.getInstance().getTree().addChild(selected);
 
 
     }

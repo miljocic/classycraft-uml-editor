@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.repository.implementation;
 import lombok.Getter;
 import lombok.Setter;
 
-import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
@@ -21,10 +20,10 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-        if(child instanceof Element){
-            Element element = (Element) child;
-            if(!this.getChildren().contains(element)) {
-                this.getChildren().add(element);
+        if(child instanceof DiagramElement){
+            DiagramElement diagramElement = (DiagramElement) child;
+            if(!this.getChildren().contains(diagramElement)) {
+                this.getChildren().add(diagramElement);
                 notifySubscribers(child);
             }
         }
@@ -32,9 +31,9 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void deleteChild(ClassyNode child) {
-        if(child instanceof Element) {
-            Element element = (Element) child;
-            this.getChildren().remove(element);
+        if(child instanceof DiagramElement) {
+            DiagramElement diagramElement = (DiagramElement) child;
+            this.getChildren().remove(diagramElement);
             notifySubscribers(child);
         }
     }
