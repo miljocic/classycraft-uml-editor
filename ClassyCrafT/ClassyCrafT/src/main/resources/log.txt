@@ -82,3 +82,4 @@
 [NODE_ALREADY_EXISTS] [null] - [Ova komponenta vec postoji!]
 [CANNOT_DELETE_PROJECT_EXPLORER] [null] - [Ne moze da se obrise Project Explorer!]
 [PROJECT_NOT_SELECTED] [null] - [Nije selektovan Projekat!]
+[PROJECT_NOT_SELECTED] [null] - [Nije selektovan Projekat!]

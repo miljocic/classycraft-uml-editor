@@ -20,8 +20,29 @@ public class StateManager {
         addState = new AddState();
         deleteState = new DeleteState();
         moveState = new MoveState();
+        selectState = new SelectState();
         zoomState = new ZoomState();
 
     }
+
+    /*
+    ne rade setteri nzm zasto?
+     */
+    public void setAddState() {
+        current = this.addState;
+    }
+    public void setDeleteState() {
+        current = this.deleteState;
+    }
+    public void setSelectState() {
+        current = this.selectState;
+    }
+    public void setMoveState() {
+        current = this.moveState;
+    }
+    public void setZoomState() {
+        current = this.zoomState;
+    }
+
 
 }

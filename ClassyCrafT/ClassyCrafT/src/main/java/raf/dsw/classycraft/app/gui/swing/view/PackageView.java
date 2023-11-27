@@ -7,6 +7,7 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
+import raf.dsw.classycraft.app.state.StateManager;
 
 
 import javax.swing.*;
@@ -21,6 +22,8 @@ public class PackageView extends JPanel implements ISubscriber {
     private JLabel projectName;
     private JLabel author;
     private Package paket;
+
+    private StateManager stateManager;
 
     public PackageView() {
         this.paket = (Package) MainFrame.getInstance().getTree().getSelectedNode().getClassyNode();
@@ -38,6 +41,7 @@ public class PackageView extends JPanel implements ISubscriber {
         add(projectName);
         add(author);
         add(mtp);
+        stateManager = new StateManager();
     }
 
     @Override
@@ -66,4 +70,29 @@ public class PackageView extends JPanel implements ISubscriber {
         }
 
     }
+
+    //za state manager (u StateManager setteri nesto cudno ponasaju)
+
+    public void startAddState(){
+        this.stateManager.setAddState();
+    }
+
+    public void startDeleteState(){
+        this.stateManager.setDeleteState();
+    }
+
+    public void startMoveState(){
+        this.stateManager.setMoveState();
+    }
+
+    public void startZoomState(){
+        this.stateManager.setZoomState();
+    }
+
+    public void startSelectState(){
+        this.stateManager.setSelectState();
+    }
+
+
+
 }
