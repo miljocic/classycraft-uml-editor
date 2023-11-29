@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 import raf.dsw.classycraft.app.repository.implementation.Package;
@@ -13,6 +14,8 @@ import java.awt.event.MouseListener;
 @Setter
 public class MyMouseListener implements MouseListener{
 
+
+    private DiagramView diagramView;
 
     @Override
     public void mouseClicked(MouseEvent e) {
