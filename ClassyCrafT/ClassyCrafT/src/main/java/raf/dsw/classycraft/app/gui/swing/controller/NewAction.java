@@ -35,10 +35,14 @@ public class NewAction extends AbstractClassyAction{
             return;
         }
 
-        //nemoguce dodavanje dalje od diagrama!
+        //nemoguce dodavanje dalje od newActiona, morace od SideBara!
         if (selected.getClassyNode() instanceof Diagram){
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_HERE);
             return;
+        }
+
+        else{
+            MainFrame.getInstance().getTree().addChild(selected);
         }
 
 
