@@ -1,10 +1,10 @@
 package raf.dsw.classycraft.app.state;
 
 import lombok.Getter;
-import lombok.Setter;
+
 import raf.dsw.classycraft.app.state.model.*;
 @Getter
-@Setter
+
 public class StateManager {
 
     private State current;
@@ -44,6 +44,5 @@ public class StateManager {
     public void setZoomState() {
         current = this.zoomState;
     }
-
 
 }

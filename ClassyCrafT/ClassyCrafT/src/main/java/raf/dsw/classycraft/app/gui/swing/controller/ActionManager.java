@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classycraft.app.state.StateMouseManager;
 import raf.dsw.classycraft.app.state.controller.*;
 
 @Getter
@@ -21,6 +22,7 @@ public class ActionManager {
     private MoveStateAction moveStateAction;
     private SelectStateAction selectStateAction;
     private ZoomStateAction zoomStateAction;
+    private StateMouseManager stateMouseManager;
 
 
     public ActionManager() {
@@ -41,6 +43,7 @@ public class ActionManager {
         moveStateAction = new MoveStateAction();
         selectStateAction = new SelectStateAction();
         zoomStateAction = new ZoomStateAction();
+        stateMouseManager = new StateMouseManager();
 
 
     }

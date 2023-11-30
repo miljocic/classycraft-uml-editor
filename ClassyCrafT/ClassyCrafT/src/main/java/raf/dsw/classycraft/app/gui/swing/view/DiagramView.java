@@ -2,9 +2,10 @@ package raf.dsw.classycraft.app.gui.swing.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.classycraft.app.gui.swing.painters.ElementPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
+import raf.dsw.classycraft.app.state.StateMouseManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +23,14 @@ public class DiagramView extends JPanel implements ISubscriber{
     private List<ElementPainter> painters;
     private List<ElementPainter> selectionModel;
 
+
+
     public DiagramView(Diagram diagram) {
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
         this.selectionModel = new ArrayList<>();
-
+        this.addMouseListener(new StateMouseManager(this)); // ili mouseListener?
     }
 
 
@@ -39,6 +42,7 @@ public class DiagramView extends JPanel implements ISubscriber{
             ((MyTabbedPane)this.getParent()).setTitleAt(((MyTabbedPane)this.getParent()).indexOfComponent(this), this.getName());
         }
 
+        repaint();
     }
 
     @Override
@@ -50,12 +54,15 @@ public class DiagramView extends JPanel implements ISubscriber{
         {
             for(ElementPainter painter: painters)
             {
-                painter.paint();
+                painter.paint(g2);
             }
 
             for(ElementPainter model: selectionModel)
             {
-                model.paint(); // isprekidan pravougaonik
+                float[] dashPattern = {5f, 5f}; // Adjust the values as needed
+                BasicStroke dashedStroke = new BasicStroke(2f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10f, dashPattern, 0f);
+                g2.setStroke(dashedStroke);
+                model.paint(g2); // isprekidan pravougaonik
             }
         }
     }

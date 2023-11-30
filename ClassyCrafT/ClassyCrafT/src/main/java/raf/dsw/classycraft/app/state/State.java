@@ -1,14 +1,16 @@
 package raf.dsw.classycraft.app.state;
 
-import java.awt.event.MouseEvent;
+import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+
 
 public interface State {
 
-    void mousePressed(MouseEvent e);
 
-    void mouseReleased(MouseEvent e);
+    void mousePressed(int x, int y, DiagramView dV);
 
-    void mouseDragged(MouseEvent e);
+    void mouseReleased(int x, int y, DiagramView dV);
+
+    void mouseDragged(int x, int y, DiagramView dV);
 
 
 }

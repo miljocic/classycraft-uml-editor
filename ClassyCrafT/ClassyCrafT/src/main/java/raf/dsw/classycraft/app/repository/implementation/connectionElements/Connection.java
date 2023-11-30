@@ -1,9 +1,13 @@
 package raf.dsw.classycraft.app.repository.implementation.connectionElements;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
+@Getter
+@Setter
 public abstract class Connection extends DiagramElement {
 
     private Interclass from;

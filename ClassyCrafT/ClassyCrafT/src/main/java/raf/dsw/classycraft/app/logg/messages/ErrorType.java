@@ -16,6 +16,7 @@ public enum ErrorType {
     RESOURCE_NOT_FOUND,
     SAVE_ERROR,
     NODE_CANNOT_BE_DELETED,
+    NO_DIAGRAM_VIEW_SELECTED
 
 
 }

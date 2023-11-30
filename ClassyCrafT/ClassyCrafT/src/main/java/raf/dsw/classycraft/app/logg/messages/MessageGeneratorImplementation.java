@@ -39,6 +39,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Ne postoji putanja!", errorType);
         } else if (ErrorType.SAVE_ERROR.equals(errorType)) {
             createMessage("Greska pri cuvanju podataka!", errorType);
+        }else if (ErrorType.NO_DIAGRAM_VIEW_SELECTED.equals(errorType)) {
+            createMessage("Diagram view nije selektovan!", errorType);
         }
 
     }
