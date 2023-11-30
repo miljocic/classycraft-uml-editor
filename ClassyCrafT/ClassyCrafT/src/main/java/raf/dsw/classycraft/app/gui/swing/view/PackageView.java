@@ -47,13 +47,11 @@ public class PackageView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-        if (notification instanceof Package) {
-            Package paket = (Package) notification;
 
-            projectName.setText("Projekat: " + paket.getName());
-            author.setText("Autor: " + paket.getAuthor());
-
-        }  else if(notification instanceof Diagram) {
+        if(notification instanceof Package) {
+            projectName.setText(paket.getName());
+            author.setText(paket.getAuthor());
+        } else if(notification instanceof Diagram) {
             revalidateTabbedPane((Diagram) notification);
         }
     }

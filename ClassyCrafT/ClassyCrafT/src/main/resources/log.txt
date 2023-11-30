@@ -122,3 +122,7 @@
 [NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
 [NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
 [NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
+[CANNOT_ADD_HERE] [null] - [Dodavanja elemenata Dijagrama moguce samo preko SideBar-a!]
+[CANNOT_ADD_HERE] [null] - [Dodavanja elemenata Dijagrama moguce samo preko SideBar-a!]
+[NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
+[NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
