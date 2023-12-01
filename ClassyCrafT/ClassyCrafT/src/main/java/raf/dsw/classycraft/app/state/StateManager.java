@@ -45,4 +45,7 @@ public class StateManager {
         current = this.zoomState;
     }
 
+    public void setCurrent(State current) {
+        this.current = current;
+    }
 }

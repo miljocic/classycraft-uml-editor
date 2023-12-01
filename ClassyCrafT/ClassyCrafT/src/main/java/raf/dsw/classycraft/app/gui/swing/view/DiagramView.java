@@ -23,6 +23,10 @@ public class DiagramView extends JPanel implements ISubscriber{
     private List<ElementPainter> painters;
     private List<ElementPainter> selectionModel;
 
+    double translateX = 0;
+    double translateY = 0;
+    double scalingF = 1;
+
 
 
     public DiagramView(Diagram diagram) {
@@ -30,7 +34,7 @@ public class DiagramView extends JPanel implements ISubscriber{
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
         this.selectionModel = new ArrayList<>();
-        this.addMouseListener(new StateMouseManager(this)); // ili mouseListener?
+        this.addMouseListener(new StateMouseManager(this));
     }
 
 
