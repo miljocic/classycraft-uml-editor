@@ -8,6 +8,7 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.state.StateManager;
+import raf.dsw.classycraft.app.state.model.AddState;
 
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class PackageView extends JPanel implements ISubscriber {
     private Package paket;
 
     private StateManager stateManager;
+    private AddState addStateInstance;
 
     public PackageView() {
         this.paket = (Package) MainFrame.getInstance().getTree().getSelectedNode().getClassyNode();
@@ -43,6 +45,7 @@ public class PackageView extends JPanel implements ISubscriber {
         add(author);
         add(mtp);
         stateManager = new StateManager();
+        addStateInstance = new AddState("DefaultElementType");
     }
 
     @Override
@@ -72,7 +75,12 @@ public class PackageView extends JPanel implements ISubscriber {
 
     //za state manager (u StateManager setteri nesto cudno ponasaju)
 
-    public void startAddState(){
+//    public void startAddState(){
+//        this.stateManager.setAddState();
+//    }
+
+    public void startAddState(String elementType) {
+        getAddStateInstance().setElementType(elementType);
         this.stateManager.setAddState();
     }
 
@@ -103,5 +111,9 @@ public class PackageView extends JPanel implements ISubscriber {
     public void startMouseReleased(int x, int y, DiagramView dV){
         stateManager.getCurrent().mouseReleased(x, y, dV);
     }
+
+
+
+
 
 }

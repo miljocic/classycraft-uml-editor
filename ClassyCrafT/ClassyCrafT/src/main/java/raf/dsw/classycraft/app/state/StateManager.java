@@ -14,7 +14,6 @@ public class StateManager {
     private MoveState moveState;
     private ZoomState zoomState;
 
-
     public StateManager() {
 
         addState = new AddState();
@@ -24,6 +23,7 @@ public class StateManager {
         zoomState = new ZoomState();
         current = addState;
 
+
     }
 
     /*
@@ -31,6 +31,7 @@ public class StateManager {
      */
     public void setAddState() {
         current = this.addState;
+        System.out.println("Current State: AddState");
     }
     public void setDeleteState() {
         current = this.deleteState;
@@ -43,6 +44,10 @@ public class StateManager {
     }
     public void setZoomState() {
         current = this.zoomState;
+    }
+
+    public void setCurrent(State current) {
+        this.current = current;
     }
 
 }
