@@ -7,7 +7,6 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum
 import java.awt.*;
 
 
-
 public class EnumPainter extends InterclassPainter{
     public EnumPainter(DiagramElement element) {
         super(element);

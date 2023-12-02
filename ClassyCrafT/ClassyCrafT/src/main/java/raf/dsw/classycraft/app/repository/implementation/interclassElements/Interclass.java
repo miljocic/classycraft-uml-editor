@@ -26,4 +26,5 @@ public abstract class Interclass extends DiagramElement {
         this.classContents = new ArrayList<>();
         this.name = name;
     }
+
 }

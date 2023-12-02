@@ -8,7 +8,6 @@ import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 
 import java.awt.*;
 
-
 @Getter
 public class InterclassPainter extends ElementPainter{
     protected Shape shape;
