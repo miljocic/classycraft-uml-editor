@@ -25,12 +25,17 @@ public class StateMouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        MainFrame.getInstance().getWorkspace().getPackageView().startMousePressed(e.getX(),e.getY(),diagramView);
+        MainFrame.getInstance().getWorkspace().getPackageView().startMousePressed(e, diagramView);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        MainFrame.getInstance().getWorkspace().getPackageView().startMouseReleased(e.getX(),e.getY(),diagramView);
+        MainFrame.getInstance().getWorkspace().getPackageView().startMouseReleased(e, diagramView);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        MainFrame.getInstance().getWorkspace().getPackageView().startMouseDragged(e, diagramView);
     }
 
     @Override
@@ -42,12 +47,6 @@ public class StateMouseManager implements MouseListener, MouseMotionListener {
     public void mouseExited(MouseEvent e) {
 
     }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        MainFrame.getInstance().getWorkspace().getPackageView().startMouseDragged(e.getX(),e.getY(),diagramView);
-    }
-
     @Override
     public void mouseMoved(MouseEvent e) {
 

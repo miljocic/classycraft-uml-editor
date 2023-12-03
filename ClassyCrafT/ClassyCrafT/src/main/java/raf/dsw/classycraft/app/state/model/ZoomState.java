@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.state.model;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.state.State;
 
+import java.awt.event.MouseEvent;
 
 
 public class ZoomState implements State {
@@ -10,17 +11,17 @@ public class ZoomState implements State {
 
 
     @Override
-    public void mousePressed(int x, int y, DiagramView dV) {
+    public void mousePressed(MouseEvent e, DiagramView dV) {
 
     }
 
     @Override
-    public void mouseReleased(int x, int y, DiagramView dV) {
+    public void mouseReleased(MouseEvent e, DiagramView dV) {
 
     }
 
     @Override
-    public void mouseDragged(int x, int y, DiagramView dV) {
+    public void mouseDragged(MouseEvent e, DiagramView dV) {
 
     }
 }

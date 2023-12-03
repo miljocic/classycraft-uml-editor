@@ -11,7 +11,7 @@ import raf.dsw.classycraft.app.state.StateManager;
 
 
 import javax.swing.*;
-
+import java.awt.event.MouseEvent;
 
 
 @Getter
@@ -92,16 +92,16 @@ public class PackageView extends JPanel implements ISubscriber {
         this.stateManager.setSelectState();
     }
 
-    public void startMousePressed(int x, int y, DiagramView dV){
-            stateManager.getCurrent().mousePressed(x, y, dV);
+    public void startMousePressed(MouseEvent e, DiagramView dV) {
+        stateManager.getCurrent().mousePressed(e, dV);
     }
 
-    public void startMouseDragged(int x, int y, DiagramView dV){
-        stateManager.getCurrent().mouseDragged(x, y, dV);
+    public void startMouseDragged(MouseEvent e, DiagramView dV) {
+        stateManager.getCurrent().mouseDragged(e, dV);
     }
 
-    public void startMouseReleased(int x, int y, DiagramView dV){
-        stateManager.getCurrent().mouseReleased(x, y, dV);
+    public void startMouseReleased(MouseEvent e, DiagramView dV) {
+        stateManager.getCurrent().mouseReleased(e, dV);
     }
 
 }

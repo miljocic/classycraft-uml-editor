@@ -126,3 +126,4 @@
 [CANNOT_ADD_HERE] [null] - [Dodavanja elemenata Dijagrama moguce samo preko SideBar-a!]
 [NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
 [NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]

@@ -19,11 +19,14 @@ public abstract class Interclass extends DiagramElement {
     private List<ClassContent> classContents;
     private String name;
 
-    public Interclass(String name, ClassyNode parent, String visibility) {
+    public Interclass(String name, ClassyNode parent, String visibility, Point location) {
         super(name, parent);
         this.visibility = visibility;
         this.location = location;
         this.classContents = new ArrayList<>();
         this.name = name;
     }
+
+
+
 }
