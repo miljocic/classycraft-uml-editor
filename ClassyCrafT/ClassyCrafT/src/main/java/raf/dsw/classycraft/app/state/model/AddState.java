@@ -17,6 +17,9 @@ import java.util.Random;
 
 public class AddState implements State {
 
+    private int classCounter = 0;
+    private int enumCounter = 0;
+    private int interfaceCounter = 0;
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
@@ -54,20 +57,25 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass", null, "defaultVisibility", e.getPoint());
+                    element = new Class("NewClass" + classCounter, null, "defaultVisibility", e.getPoint());
+                    classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum", null, "defaultVisibility", e.getPoint());
+                    element = new Enum("NewEnum" + enumCounter, null, "defaultVisibility", e.getPoint());
+                    enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface", null, "defaultVisibility", e.getPoint());
+                    element = new Interface("NewInterface" + interfaceCounter, null, "defaultVisibility", e.getPoint());
+                    interfaceCounter++;
                     break;
                 default:
                     element = null;
             }
 
+
             // Add the created element to the diagram
             if (element != null) {
+                System.out.println("Dodat");
                 dV.getDiagram().addChild(element);
             }
         }
