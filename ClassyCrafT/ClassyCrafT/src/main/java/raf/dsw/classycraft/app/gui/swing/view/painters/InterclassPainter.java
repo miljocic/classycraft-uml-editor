@@ -1,7 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
-
-import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
@@ -9,36 +7,33 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 
 import java.awt.*;
 
-public class InterclassPainter extends ElementPainter{
-
+public class InterclassPainter extends ElementPainter {
 
     public InterclassPainter(Interclass interclass) {
         super(interclass);
-    }
+       }
 
     @Override
     public void paint(Graphics2D g) {
         // Retrieve Interclass information
         Interclass interclass = (Interclass) getElement();
-        if (interclass==null){
+        if (interclass == null) {
             System.out.println("Crash!");
             return;
         }
         String name = interclass.getName();
-        String visibility = interclass.getVisibility();
         String type = determineType(interclass);
 
         // Paint the rectangle
         g.setColor(Color.white);
-        g.fillRect(interclass.getLocation().x, interclass.getLocation().y, 100, 50);
+        g.fillRect((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 100, 50);
         g.setColor(Color.black);
-        g.drawRect(interclass.getLocation().x, interclass.getLocation().y, 100, 50);
+        g.drawRect((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 100, 50);
 
         // Paint the top section with name and type
-        g.drawString(name, interclass.getLocation().x + 10, interclass.getLocation().y + 20);
-        g.drawString(type, interclass.getLocation().x + 80, interclass.getLocation().y + 20);
-        g.drawString(visibility, interclass.getLocation().x + 10, interclass.getLocation().y + 35);
-
+        g.drawString(name, (int) interclass.getXCoordinate() + 10, (int) interclass.getYCoordinate() + 20);
+        g.drawString(type, (int) interclass.getXCoordinate() + 80, (int) interclass.getYCoordinate() + 20);
+        g.drawString( " ", (int) interclass.getXCoordinate() + 10, (int) interclass.getYCoordinate() + 35);
     }
 
     private String determineType(Interclass interclass) {
@@ -57,8 +52,14 @@ public class InterclassPainter extends ElementPainter{
     public boolean elementAt(Point pos) {
         // Check if the point is within the bounds of the rectangle
         Interclass interclass = (Interclass) getElement();
-        return new Rectangle(interclass.getLocation().x, interclass.getLocation().y, 100, 50).contains(pos);
+        return new Rectangle((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 100, 50).contains(pos);
     }
 
-
+    @Override
+    public void paintSelected(Graphics2D g) {
+        g.setPaint(Color.BLUE);
+        Interclass interclass = (Interclass) getElement();
+        Rectangle shape = new Rectangle((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 100, 50);
+        g.fill(shape);
+    }
 }

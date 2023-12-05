@@ -92,6 +92,9 @@ public class PackageView extends JPanel implements ISubscriber {
         this.stateManager.setSelectState();
     }
 
+    public void startConnectState(){ this.stateManager.setConnectState();
+    }
+
     public void startMousePressed(MouseEvent e, DiagramView dV) {
         stateManager.getCurrent().mousePressed(e, dV);
     }
@@ -103,5 +106,6 @@ public class PackageView extends JPanel implements ISubscriber {
     public void startMouseReleased(MouseEvent e, DiagramView dV) {
         stateManager.getCurrent().mouseReleased(e, dV);
     }
+
 
 }

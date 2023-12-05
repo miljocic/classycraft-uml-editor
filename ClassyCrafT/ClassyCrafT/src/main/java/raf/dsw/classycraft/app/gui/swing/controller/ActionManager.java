@@ -23,6 +23,7 @@ public class ActionManager {
     private SelectStateAction selectStateAction;
     private ZoomStateAction zoomStateAction;
     private StateMouseManager stateMouseManager;
+    private ConnectStateAction connectStateAction;
 
 
     public ActionManager() {
@@ -44,6 +45,7 @@ public class ActionManager {
         selectStateAction = new SelectStateAction();
         zoomStateAction = new ZoomStateAction();
         stateMouseManager = new StateMouseManager();
+        connectStateAction = new ConnectStateAction();
 
 
     }

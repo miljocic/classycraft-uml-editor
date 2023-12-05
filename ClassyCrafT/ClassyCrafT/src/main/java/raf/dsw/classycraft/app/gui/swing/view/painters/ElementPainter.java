@@ -7,7 +7,8 @@ import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import java.awt.*;
 
 
-
+@Getter
+@Setter
 public abstract class ElementPainter {
 
     public DiagramElement element;
@@ -20,7 +21,7 @@ public abstract class ElementPainter {
     public abstract void paint(Graphics2D g);
     public abstract boolean elementAt(Point pos);
 
-    public DiagramElement getElement() {
-        return element;
-    }
+    public abstract void paintSelected(Graphics2D g);
+
+
 }

@@ -21,7 +21,14 @@ public class MyMouseListener implements MouseListener{
         if(e.getClickCount() == 2){
             System.out.println("Detektovao");
             if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package){
+                for(PackageView pv : MainFrame.getInstance().getPackageViews()) {
+                    if(pv.getPaket().equals(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode())) {
+                        MainFrame.getInstance().getSplitPane().setRightComponent(pv);
+                        return;
+                    }
+                }
                 PackageView pv = MainFrame.getInstance().getWorkspace().generateWorkspace();
+                MainFrame.getInstance().getPackageViews().add(pv);
                 MainFrame.getInstance().getSplitPane().setRightComponent(pv);
             } /*
             else if(MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode() instanceof MindMap){

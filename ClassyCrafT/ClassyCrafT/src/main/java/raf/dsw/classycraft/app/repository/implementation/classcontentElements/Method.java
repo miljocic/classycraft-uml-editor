@@ -4,7 +4,8 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 
 public class Method extends ClassContent {
 
-    public Method(String name, ClassyNode parent) {
-        super(name, parent);
+
+    public Method(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate) {
+        super(name, parent, stroke, color, xCoordinate, yCoordinate);
     }
 }

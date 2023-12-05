@@ -6,8 +6,8 @@ import java.awt.*;
 
 public class Enum extends Interclass {
 
-    public Enum(String name, ClassyNode parent, String visibility, Point location) {
-        super(name, parent, visibility, location);
 
+    public Enum(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate) {
+        super(name, parent, stroke, color, xCoordinate, yCoordinate);
     }
 }

@@ -13,6 +13,7 @@ public class StateManager {
     private SelectState selectState;
     private MoveState moveState;
     private ZoomState zoomState;
+    private ConnectState connectState;
 
 
     public StateManager() {
@@ -22,7 +23,9 @@ public class StateManager {
         moveState = new MoveState();
         selectState = new SelectState();
         zoomState = new ZoomState();
+        connectState = new ConnectState();
         current = addState;
+
 
     }
 
@@ -44,5 +47,6 @@ public class StateManager {
     public void setZoomState() {
         current = this.zoomState;
     }
+    public void setConnectState(){current = this.connectState;}
 
 }

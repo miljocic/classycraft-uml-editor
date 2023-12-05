@@ -1,9 +1,10 @@
 package raf.dsw.classycraft.app.state.model;
 
+import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 
-import raf.dsw.classycraft.app.repository.implementation.Diagram;
-import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
+import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
@@ -12,7 +13,6 @@ import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
-import java.util.Random;
 
 
 public class AddState implements State {
@@ -57,27 +57,35 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, null, "defaultVisibility", e.getPoint());
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY());
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, null, "defaultVisibility", e.getPoint());
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY());
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, null, "defaultVisibility", e.getPoint());
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY());
                     interfaceCounter++;
                     break;
                 default:
                     element = null;
             }
 
+            for (ElementPainter elementPainter : dV.getElementPainters()) {
+                if (elementPainter.elementAt(e.getPoint())) {
+                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage( ErrorType.ELEMENT_FOUND_AT_POINT);
+                    return;
+                }
+            }
 
             // Add the created element to the diagram
             if (element != null) {
                 System.out.println("Dodat");
                 dV.getDiagram().addChild(element);
             }
+
+
         }
 
     }
