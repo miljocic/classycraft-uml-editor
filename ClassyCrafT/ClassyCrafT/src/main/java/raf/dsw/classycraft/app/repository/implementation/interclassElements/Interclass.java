@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 public abstract class Interclass extends DiagramElement {
 
-
     private List<ClassContent> classContents;
     private String name;
 
