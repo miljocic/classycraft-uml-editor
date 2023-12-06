@@ -2,7 +2,6 @@ package raf.dsw.classycraft.app.state.model;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
-
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
@@ -12,8 +11,8 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
-
 
 public class AddState implements State {
 
@@ -57,37 +56,73 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY());
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY(), getVisibility());
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY());
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY(), getVisibility());
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY());
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY(), getVisibility());
                     interfaceCounter++;
                     break;
                 default:
                     element = null;
             }
 
-            for (ElementPainter elementPainter : dV.getElementPainters()) {
-                if (elementPainter.elementAt(e.getPoint())) {
-                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage( ErrorType.ELEMENT_FOUND_AT_POINT);
-                    return;
-                }
-            }
-
-            // Add the created element to the diagram
-            if (element != null) {
+            if (element != null && !checkOverlap(element, dV.getElementPainters())) {
+                // Add the created element to the diagram
                 System.out.println("Dodat");
                 dV.getDiagram().addChild(element);
             }
-
-
         }
+    }
 
+
+
+    private boolean checkOverlap(Interclass newElement, Iterable<ElementPainter> painters) {
+        for (ElementPainter elementPainter : painters) {
+            Interclass existingElement = (Interclass) elementPainter.getElement();
+            if (existingElement != null && newElement != null) {
+                Rectangle newBounds = new Rectangle((int) newElement.getXCoordinate(), (int) newElement.getYCoordinate(), 200, 250);
+                Rectangle existingBounds = new Rectangle((int) existingElement.getXCoordinate(), (int) existingElement.getYCoordinate(), 200, 250);
+
+                if (newBounds.intersects(existingBounds)) {
+                    ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ELEMENT_FOUND_AT_POINT);
+                    return true; // Overlap detected
+                }
+            }
+        }
+        return false; // No overlap
+    }
+
+    // Rest of the class remains unchanged
+    // ...
+
+    private String getVisibility() {
+        String[] options = {"public", "private", "protected"};
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Select the visibility for the new element:",
+                "Visibility",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+
+        switch (choice) {
+            case 0:
+                return "public";
+            case 1:
+                return "private";
+            case 2:
+                return "protected";
+            default:
+                return ""; // Default case, handle as needed
+        }
     }
 
     @Override
