@@ -74,6 +74,9 @@ public class PackageView extends JPanel implements ISubscriber {
     public void startAddState(){
         this.stateManager.setAddState();
     }
+    public void startEditState(){
+        this.stateManager.setEditState();
+    }
 
     public void startDeleteState(){
         this.stateManager.setDeleteState();
@@ -84,7 +87,7 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
     public void startZoomState(){
-        this.stateManager.setZoomState();
+        this.stateManager.setZoomInState();
     }
 
     public void startSelectState(){

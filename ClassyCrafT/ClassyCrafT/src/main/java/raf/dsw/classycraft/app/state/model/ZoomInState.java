@@ -5,8 +5,7 @@ import raf.dsw.classycraft.app.state.State;
 
 import java.awt.event.MouseEvent;
 
-
-public class ZoomState implements State {
+public class ZoomInState implements State {
 
 
 
@@ -25,3 +24,4 @@ public class ZoomState implements State {
 
     }
 }
+

@@ -1,9 +1,7 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
-import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
-import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
+import raf.dsw.classycraft.app.repository.implementation.classcontentElements.ClassContent;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
-import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface;
 
 import java.awt.*;
 
@@ -15,56 +13,51 @@ public class InterclassPainter extends ElementPainter {
 
     @Override
     public void paint(Graphics2D g) {
-
         Interclass interclass = (Interclass) getElement();
         if (interclass == null) {
             System.out.println("Crash!");
             return;
         }
+
         String name = interclass.getName();
         String type = determineType(interclass);
         String visibility = interclass.getVisibility();
-
 
         g.setColor(Color.white);
         g.fillRect((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 200, 250);
         g.setColor(Color.black);
         g.drawRect((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 200, 250);
 
+        g.drawString(visibility + " " + type + ": " + name, (int) interclass.getXCoordinate() + 10, (int) interclass.getYCoordinate() + 20);
 
-        g.drawString(visibility + " " + type+ ": " + name, (int) interclass.getXCoordinate() + 10, (int) interclass.getYCoordinate() + 20);  // Updated line
-        g.drawLine((int) interclass.getXCoordinate() + 10, (int) interclass.getYCoordinate() + 25, (int) interclass.getXCoordinate() + 190, (int) interclass.getYCoordinate() + 25);
-        // No change for the type drawing
-
+        // Draw line under the name
+        g.drawLine((int) interclass.getXCoordinate() + 10, (int) interclass.getYCoordinate() + 35, (int) interclass.getXCoordinate() + 190, (int) interclass.getYCoordinate() + 35);
 
         int yOffset = (int) interclass.getYCoordinate() + 70;
 
-        if (interclass instanceof Class) {
-            for (String attribute : interclass.getAttributes()) {
-                g.drawString(attribute, (int) interclass.getXCoordinate() + 10, yOffset);
-                yOffset += 15;
-            }
+        // Draw attributes
+        for (String attribute : interclass.getAttributes()) {
+            g.drawString(attribute, (int) interclass.getXCoordinate() + 20, yOffset);
+            yOffset += 15;
+        }
 
-            for (String method : interclass.getMethods()) {
-                g.drawString(method, (int) interclass.getXCoordinate() + 10, yOffset);
-                yOffset += 15;
-            }
-        } else if(interclass instanceof Enum) {
+        // Draw line after attributes
+        g.drawLine((int) interclass.getXCoordinate() + 10, yOffset, (int) interclass.getXCoordinate() + 190, yOffset);
 
-        } else if (interclass instanceof Interface) {
-            for (String method : interclass.getMethods()) {
-                g.drawString(method, (int) interclass.getXCoordinate() + 10, yOffset);
-                yOffset += 15;
-            }
+        // Draw methods
+        yOffset += 15;
+        for (String method : interclass.getMethods()) {
+            g.drawString(method, (int) interclass.getXCoordinate() + 20, yOffset);
+            yOffset += 15;
         }
     }
 
     private String determineType(Interclass interclass) {
-        if (interclass instanceof Class) {
+        if (interclass instanceof raf.dsw.classycraft.app.repository.implementation.interclassElements.Class) {
             return "C";
-        } else if (interclass instanceof Enum) {
+        } else if (interclass instanceof raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum) {
             return "E";
-        } else if (interclass instanceof Interface) {
+        } else if (interclass instanceof raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface) {
             return "I";
         } else {
             return "";
@@ -73,7 +66,6 @@ public class InterclassPainter extends ElementPainter {
 
     @Override
     public boolean elementAt(Point pos) {
-
         Interclass interclass = (Interclass) getElement();
         return new Rectangle((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate(), 200, 250).contains(pos);
     }

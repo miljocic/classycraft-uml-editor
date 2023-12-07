@@ -12,8 +12,9 @@ public class StateManager {
     private DeleteState deleteState;
     private SelectState selectState;
     private MoveState moveState;
-    private ZoomState zoomState;
+    private ZoomInState zoomInState;
     private ConnectState connectState;
+    private EditState editState;
 
 
     public StateManager() {
@@ -22,8 +23,8 @@ public class StateManager {
         deleteState = new DeleteState();
         moveState = new MoveState();
         selectState = new SelectState();
-        zoomState = new ZoomState();
         connectState = new ConnectState();
+        editState = new EditState();
         current = addState;
 
 
@@ -32,18 +33,20 @@ public class StateManager {
     public void setAddState() {
         current = this.addState;
     }
+    public void setEditState(){current = this.editState;}
     public void setDeleteState() {
         current = this.deleteState;
     }
     public void setSelectState() {
         current = this.selectState;
     }
+    public void setZoomInState(){
+        current = this.zoomInState;
+    }
     public void setMoveState() {
         current = this.moveState;
     }
-    public void setZoomState() {
-        current = this.zoomState;
-    }
+
     public void setConnectState(){current = this.connectState;}
 
 }

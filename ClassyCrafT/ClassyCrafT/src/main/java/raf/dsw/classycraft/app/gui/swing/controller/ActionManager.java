@@ -18,10 +18,11 @@ public class ActionManager {
     private MyMouseListener myMouseListener;
 
     private AddStateAction addStateAction;
+    private EditStateAction editStateAction;
     private DeleteStateAction deleteStateAction;
     private MoveStateAction moveStateAction;
     private SelectStateAction selectStateAction;
-    private ZoomStateAction zoomStateAction;
+    private ZoomInStateAction zoomInStateAction;
     private StateMouseManager stateMouseManager;
     private ConnectStateAction connectStateAction;
 
@@ -40,10 +41,11 @@ public class ActionManager {
         myMouseListener = new MyMouseListener();
 
         addStateAction = new AddStateAction();
+        editStateAction = new EditStateAction();
         deleteStateAction = new DeleteStateAction();
         moveStateAction = new MoveStateAction();
         selectStateAction = new SelectStateAction();
-        zoomStateAction = new ZoomStateAction();
+        zoomInStateAction = new ZoomInStateAction();
         stateMouseManager = new StateMouseManager();
         connectStateAction = new ConnectStateAction();
 

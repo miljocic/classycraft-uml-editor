@@ -10,20 +10,29 @@ import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Me
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 public abstract class Interclass extends DiagramElement {
 
-
     private List<ClassContent> classContents;
     private String name;
     private String visibility;
+
     public Interclass(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, String visibility) {
         super(name, parent, stroke, color, xCoordinate, yCoordinate);
         this.classContents = new ArrayList<>();
         this.name = name;
         this.visibility = visibility;
+    }
+
+    public void addClassContent(ClassContent content) {
+        classContents.add(content);
+    }
+
+    public List<String> getClassContentNames() {
+        return classContents.stream().map(ClassContent::getName).collect(Collectors.toList());
     }
 
     public List<String> getAttributes() {
@@ -45,4 +54,5 @@ public abstract class Interclass extends DiagramElement {
         }
         return methods;
     }
+
 }
