@@ -3,8 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.view.painters;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Path2D;
 
 public class DependencyPainter extends ConnectionPainter {
     public DependencyPainter(Connection connection) {
@@ -22,32 +20,38 @@ public class DependencyPainter extends ConnectionPainter {
         double xTo = connection.getTo().getXCoordinate();
         double yTo = connection.getTo().getYCoordinate();
 
-        // Calculate midpoint coordinates
-        double midX = (xFrom + xTo) / 2.0;
-        double midY = (yFrom + yTo) / 2.0;
+        // Draw a line from midpoints on each side
+        drawLineFromMidpoints(g, xFrom, yFrom, xTo, yTo);
 
-        // Draw a simple line from one element to another
-        g.drawLine((int) xFrom, (int) yFrom, (int) xTo, (int) yTo);
+        // Draw arrowhead at the end
+        drawArrowhead(g, xTo, yTo, xFrom, yFrom);
+    }
 
-        // Draw arrowhead at the midpoint
-        drawArrowhead(g, midX, midY, xTo, yTo);
+    private void drawLineFromMidpoints(Graphics2D g, double xFrom, double yFrom, double xTo, double yTo) {
+        double arrowSize = 10.0; // Adjust arrow size based on your requirements
+        double offs = 20 * Math.PI / 180.0;
+
+        // Calculate midpoints
+        double midXFrom = (xFrom + xTo) / 2;
+        double midYFrom = (yFrom + yTo) / 2;
+
+        double midXTo = (xTo + xFrom) / 2;
+        double midYTo = (yTo + yFrom) / 2;
+
+        // Draw a line from midpoints
+        g.drawLine((int) midXFrom, (int) midYFrom, (int) midXTo, (int) midYTo);
     }
 
     private void drawArrowhead(Graphics2D g, double xFrom, double yFrom, double xTo, double yTo) {
         double arrowSize = 10.0; // Adjust arrow size based on your requirements
+        double offs = 20 * Math.PI / 180.0;
 
-        double angle = Math.atan2(yTo - yFrom, xTo - xFrom);
-        AffineTransform tx = g.getTransform();
-        tx.translate(xTo, yTo);
-        tx.rotate(angle - Math.PI / 2.0);
+        double angle = Math.atan2(yFrom - yTo, xFrom - xTo);
+        int[] xs = {(int) (xTo + 20 * Math.cos(angle + offs)), (int) xTo,
+                (int) (xTo + 20 * Math.cos(angle - offs))};
+        int[] ys = {(int) (yTo + 20 * Math.sin(angle + offs)), (int) yTo,
+                (int) (yTo + 20 * Math.sin(angle - offs))};
 
-        Path2D arrow = new Path2D.Double();
-        arrow.moveTo(0, -arrowSize / 2.0);
-        arrow.lineTo(arrowSize, 0);
-        arrow.lineTo(0, arrowSize / 2.0);
-        arrow.closePath();
-
-        g.fill(tx.createTransformedShape(arrow));
+        g.fillPolygon(xs, ys, 3);
     }
-
 }

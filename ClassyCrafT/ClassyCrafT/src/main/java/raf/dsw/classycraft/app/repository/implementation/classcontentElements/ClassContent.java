@@ -6,7 +6,7 @@ import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 public abstract class ClassContent extends DiagramElement {
 
 
-    public ClassContent(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate) {
-        super(name, parent, stroke, color, xCoordinate, yCoordinate);
+    public ClassContent(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, double width, double height) {
+        super(name, parent, stroke, color, xCoordinate, yCoordinate, width, height);
     }
 }
