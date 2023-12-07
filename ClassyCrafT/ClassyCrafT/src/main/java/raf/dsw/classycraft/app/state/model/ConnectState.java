@@ -29,10 +29,14 @@ public class ConnectState implements State {
             if (elementPainter.elementAt(e.getPoint())) {
                 if (elementPainter instanceof InterclassPainter) {
                     from = (InterclassPainter) elementPainter;
+                    System.out.println("Mouse Pressed");
+                    System.out.println("From: " + from);
+                    System.out.println("To: " + to);
                     return;
                 }
                 from = null;
                 return;
+
             }
         }
     }
@@ -50,10 +54,7 @@ public class ConnectState implements State {
         }
 
         if (to != null && from != null && to != from) {
-//            dV.getDiagram().addChild(new Dependency("Connection " + count++, dV.getDiagram(), (Interclass) from.getElement(), (Interclass) to.getElement()) {
-//            });
-//
-//            dV.repaint();
+
 
             String[] options = {"Aggregation", "Composition", "Dependency", "Generalization"};
             int choice = JOptionPane.showOptionDialog(
@@ -110,11 +111,15 @@ public class ConnectState implements State {
                 }
 
 
-                // Add the created element to the diagram
+
                 if (element != null) {
                     System.out.println("Dodat");
+                    System.out.println("Mouse Released");
+                    System.out.println("From: " + from);
+                    System.out.println("To: " + to);
                     dV.getDiagram().addChild(element);
                     dV.repaint();
+                    dV.update(element);
                 }
 
 

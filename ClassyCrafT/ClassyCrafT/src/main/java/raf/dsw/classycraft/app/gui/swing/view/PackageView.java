@@ -70,7 +70,6 @@ public class PackageView extends JPanel implements ISubscriber {
 
     }
 
-    //za state manager (u StateManager setteri nesto cudno ponasaju)
 
     public void startAddState(){
         this.stateManager.setAddState();

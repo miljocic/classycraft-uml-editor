@@ -29,9 +29,6 @@ public class StateManager {
 
     }
 
-    /*
-    ne rade setteri nzm zasto?
-     */
     public void setAddState() {
         current = this.addState;
     }

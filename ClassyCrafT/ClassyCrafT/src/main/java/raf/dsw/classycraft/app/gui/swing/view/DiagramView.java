@@ -53,15 +53,20 @@ public class DiagramView extends JPanel implements ISubscriber{
                 else
                     painters.remove(contains);
             } else if (notification instanceof Connection) {
+                System.out.println("Inside Connection block");
                 Connection connection = (Connection) notification;
+                System.out.println("Connection type: " + connection.getClass().getSimpleName());
+
 
                 if (contains == null) {
                     ConnectionPainter connectionPainter = createConnectionPainter(connection);
+                    System.out.println("Update method called");
                     painters.add(connectionPainter);
                 } else {
                     painters.remove(contains);
                 }
             }
+            System.out.println("Painters after adding connection: " + painters);
 
             repaint();
         }

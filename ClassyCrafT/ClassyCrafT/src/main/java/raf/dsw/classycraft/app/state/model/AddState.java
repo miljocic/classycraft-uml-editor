@@ -22,7 +22,7 @@ public class AddState implements State {
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-        // Show a pop-up window to choose the type of element to create
+
         String[] options = {"Class", "Enum", "Interface"};
         int choice = JOptionPane.showOptionDialog(
                 dV,
@@ -36,7 +36,7 @@ public class AddState implements State {
         );
 
         if (choice >= 0) {
-            // Determine the type based on the user's choice
+
             String type;
             switch (choice) {
                 case 0:
@@ -52,7 +52,7 @@ public class AddState implements State {
                     type = "";
             }
 
-            // Create the corresponding element based on the type
+
             Interclass element;
             switch (type) {
                 case "Class":
@@ -72,7 +72,7 @@ public class AddState implements State {
             }
 
             if (element != null && !checkOverlap(element, dV.getElementPainters())) {
-                // Add the created element to the diagram
+
                 System.out.println("Dodat");
                 dV.getDiagram().addChild(element);
             }
@@ -90,15 +90,14 @@ public class AddState implements State {
 
                 if (newBounds.intersects(existingBounds)) {
                     ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ELEMENT_FOUND_AT_POINT);
-                    return true; // Overlap detected
+                    return true;
                 }
             }
         }
-        return false; // No overlap
+        return false;
     }
 
-    // Rest of the class remains unchanged
-    // ...
+
 
     private String getVisibility() {
         String[] options = {"public", "private", "protected"};
@@ -121,7 +120,7 @@ public class AddState implements State {
             case 2:
                 return "protected";
             default:
-                return ""; // Default case, handle as needed
+                return "";
         }
     }
 
