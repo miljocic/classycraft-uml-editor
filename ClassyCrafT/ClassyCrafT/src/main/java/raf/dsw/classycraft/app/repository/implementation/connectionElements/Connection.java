@@ -14,7 +14,7 @@ public abstract class Connection extends DiagramElement {
     private Interclass to;
 
     public Connection(String name, ClassyNode parent, Interclass from, Interclass to) {
-        super(name, parent,2, 0x000000, from.getXCoordinate(), to.getXCoordinate(),0,0);
+        super(name, parent,2, 0x000000, from.getXCoordinate(), to.getXCoordinate());
         this.from = from;
         this.to = to;
     }

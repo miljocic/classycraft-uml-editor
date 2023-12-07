@@ -5,9 +5,8 @@ import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Me
 
 public class Interface extends Interclass {
 
-
-    public Interface(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, double width, double height, String visibility) {
-        super(name, parent, stroke, color, xCoordinate, yCoordinate, width, height, visibility);
+    public Interface(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, String visibility) {
+        super(name, parent, stroke, color, xCoordinate, yCoordinate, visibility);
     }
 
 

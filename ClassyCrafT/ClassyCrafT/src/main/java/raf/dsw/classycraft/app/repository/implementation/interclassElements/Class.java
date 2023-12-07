@@ -9,9 +9,8 @@ import java.awt.*;
 
 public class Class extends Interclass {
 
-
-    public Class(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, double width, double height, String visibility) {
-        super(name, parent, stroke, color, xCoordinate, yCoordinate, width, height, visibility);
+    public Class(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, String visibility) {
+        super(name, parent, stroke, color, xCoordinate, yCoordinate, visibility);
     }
 
     public void addAttribute(String visibility, String attributeName) {
