@@ -4,25 +4,25 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 
+import java.awt.*;
+
 @Getter
 @Setter
 public abstract class DiagramElement extends ClassyNode {
 
-    private int color;
-    private Integer stroke;
-    private double xCoordinate;
-    private double yCoordinate;
-    private double width;
-    private double height;
+    private Color color;
+    private int stroke;
 
-    public DiagramElement(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate) {
+    public DiagramElement(String name, ClassyNode parent, Color color, int stroke) {
         super(name, parent);
-        this.color = color;
+        this.color =color;
         this.stroke = stroke;
-        this.xCoordinate = xCoordinate;
-        this.yCoordinate = yCoordinate;
-        this.width = width;
-        this.height = height;
     }
+//    private double xCoordinate;
+//    private double yCoordinate;
+//    private double width;
+//    private double height;
+//    private String visibility;
+
 
 }

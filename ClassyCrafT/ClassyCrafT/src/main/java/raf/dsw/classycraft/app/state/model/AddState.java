@@ -56,15 +56,15 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY(), getVisibility());
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(), e.getPoint(), getVisibility(),new Dimension(200, 250));
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY(), getVisibility());
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), e.getPoint(), getVisibility(),new Dimension(200, 250));
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), dV.getStroke(), dV.getColor(), e.getPoint().getX(), e.getPoint().getY(),getVisibility());
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
                     interfaceCounter++;
                     break;
                 default:
@@ -85,8 +85,8 @@ public class AddState implements State {
         for (ElementPainter elementPainter : painters) {
             Interclass existingElement = (Interclass) elementPainter.getElement();
             if (existingElement != null && newElement != null) {
-                Rectangle newBounds = new Rectangle((int) newElement.getXCoordinate(), (int) newElement.getYCoordinate(), 200, 250);
-                Rectangle existingBounds = new Rectangle((int) existingElement.getXCoordinate(), (int) existingElement.getYCoordinate(), 200, 250);
+                Rectangle newBounds = new Rectangle((int) newElement.getLocation().getX(), (int) newElement.getLocation().getY(), 200, 250);
+                Rectangle existingBounds = new Rectangle((int) existingElement.getLocation().getX(), (int) existingElement.getLocation().getY(), 200, 250);
 
                 if (newBounds.intersects(existingBounds)) {
                     ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ELEMENT_FOUND_AT_POINT);

@@ -6,6 +6,8 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
+import java.awt.*;
+
 @Getter
 @Setter
 public abstract class Connection extends DiagramElement {
@@ -14,10 +16,9 @@ public abstract class Connection extends DiagramElement {
     private Interclass to;
 
     public Connection(String name, ClassyNode parent, Interclass from, Interclass to) {
-        super(name, parent,2, 0x000000, from.getXCoordinate(), to.getXCoordinate());
+        super(name, parent, Color.BLACK, 2);
         this.from = from;
         this.to = to;
     }
-
 
 }

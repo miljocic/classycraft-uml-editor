@@ -5,6 +5,7 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 
 public class Composition extends Connection {
 
+
     public Composition(String name, ClassyNode parent, Interclass from, Interclass to) {
         super(name, parent, from, to);
     }

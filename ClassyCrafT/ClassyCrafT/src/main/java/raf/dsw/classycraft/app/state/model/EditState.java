@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class EditState implements State {
@@ -66,7 +67,7 @@ public class EditState implements State {
         String attributeName = JOptionPane.showInputDialog("Enter attribute name:");
 
         if (attributeName != null && !attributeName.isEmpty()) {
-            Attribute attribute = new Attribute(attributeName, element, 1, 0, 0, 0, visibility);
+            Attribute attribute = new Attribute(attributeName, element, Color.BLACK,2 );
             element.addClassContent(attribute);
             dV.repaint();
         }
@@ -77,7 +78,7 @@ public class EditState implements State {
         String methodName = JOptionPane.showInputDialog("Enter method name:");
 
         if (methodName != null && !methodName.isEmpty()) {
-            Method method = new Method(methodName, element, 1, 0, 0, 0, visibility);
+            Method method = new Method(methodName, element, Color.BLACK, 2);
             element.addClassContent(method);
             dV.repaint();
         }

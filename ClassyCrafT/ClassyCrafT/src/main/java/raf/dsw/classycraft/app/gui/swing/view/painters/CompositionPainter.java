@@ -1,41 +1,60 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
-import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CompositionPainter extends ConnectionPainter {
+
+    private Connection d;
     public CompositionPainter(Connection connection) {
         super(connection);
+        this.d = connection;
     }
 
     @Override
     public void paint(Graphics2D g) {
         super.paint(g);
-        Connection connection = (Connection) element;
 
-        double xFrom = connection.getFrom().getXCoordinate();
-        double yFrom = connection.getFrom().getYCoordinate();
+        java.util.List<Point> beginningsList = new ArrayList<>();
+        beginningsList.add(new Point((int) d.getFrom().getLocation().getX() + (int) d.getFrom().getDimension().getWidth() / 2, (int) d.getFrom().getLocation().getY()));
+        beginningsList.add(new Point((int) d.getFrom().getLocation().getX() + (int) d.getFrom().getDimension().getWidth() / 2, (int) d.getFrom().getLocation().getY() + (int) d.getFrom().getDimension().getHeight()));
+        beginningsList.add(new Point((int) d.getFrom().getLocation().getX(), (int) d.getFrom().getLocation().getY() + (int) d.getFrom().getDimension().getHeight() / 2));
+        beginningsList.add(new Point((int) d.getFrom().getLocation().getX() + (int) d.getFrom().getDimension().getWidth(), (int) d.getFrom().getLocation().getY() + (int) d.getFrom().getDimension().getHeight() / 2));
 
-        double xTo = connection.getTo().getXCoordinate();
-        double yTo = connection.getTo().getYCoordinate();
+        java.util.List<Point> endingsList = new ArrayList<>();
+        endingsList.add(new Point((int) d.getTo().getLocation().getX() + (int) d.getTo().getDimension().getWidth() / 2, (int) d.getTo().getLocation().getY()));
+        endingsList.add(new Point((int) d.getTo().getLocation().getX() + (int) d.getTo().getDimension().getWidth() / 2, (int) d.getTo().getLocation().getY() + (int) d.getTo().getDimension().getHeight()));
+        endingsList.add(new Point((int) d.getTo().getLocation().getX(), (int) d.getTo().getLocation().getY() + (int) d.getTo().getDimension().getHeight() / 2));
+        endingsList.add(new Point((int) d.getTo().getLocation().getX() + (int) d.getTo().getDimension().getWidth(), (int) d.getTo().getLocation().getY() + (int) d.getTo().getDimension().getHeight() / 2));
 
-        // Draw line with a black diamond at the beginning
-        drawLineWithDiamond(g, xFrom, yFrom, xTo, yTo);
+        Point beginningPoint = new Point(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        Point endPoint = new Point(0, 0);
+
+        for (Point b : beginningsList) {
+            for (Point e : endingsList) {
+                if (b.distance(e) <= beginningPoint.distance(endPoint)) {
+                    beginningPoint = b;
+                    endPoint = e;
+                }
+            }
+        }
+        drawDiamond(g, (int) beginningPoint.getX(), (int) beginningPoint.getY());
+        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int)  endPoint.getX(), (int) endPoint.getY());
+
     }
+    private void drawDiamond(Graphics2D g, int x, int y) {
+        int size = 10; // Adjust the size as needed
 
+        g.setColor(Color.BLACK);
 
-    private void drawLineWithDiamond(Graphics2D g, double x1, double y1, double x2, double y2) {
-        // Implement line with diamond drawing logic here
-        g.drawLine((int) x1, (int) y1, (int) x2, (int) y2);
-        drawDiamond(g, x1, y1);
-    }
+        int[] xPoints = {x, x + size, x, x - size};
+        int[] yPoints = {y - size, y, y + size, y};
 
-    private void drawDiamond(Graphics2D g, double x, double y) {
-        // Implement diamond drawing logic here
-        int[] xPoints = {(int) x, (int) x - 10, (int) x, (int) x + 10};
-        int[] yPoints = {(int) y - 10, (int) y, (int) y + 10, (int) y};
         g.fillPolygon(xPoints, yPoints, 4);
     }
+
+
 }

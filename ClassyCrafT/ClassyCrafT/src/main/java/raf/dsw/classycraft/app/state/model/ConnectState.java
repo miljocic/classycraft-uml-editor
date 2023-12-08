@@ -4,6 +4,7 @@ package raf.dsw.classycraft.app.state.model;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
+import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.*;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 import raf.dsw.classycraft.app.state.State;
@@ -20,8 +21,6 @@ public class ConnectState implements State {
     private InterclassPainter from;
     private InterclassPainter to;
 
-
-
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
         System.out.println("from");
@@ -29,9 +28,6 @@ public class ConnectState implements State {
             if (elementPainter.elementAt(e.getPoint())) {
                 if (elementPainter instanceof InterclassPainter) {
                     from = (InterclassPainter) elementPainter;
-                    System.out.println("Mouse Pressed");
-                    System.out.println("From: " + from);
-                    System.out.println("To: " + to);
                     return;
                 }
                 from = null;
@@ -91,19 +87,19 @@ public class ConnectState implements State {
                 Connection element;
                 switch (type) {
                     case "Aggregation":
-                        element = new Aggregation("NewAggregation" + aggCounter, dV.getDiagram(), (Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Aggregation("NewAggregation" + aggCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement());
                         aggCounter++;
                         break;
                     case "Composition":
-                        element = new Composition("NewComposition" + comCounter, dV.getDiagram(), (Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Composition("NewComposition" + comCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement());
                         comCounter++;
                         break;
                     case "Dependency":
-                        element = new Dependency("NewDependency" + depCounter, dV.getDiagram(), (Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Dependency("NewDependency" + depCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement() );
                         depCounter++;
                         break;
                     case "Generalization":
-                        element = new Generalization("NewGeneralization" + genCounter, dV.getDiagram(), (Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Generalization("NewGeneralization" + genCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement());
                         genCounter++;
                         break;
                     default:
@@ -114,9 +110,6 @@ public class ConnectState implements State {
 
                 if (element != null) {
                     System.out.println("Dodat");
-                    System.out.println("Mouse Released");
-                    System.out.println("From: " + from);
-                    System.out.println("To: " + to);
                     dV.getDiagram().addChild(element);
                     dV.repaint();
                     dV.update(element);

@@ -36,6 +36,7 @@ public class DiagramView extends JPanel implements ISubscriber{
         this.addMouseListener(new StateMouseManager(this));
         this.stroke = 2;
         this.color = 0x000000;
+
     }
 
 
@@ -53,20 +54,16 @@ public class DiagramView extends JPanel implements ISubscriber{
                 else
                     painters.remove(contains);
             } else if (notification instanceof Connection) {
-                System.out.println("Inside Connection block");
                 Connection connection = (Connection) notification;
-                System.out.println("Connection type: " + connection.getClass().getSimpleName());
 
 
                 if (contains == null) {
                     ConnectionPainter connectionPainter = createConnectionPainter(connection);
-                    System.out.println("Update method called");
                     painters.add(connectionPainter);
                 } else {
                     painters.remove(contains);
                 }
             }
-            System.out.println("Painters after adding connection: " + painters);
 
             repaint();
         }
@@ -106,6 +103,16 @@ public class DiagramView extends JPanel implements ISubscriber{
             elementPainter.paint(g2);
         }
     }
+//@Override
+//protected void paintComponent(Graphics g) {
+//    super.paintComponent(g);
+//    RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//    rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+//    ((Graphics2D)g).setRenderingHints(rh);
+//    for (ElementPainter elementPainter : painters) {
+//        elementPainter.paint((Graphics2D) g);
+//    }
+//}
     public List<ElementPainter> getElementPainters() {
         return painters;
     }

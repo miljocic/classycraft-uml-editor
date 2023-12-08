@@ -3,15 +3,17 @@ package raf.dsw.classycraft.app.repository.implementation.interclassElements;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Method;
 
+import java.awt.*;
+
 public class Interface extends Interclass {
 
-    public Interface(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, String visibility) {
-        super(name, parent, stroke, color, xCoordinate, yCoordinate, visibility);
+
+    public Interface(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
+        super(name, parent, location, visibility, dimension);
     }
 
-
     public void addMethod(String visibility, String methodName) {
-        Method method = new Method(methodName, this, null, 0, 0, 0, visibility);
+        Method method = new Method(methodName, this, Color.BLACK, 2);
         addClassContent(method);
     }
 }

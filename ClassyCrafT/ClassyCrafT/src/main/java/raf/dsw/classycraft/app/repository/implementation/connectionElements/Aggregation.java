@@ -5,8 +5,8 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 
 public class Aggregation extends Connection {
 
-    public Aggregation(String name, ClassyNode parent, Interclass from, Interclass to) {
-        super(name, parent,  from,  to);
-    }
 
+    public Aggregation(String name, ClassyNode parent, Interclass from, Interclass to) {
+        super(name, parent, from, to);
+    }
 }

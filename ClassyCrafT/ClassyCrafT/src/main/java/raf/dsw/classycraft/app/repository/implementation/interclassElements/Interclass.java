@@ -8,6 +8,7 @@ import raf.dsw.classycraft.app.repository.implementation.classcontentElements.At
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.ClassContent;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Method;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,13 +19,17 @@ public abstract class Interclass extends DiagramElement {
 
     private List<ClassContent> classContents;
     private String name;
+    private Dimension dimension;
+    private Point location;
     private String visibility;
 
-    public Interclass(String name, ClassyNode parent, Integer stroke, int color, double xCoordinate, double yCoordinate, String visibility) {
-        super(name, parent, stroke, color, xCoordinate, yCoordinate);
-        this.classContents = new ArrayList<>();
+    public Interclass(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
+        super(name, parent,Color.BLACK, 2);
         this.name = name;
+        this.location = location;
         this.visibility = visibility;
+        this.classContents = new ArrayList<>();
+        this.dimension = dimension;
     }
 
     public void addClassContent(ClassContent content) {

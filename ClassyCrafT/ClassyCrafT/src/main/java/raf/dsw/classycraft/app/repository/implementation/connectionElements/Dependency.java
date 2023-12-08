@@ -5,8 +5,8 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 
 public class Dependency extends Connection {
 
+
     public Dependency(String name, ClassyNode parent, Interclass from, Interclass to) {
         super(name, parent, from, to);
     }
-
 }
