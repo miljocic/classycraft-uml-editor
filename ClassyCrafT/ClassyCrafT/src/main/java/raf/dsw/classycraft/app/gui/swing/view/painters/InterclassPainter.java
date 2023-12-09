@@ -23,6 +23,7 @@ public class InterclassPainter extends ElementPainter {
         String type = determineType(interclass);
         String visibility = interclass.getVisibility();
 
+
         g.setColor(Color.white);
         g.fillRect((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY(), 200, 250);
         g.setColor(Color.black);
@@ -31,18 +32,18 @@ public class InterclassPainter extends ElementPainter {
         g.drawString(visibility + " " + type + ": " + name, (int) interclass.getLocation().getX() + 10, (int) interclass.getLocation().getY() + 20);
 
         // Draw line under the name
-        g.drawLine((int) interclass.getLocation().getX() + 10, (int) interclass.getLocation().getY() + 35, (int) interclass.getLocation().getX() + 190, (int) interclass.getLocation().getY() + 35);
+        g.drawLine((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY() + 35, (int) interclass.getLocation().getX() + 200, (int) interclass.getLocation().getY() + 35);
 
         int yOffset = (int) interclass.getLocation().getY() + 70;
 
         // Draw attributes
         for (String attribute : interclass.getAttributes()) {
-            g.drawString(attribute, (int) interclass.getLocation().getX() + 20, yOffset);
+            g.drawString(attribute,(int) interclass.getLocation().getX() + 20, yOffset);
             yOffset += 15;
         }
 
         // Draw line after attributes
-        g.drawLine((int) interclass.getLocation().getX() + 10, yOffset, (int) interclass.getLocation().getX() + 190, yOffset);
+        g.drawLine((int) interclass.getLocation().getX(), yOffset, (int) interclass.getLocation().getX() + 200, yOffset);
 
         // Draw methods
         yOffset += 15;

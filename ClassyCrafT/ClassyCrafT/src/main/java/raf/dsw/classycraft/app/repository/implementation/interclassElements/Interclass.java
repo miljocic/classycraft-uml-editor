@@ -36,9 +36,7 @@ public abstract class Interclass extends DiagramElement {
         classContents.add(content);
     }
 
-    public List<String> getClassContentNames() {
-        return classContents.stream().map(ClassContent::getName).collect(Collectors.toList());
-    }
+
 
     public List<String> getAttributes() {
         List<String> attributes = new ArrayList<>();

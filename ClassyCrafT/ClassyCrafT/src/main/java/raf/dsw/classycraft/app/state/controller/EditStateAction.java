@@ -14,7 +14,7 @@ public class EditStateAction extends AbstractClassyAction {
 
         putValue(NAME, "Edit element");
         putValue(SMALL_ICON, loadIcon("/images/editstate.png"));
-        putValue(SHORT_DESCRIPTION, "Edit Class Element");
+        putValue(SHORT_DESCRIPTION, "Edit Element");
 
     }
 

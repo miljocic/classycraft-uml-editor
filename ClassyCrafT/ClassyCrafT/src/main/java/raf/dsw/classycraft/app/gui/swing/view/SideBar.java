@@ -13,10 +13,11 @@ public class SideBar extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getEditStateAction());
         add(MainFrame.getInstance().getActionManager().getConnectStateAction());
         add(MainFrame.getInstance().getActionManager().getDeleteStateAction());
+        add(MainFrame.getInstance().getActionManager().getSelectStateAction());
         add(MainFrame.getInstance().getActionManager().getMoveStateAction());
         add(MainFrame.getInstance().getActionManager().getZoomInStateAction());
-        add(MainFrame.getInstance().getActionManager().getSelectStateAction());
-        add(MainFrame.getInstance().getActionManager().getConnectStateAction());
+
+
     }
 
 }

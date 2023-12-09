@@ -12,16 +12,16 @@ public class ZoomInStateAction extends AbstractClassyAction{
 
     public ZoomInStateAction() {
 
-        putValue(NAME, "Add element");
+        putValue(NAME, "Zoom state");
         putValue(SMALL_ICON, loadIcon("/images/zoomstate.png"));
-        putValue(SHORT_DESCRIPTION, "Add Element");
+        putValue(SHORT_DESCRIPTION, "Zoom State");
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
-            MainFrame.getInstance().getWorkspace().getPackageView().startAddState();
+            MainFrame.getInstance().getWorkspace().getPackageView().startZoomState();
         }else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_VIEW_SELECTED);
         }

@@ -12,8 +12,5 @@ public class Interface extends Interclass {
         super(name, parent, location, visibility, dimension);
     }
 
-    public void addMethod(String visibility, String methodName) {
-        Method method = new Method(methodName, this, Color.BLACK, 2);
-        addClassContent(method);
-    }
+
 }
