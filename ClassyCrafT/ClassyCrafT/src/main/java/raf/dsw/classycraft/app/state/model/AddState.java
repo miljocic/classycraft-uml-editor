@@ -4,6 +4,8 @@ import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
+import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
@@ -83,12 +85,24 @@ public class AddState implements State {
 
     private boolean checkOverlap(Interclass newElement, Iterable<ElementPainter> painters) {
         for (ElementPainter elementPainter : painters) {
-            Interclass existingElement = (Interclass) elementPainter.getElement();
-            if (existingElement != null && newElement != null) {
-                Rectangle newBounds = new Rectangle((int) newElement.getLocation().getX(), (int) newElement.getLocation().getY(), 200, 250);
-                Rectangle existingBounds = new Rectangle((int) existingElement.getLocation().getX(), (int) existingElement.getLocation().getY(), 200, 250);
+            DiagramElement element = elementPainter.getElement();
 
-                if (newBounds.intersects(existingBounds)) {
+            if (element instanceof Interclass) {
+                Interclass existingElement = (Interclass) element;
+                if (existingElement != null && newElement != null) {
+                    Rectangle newBounds = new Rectangle((int) newElement.getLocation().getX(), (int) newElement.getLocation().getY(), 200, 250);
+                    Rectangle existingBounds = new Rectangle((int) existingElement.getLocation().getX(), (int) existingElement.getLocation().getY(), 200, 250);
+
+                    if (newBounds.intersects(existingBounds)) {
+                        ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ELEMENT_FOUND_AT_POINT);
+                        return true;
+                    }
+                }
+            } else if (element instanceof Connection) {
+                Connection connection = (Connection) element;
+                Rectangle newBounds = new Rectangle((int) newElement.getLocation().getX(), (int) newElement.getLocation().getY(), 200, 250);
+                if (connection.intersectsRectangle(newBounds)) {
+                    System.out.println("Usao u check dal se preseca"); //Ne valja check ovde
                     ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ELEMENT_FOUND_AT_POINT);
                     return true;
                 }

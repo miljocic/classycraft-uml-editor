@@ -21,4 +21,7 @@ public abstract class Connection extends DiagramElement {
         this.to = to;
     }
 
+    public abstract boolean intersectsRectangle(Rectangle rect);
+
+
 }
