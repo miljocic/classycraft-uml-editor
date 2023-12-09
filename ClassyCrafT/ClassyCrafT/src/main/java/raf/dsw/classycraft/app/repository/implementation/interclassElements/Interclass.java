@@ -4,27 +4,59 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Attribute;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.ClassContent;
+import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Method;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 public abstract class Interclass extends DiagramElement {
 
-    private String visibility;
-    private Point location;
     private List<ClassContent> classContents;
     private String name;
+    private Dimension dimension;
+    private Point location;
+    private String visibility;
 
-    public Interclass(String name, ClassyNode parent, String visibility) {
-        super(name, parent);
-        this.visibility = visibility;
-        this.location = location;
-        this.classContents = new ArrayList<>();
+    public Interclass(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
+        super(name, parent,Color.BLACK, 2);
         this.name = name;
+        this.location = location;
+        this.visibility = visibility;
+        this.classContents = new ArrayList<>();
+        this.dimension = dimension;
     }
 
+    public void addClassContent(ClassContent content) {
+        classContents.add(content);
+    }
+
+    public List<String> getClassContentNames() {
+        return classContents.stream().map(ClassContent::getName).collect(Collectors.toList());
+    }
+
+    public List<String> getAttributes() {
+        List<String> attributes = new ArrayList<>();
+        for (ClassContent content : classContents) {
+            if (content instanceof Attribute) {
+                attributes.add(content.getName());
+            }
+        }
+        return attributes;
+    }
+
+    public List<String> getMethods() {
+        List<String> methods = new ArrayList<>();
+        for (ClassContent content : classContents) {
+            if (content instanceof Method) {
+                methods.add(content.getName());
+            }
+        }
+        return methods;
+    }
 }

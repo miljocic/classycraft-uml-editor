@@ -41,6 +41,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Greska pri cuvanju podataka!", errorType);
         }else if (ErrorType.NO_DIAGRAM_VIEW_SELECTED.equals(errorType)) {
             createMessage("Diagram view nije selektovan!", errorType);
+        }else if (ErrorType.ELEMENT_FOUND_AT_POINT.equals(errorType)) {
+            createMessage("Element je pronadjen!", errorType);
         }
 
     }

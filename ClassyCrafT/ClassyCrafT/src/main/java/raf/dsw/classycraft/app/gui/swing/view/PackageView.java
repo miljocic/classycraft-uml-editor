@@ -8,11 +8,10 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.state.StateManager;
-import raf.dsw.classycraft.app.state.model.AddState;
 
 
 import javax.swing.*;
-
+import java.awt.event.MouseEvent;
 
 
 @Getter
@@ -26,7 +25,6 @@ public class PackageView extends JPanel implements ISubscriber {
     private Package paket;
 
     private StateManager stateManager;
-    private AddState addStateInstance;
 
     public PackageView() {
         this.paket = (Package) MainFrame.getInstance().getTree().getSelectedNode().getClassyNode();
@@ -45,7 +43,6 @@ public class PackageView extends JPanel implements ISubscriber {
         add(author);
         add(mtp);
         stateManager = new StateManager();
-        addStateInstance = new AddState("DefaultElementType");
     }
 
     @Override
@@ -73,15 +70,12 @@ public class PackageView extends JPanel implements ISubscriber {
 
     }
 
-    //za state manager (u StateManager setteri nesto cudno ponasaju)
 
-//    public void startAddState(){
-//        this.stateManager.setAddState();
-//    }
-
-    public void startAddState(String elementType) {
-        getAddStateInstance().setElementType(elementType);
+    public void startAddState(){
         this.stateManager.setAddState();
+    }
+    public void startEditState(){
+        this.stateManager.setEditState();
     }
 
     public void startDeleteState(){
@@ -93,27 +87,27 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
     public void startZoomState(){
-        this.stateManager.setZoomState();
+        this.stateManager.setZoomInState();
     }
 
     public void startSelectState(){
         this.stateManager.setSelectState();
     }
 
-    public void startMousePressed(int x, int y, DiagramView dV){
-            stateManager.getCurrent().mousePressed(x, y, dV);
+    public void startConnectState(){ this.stateManager.setConnectState();
     }
 
-    public void startMouseDragged(int x, int y, DiagramView dV){
-        stateManager.getCurrent().mouseDragged(x, y, dV);
+    public void startMousePressed(MouseEvent e, DiagramView dV) {
+        stateManager.getCurrent().mousePressed(e, dV);
     }
 
-    public void startMouseReleased(int x, int y, DiagramView dV){
-        stateManager.getCurrent().mouseReleased(x, y, dV);
+    public void startMouseDragged(MouseEvent e, DiagramView dV) {
+        stateManager.getCurrent().mouseDragged(e, dV);
     }
 
-
-
+    public void startMouseReleased(MouseEvent e, DiagramView dV) {
+        stateManager.getCurrent().mouseReleased(e, dV);
+    }
 
 
 }

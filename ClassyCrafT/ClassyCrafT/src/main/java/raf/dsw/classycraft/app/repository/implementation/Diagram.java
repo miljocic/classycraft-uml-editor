@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
 @Getter
 @Setter
@@ -20,10 +21,10 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-        if(child instanceof DiagramElement){
-            DiagramElement diagramElement = (DiagramElement) child;
-            if(!this.getChildren().contains(diagramElement)) {
-                this.getChildren().add(diagramElement);
+        if(child instanceof Interclass){
+            Interclass interclass = (Interclass) child;
+            if(!this.getChildren().contains(interclass)) {
+                this.getChildren().add(interclass);
                 notifySubscribers(child);
             }
         }

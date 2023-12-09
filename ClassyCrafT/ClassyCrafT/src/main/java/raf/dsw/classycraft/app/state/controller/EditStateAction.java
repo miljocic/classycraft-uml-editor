@@ -8,24 +8,23 @@ import raf.dsw.classycraft.app.logg.messages.ErrorType;
 
 import java.awt.event.ActionEvent;
 
-public class ZoomStateAction extends AbstractClassyAction {
+public class EditStateAction extends AbstractClassyAction {
 
-    public ZoomStateAction() {
+    public EditStateAction() {
 
-        putValue(NAME, "Zoom element");
-        putValue(SMALL_ICON, loadIcon("/images/zoomstate.png"));
-        putValue(SHORT_DESCRIPTION, "Zoom Element");
+        putValue(NAME, "Edit element");
+        putValue(SMALL_ICON, loadIcon("/images/editstate.png"));
+        putValue(SHORT_DESCRIPTION, "Edit Class Element");
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView){
-            MainFrame.getInstance().getWorkspace().getPackageView().startZoomState();
+        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
+            MainFrame.getInstance().getWorkspace().getPackageView().startEditState();
         }else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_VIEW_SELECTED);
         }
-
 
     }
 

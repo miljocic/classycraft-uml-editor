@@ -11,17 +11,18 @@ import java.awt.*;
 public abstract class DiagramElement extends ClassyNode {
 
     private Color color;
-    private Integer stroke;
-    private Point location;
+    private int stroke;
 
-
-    public DiagramElement(String name, ClassyNode parent) {
+    public DiagramElement(String name, ClassyNode parent, Color color, int stroke) {
         super(name, parent);
-        this.color = Color.BLACK;
-        this.stroke = 1;
-        this.location = new Point(0, 0);
+        this.color =color;
+        this.stroke = stroke;
     }
-
+//    private double xCoordinate;
+//    private double yCoordinate;
+//    private double width;
+//    private double height;
+//    private String visibility;
 
 
 }
