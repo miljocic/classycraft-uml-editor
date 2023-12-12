@@ -47,7 +47,7 @@ public class EditState implements State {
     }
 
     private void editClass(Class element) {
-        String[] options = {"Edit Attributes", "Edit Methods"};
+        String[] options = {"Add an Attribute", "Add a Method"};
         int choice = JOptionPane.showOptionDialog(
                 dV,
                 "Select the type of edit:",
@@ -66,7 +66,7 @@ public class EditState implements State {
     }
 
     private void editInterface(Interface element) {
-        String[] options = {"Edit Attributes", "Edit Methods"};
+        String[] options = {"Add an Attribute", "Add a Method"};
         int choice = JOptionPane.showOptionDialog(
                 dV,
                 "Select the type of edit:",
@@ -85,7 +85,7 @@ public class EditState implements State {
     }
 
     private void editEnum(Enum element) {
-        String[] options = {"Edit Enum Elements", "Edit Methods"};
+        String[] options = {"Add Enum Element", "Add a Method"};
         int choice = JOptionPane.showOptionDialog(
                 dV,
                 "Select the type of edit:",
