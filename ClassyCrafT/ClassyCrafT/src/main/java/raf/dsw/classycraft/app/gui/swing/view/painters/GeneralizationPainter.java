@@ -3,6 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.view.painters;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
 import java.awt.*;
+import java.awt.geom.Path2D;
 import java.util.ArrayList;
 
 public class GeneralizationPainter extends ConnectionPainter {
@@ -41,18 +42,37 @@ public class GeneralizationPainter extends ConnectionPainter {
             }
         }
         g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int)  endPoint.getX(), (int) endPoint.getY());
-        drawEmptyTriangle(g, (int) endPoint.getX(), (int) endPoint.getY());
+        drawTriangle(g, beginningPoint, endPoint);
     }
 
-    private void drawEmptyTriangle(Graphics2D g, int x, int y) {
-        int size = 10;
+    private void drawTriangle(Graphics2D g, Point start, Point end) {
+        double angle = Math.atan2(end.getY() - start.getY(), end.getX() - start.getX());
 
+        int arrowLength = 10;
+
+        int x1 = (int) (end.getX() - arrowLength * Math.cos(angle - Math.PI / 6));
+        int y1 = (int) (end.getY() - arrowLength * Math.sin(angle - Math.PI / 6));
+
+        int x2 = (int) (end.getX() - arrowLength * Math.cos(angle + Math.PI / 6));
+        int y2 = (int) (end.getY() - arrowLength * Math.sin(angle + Math.PI / 6));
+
+        Path2D arrowhead = new Path2D.Double();
+        arrowhead.moveTo(end.getX(), end.getY());
+        arrowhead.lineTo(x1, y1);
+        arrowhead.moveTo(end.getX(), end.getY());
+        arrowhead.lineTo(x2, y2);
+
+        // Add a line connecting the two points of the arrowhead
+        arrowhead.lineTo(x1, y1);
+
+        // Fill the resulting path to create a triangle with a white fill
+        g.setColor(Color.WHITE);
+        g.fill(arrowhead);
+
+        // Draw the outline of the triangle in black
         g.setColor(Color.BLACK);
-
-        int[] xPoints = {x, x + size, x - size};
-        int[] yPoints = {y + size, y - size, y - size};
-
-        g.drawPolygon(xPoints, yPoints, 3);
+        g.draw(arrowhead);
     }
+
 
 }

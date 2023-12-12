@@ -185,3 +185,6 @@
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
