@@ -83,8 +83,8 @@ public class AddState implements State {
                 ClassyTreeItem parent = MainFrame.getInstance().getTree().findNode(dV.getDiagram());
                 ClassyTreeItem classyTreeItem = new ClassyTreeItem(element);
                 parent.add(classyTreeItem);
-                MainFrame.getInstance().getProjectExplorer().expandPath(new TreePath(parent.getPath()));
-                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getProjectExplorer());
+               // MainFrame.getInstance().getProjectExplorer().expandPath(new TreePath(parent.getPath()));
+               // SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getProjectExplorer());
             }
         }
     }
