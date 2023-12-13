@@ -21,6 +21,7 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
 @Getter
 @Setter
@@ -165,4 +166,29 @@ public class ClassyTreeImplementation implements ClassyTree{
     public ClassyTreeItem getSelectedNode() {
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
     }
+
+    @Override
+    public ClassyTreeItem findNode(ClassyNode parent) {
+        return searchTree((ClassyTreeItem) treeModel.getRoot(), parent);
+    }
+
+
+    private ClassyTreeItem searchTree(ClassyTreeItem currentItem, ClassyNode targetNode) {
+        if (isMatching(currentItem, targetNode))
+            return currentItem;
+
+        Enumeration children = currentItem.children();
+        while (children.hasMoreElements()) {
+            ClassyTreeItem child = (ClassyTreeItem) children.nextElement();
+            ClassyTreeItem result = searchTree(child, targetNode);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+
+    private boolean isMatching(ClassyTreeItem currentItem, ClassyNode targetNode) {
+        return currentItem.getClassyNode().equals(targetNode);
+    }
+
 }

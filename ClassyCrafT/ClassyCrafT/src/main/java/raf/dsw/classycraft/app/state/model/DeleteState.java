@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.state.model;
 
+import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
@@ -31,6 +33,9 @@ public class DeleteState implements State {
                 if(elementPainter.equals(dV.getSelected())) dV.setSelected(null);
                 diagram.deleteChild(elementPainter.getElement());
                 deleted = elementPainter;
+                ClassyTreeImplementation treeImp = (ClassyTreeImplementation) MainFrame.getInstance().getTree();
+                treeImp.delete(treeImp.findNode(elementPainter.getElement()));
+                dV.getDiagram().deleteChild(elementPainter.getElement());
                 break;
             }
         }
@@ -52,6 +57,8 @@ public class DeleteState implements State {
                 diagram.deleteChild(c);
             }
         }
+
+
 
     }
 

@@ -1,7 +1,9 @@
 package raf.dsw.classycraft.app.state.model;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
@@ -13,6 +15,7 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -77,6 +80,11 @@ public class AddState implements State {
 
                 System.out.println("Dodat");
                 dV.getDiagram().addChild(element);
+                ClassyTreeItem parent = MainFrame.getInstance().getTree().findNode(dV.getDiagram());
+                ClassyTreeItem classyTreeItem = new ClassyTreeItem(element);
+                parent.add(classyTreeItem);
+                MainFrame.getInstance().getProjectExplorer().expandPath(new TreePath(parent.getPath()));
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getProjectExplorer());
             }
         }
     }
