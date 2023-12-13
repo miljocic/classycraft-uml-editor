@@ -20,3 +20,4 @@ public interface ClassyTree {
 
     ClassyTreeItem findNode(ClassyNode parent);
 }
+
