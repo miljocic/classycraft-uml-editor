@@ -43,6 +43,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Diagram view nije selektovan!", errorType);
         }else if (ErrorType.ELEMENT_FOUND_AT_POINT.equals(errorType)) {
             createMessage("Element je pronadjen!", errorType);
+        }else if (ErrorType.NODE_NOT_COMPOSITE.equals(errorType)) {
+            createMessage("Selektovani Node nije Composite!: ", errorType);
         }
 
     }

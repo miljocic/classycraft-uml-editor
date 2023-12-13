@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
+import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 
 import javax.swing.*;
@@ -27,25 +28,19 @@ public class NewAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        ClassyTreeItem selected= MainFrame.getInstance().getTree().getSelectedNode();
-
-        //nemoguce dodavanje na prazan prostor
-        if (selected == null){
+        if(MainFrame.getInstance().getTree().getSelectedNode() == null ) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_NOT_SELECTED);
-            return;
         }
-
-        //nemoguce dodavanje dalje od newActiona, morace od SideBara!
-        if (selected.getClassyNode() instanceof Diagram){
-            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_HERE);
-            return;
+        else if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof ClassyNodeComposite) {
+            if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Diagram) {
+                ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_HERE);
+                return;
+            }
+            MainFrame.getInstance().getTree().addChild(MainFrame.getInstance().getTree().getSelectedNode());
         }
-
-        else{
-            MainFrame.getInstance().getTree().addChild(selected);
+        else {
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_NOT_COMPOSITE);
         }
-
-
 
 
     }

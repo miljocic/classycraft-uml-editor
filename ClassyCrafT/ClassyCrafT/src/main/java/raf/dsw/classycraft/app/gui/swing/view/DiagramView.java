@@ -43,6 +43,9 @@ public class DiagramView extends JPanel implements ISubscriber{
     @Override
     public void update(Object notification) {
 
+        System.out.println("Received update: " + notification.toString());
+        System.out.println("Notification type: " + notification.getClass());
+
         if(notification instanceof Diagram) {
             setName(((Diagram) notification).getName());
             ((MyTabbedPane)this.getParent()).setTitleAt(((MyTabbedPane)this.getParent()).indexOfComponent(this), this.getName());
@@ -100,7 +103,7 @@ public class DiagramView extends JPanel implements ISubscriber{
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
         for(ElementPainter elementPainter : painters) {
             if(elementPainter.equals(selected)) elementPainter.paintSelected(g2);
-            elementPainter.paint(g2);
+            else elementPainter.paint(g2);
         }
     }
 //@Override

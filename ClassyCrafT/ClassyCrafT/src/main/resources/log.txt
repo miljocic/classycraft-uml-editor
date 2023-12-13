@@ -189,3 +189,5 @@
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[CANNOT_ADD_HERE] [null] - [Dodavanja elemenata Dijagrama moguce samo preko SideBar-a!]
+[CANNOT_ADD_HERE] [null] - [Dodavanja elemenata Dijagrama moguce samo preko SideBar-a!]

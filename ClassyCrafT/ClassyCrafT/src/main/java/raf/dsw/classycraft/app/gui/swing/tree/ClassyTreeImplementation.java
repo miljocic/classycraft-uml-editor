@@ -93,6 +93,8 @@ public class ClassyTreeImplementation implements ClassyTree{
             @Override
             public void actionPerformed(ActionEvent e){
                 ClassyNode child = createChild(parent.getClassyNode(), NodeType.DIAGRAM);
+                System.out.println("Created child: " + child.getClass().getName());
+
                 parent.add(new ClassyTreeItem(child));
                 ((Package) parent.getClassyNode()).addChild(child);
                 treeView.expandPath(treeView.getSelectionPath());
@@ -107,6 +109,8 @@ public class ClassyTreeImplementation implements ClassyTree{
             @Override
             public void actionPerformed(ActionEvent e){
                 ClassyNode child = createChild(parent.getClassyNode(), NodeType.PACKAGE);
+                System.out.println("Created child: " + child.getClass().getName());
+
                 parent.add(new ClassyTreeItem(child));
                 ((Package) parent.getClassyNode()).addChild(child);
                 treeView.expandPath(treeView.getSelectionPath());
@@ -116,6 +120,13 @@ public class ClassyTreeImplementation implements ClassyTree{
 
 
         });
+    }
+
+    private ClassyNode createChild(ClassyNode parent, NodeType type) {
+
+        return Utils.getFactory(type).getClassyNode(parent);
+
+
     }
 
     @Override
@@ -144,11 +155,6 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             parent.remove(child);
             treeView.updateUI();
-            /*
-            Nakon sto se obrise objekat, vraca se na prvi sledeci
-            zarad izbegavanja moguceh neregistrovanog Node not selected problema
-            doduse na svog roditelja se penje
-             */
             treeView.setSelectionPath(new TreePath(parent.getPath()));
         }
 
@@ -156,11 +162,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     }
 
-    private ClassyNode createChild(ClassyNode parent, NodeType type) {
 
-        return Utils.getFactory(type).getClassyNode(parent);
-
-    }
 
     @Override
     public ClassyTreeItem getSelectedNode() {

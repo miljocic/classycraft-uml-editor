@@ -18,20 +18,30 @@ public class MyMouseListener implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
 
+//        if(e.getClickCount() == 2){
+//            System.out.println("Detektovao");
+//            if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package){
+//                PackageView pv = MainFrame.getInstance().getWorkspace().generateWorkspace();
+//                MainFrame.getInstance().getSplitPane().setRightComponent(pv);
+//            }
+//        }
+
+        if(e.getButton() != MouseEvent.BUTTON1) return;
         if(e.getClickCount() == 2){
-            System.out.println("Detektovao");
-            if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package){
-                PackageView pv = MainFrame.getInstance().getWorkspace().generateWorkspace();
-                MainFrame.getInstance().getSplitPane().setRightComponent(pv);
-            } /*
-            else if(MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode() instanceof MindMap){
-                if(MainFrame.getInstance().getSplit().getRightComponent() instanceof ProjectView) {
-                    ProjectView pv = (ProjectView) MainFrame.getInstance().getSplit().getRightComponent();
-                    MapView mv = new MapView((MindMap) MainFrame.getInstance().getMapTree().getSelectedNode().getMapNode());
-                    JTabbedPane tabbedPane = pv.getMapsTabbedPane();
-                    tabbedPane.addTab(mv.getMindMap().getName(), mv);
+            if(MainFrame.getInstance().getTree().getSelectedNode() != null &&
+                    MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() != null){
+                if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package) {
+                    for (PackageView packageView : MainFrame.getInstance().getPackageViews()) {
+                        if (packageView.getPaket().equals(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode())) {
+                            MainFrame.getInstance().getSplitPane().setRightComponent(packageView);
+                            return;
+                        }
+                    }
+                    PackageView packageView = MainFrame.getInstance().getWorkspace().generateWorkspace();
+                    MainFrame.getInstance().getPackageViews().add(packageView);
+                    MainFrame.getInstance().getSplitPane().setRightComponent(packageView);
                 }
-            } */
+            }
         }
 
     }

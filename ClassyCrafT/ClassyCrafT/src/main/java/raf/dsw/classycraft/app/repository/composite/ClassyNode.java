@@ -15,20 +15,19 @@ public abstract class ClassyNode implements IPublisher {
 
     protected List<ISubscriber> subs;
     private String name;
-    private ClassyNode parent;
+    private transient ClassyNode parent;
 
 
     public ClassyNode(String name, ClassyNode parent) {
         this.name = name;
         this.parent = parent;
-        this.subs = new ArrayList<>();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj != null && obj instanceof ClassyNode) {
-            ClassyNode otherObj = (ClassyNode) obj;
-            return this.getName().equals(otherObj.getName());
+        if(obj instanceof ClassyNode){
+            ClassyNode Obj = (ClassyNode) obj;
+            return this.getName().equals(Obj.getName());
         }
         return false;
     }
@@ -40,8 +39,8 @@ public abstract class ClassyNode implements IPublisher {
 
     @Override
     public void addSubscriber(ISubscriber sub){
-//        if(sub == null)
-//            this.subs = new ArrayList<>();
+        if(subs == null)
+            this.subs = new ArrayList<>();
         subs.add(sub);
     }
 
@@ -52,12 +51,9 @@ public abstract class ClassyNode implements IPublisher {
 
     @Override
     public void notifySubscribers(Object notification){
-//        if(subs == null) return;
+        if(subs == null) return;
         for(ISubscriber sub : subs){
             sub.update(notification);
         }
     }
-
-
-
 }

@@ -62,17 +62,15 @@ public class GeneralizationPainter extends ConnectionPainter {
         arrowhead.moveTo(end.getX(), end.getY());
         arrowhead.lineTo(x2, y2);
 
-        // Add a line connecting the two points of the arrowhead
         arrowhead.lineTo(x1, y1);
 
-        // Fill the resulting path to create a triangle with a white fill
         g.setColor(Color.WHITE);
         g.fill(arrowhead);
 
-        // Draw the outline of the triangle in black
         g.setColor(Color.BLACK);
         g.draw(arrowhead);
     }
+
 
 
 }

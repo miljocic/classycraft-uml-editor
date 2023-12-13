@@ -35,6 +35,7 @@ public class PackageView extends JPanel implements ISubscriber {
 
         for (ClassyNode node : paket.getChildren()) {
             if (node instanceof Diagram) {
+                ((Diagram) node).addSubscriber(this);
                 revalidateTabbedPane((Diagram) node);
             }
         }
@@ -47,25 +48,53 @@ public class PackageView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Object notification) {
-
+        System.out.println("Received update: " + notification.toString());
+        System.out.println("Notification type: " + notification.getClass());
         if(notification instanceof Package) {
+            System.out.println("Paket");
             projectName.setText(paket.getName());
             author.setText(paket.getAuthor());
         } else if(notification instanceof Diagram) {
+            System.out.println("Dijagram i Krece revalidate");
             revalidateTabbedPane((Diagram) notification);
         }
     }
     private void revalidateTabbedPane(Diagram updatedDiagram) {
 
-        if(paket.getChildren().contains(updatedDiagram)) {
-            this.mtp.addTab(updatedDiagram.getName(), new DiagramView(updatedDiagram));
-        } else {
-            System.out.println(mtp);
-            for(int i = 0; i < mtp.getTabCount(); i++) {
-                DiagramView diagramView = (DiagramView) mtp.getComponentAt(i);
-                if(diagramView.getDiagram().equals(updatedDiagram))
-                    mtp.remove(diagramView);
+//        if(paket.getChildren().contains(updatedDiagram)) {
+//            DiagramView dV = new DiagramView(updatedDiagram);
+//            this.mtp.addTab(updatedDiagram.getName(), dV);
+//            this.mtp.setSelectedComponent(dV);
+//            updatedDiagram.addSubscriber(dV);
+//        } else {
+//            System.out.println(mtp);
+//            for(int i = 0; i < mtp.getTabCount(); i++) {
+//                DiagramView diagramView = (DiagramView) mtp.getComponentAt(i);
+//                if(diagramView.getDiagram().equals(updatedDiagram))
+//                    mtp.remove(diagramView);
+//            }
+//        }
+
+        boolean diagramFound = false;
+
+        for (int i = 0; i < mtp.getTabCount(); i++) {
+            DiagramView diagramView = (DiagramView) mtp.getComponentAt(i);
+
+            if (diagramView.getDiagram().equals(updatedDiagram)) {
+                // If the diagram is already in the tab, select it
+                mtp.setSelectedComponent(diagramView);
+                diagramFound = true;
+                System.out.println("Diagram found in tab. Selected existing tab.");
+                break;
             }
+        }
+
+        if (!diagramFound) {
+            // If the diagram is not in the tab, add a new tab
+            DiagramView newDiagramView = new DiagramView(updatedDiagram);
+            mtp.addTab(updatedDiagram.getName(), newDiagramView);
+            mtp.setSelectedIndex(mtp.getTabCount() - 1);
+            System.out.println("Diagram not found in tab. Added a new tab.");
         }
 
     }
