@@ -22,7 +22,11 @@ public abstract class ConnectionPainter extends ElementPainter {
 
     @Override
     public boolean elementAt(Point pos) {
-        return true ;
+        if(shape !=null)
+        {
+            return true ;
+        }
+      return false;
     }
 
     @Override
