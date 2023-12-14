@@ -16,13 +16,16 @@ public class ActionManager {
     private DeleteAction deleteAction;
     private AuthorAction authorAction;
     private MyMouseListener myMouseListener;
-
     private AddStateAction addStateAction;
     private EditStateAction editStateAction;
     private DeleteStateAction deleteStateAction;
     private MoveStateAction moveStateAction;
     private SelectStateAction selectStateAction;
-    private ZoomInStateAction zoomInStateAction;
+    private MoveDiagramStateAction moveDiagramStateAction;
+
+    private ZoomIn zoomIn;
+    private ZoomOut zoomOut;
+
     private StateMouseManager stateMouseManager;
     private ConnectStateAction connectStateAction;
 
@@ -45,7 +48,9 @@ public class ActionManager {
         deleteStateAction = new DeleteStateAction();
         moveStateAction = new MoveStateAction();
         selectStateAction = new SelectStateAction();
-        zoomInStateAction = new ZoomInStateAction();
+        moveDiagramStateAction = new MoveDiagramStateAction();
+        zoomIn = new ZoomIn();
+        zoomOut = new ZoomOut();
         stateMouseManager = new StateMouseManager();
         connectStateAction = new ConnectStateAction();
 

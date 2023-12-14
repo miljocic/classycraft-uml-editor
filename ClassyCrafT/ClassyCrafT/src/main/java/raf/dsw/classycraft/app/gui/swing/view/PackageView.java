@@ -35,7 +35,8 @@ public class PackageView extends JPanel implements ISubscriber {
 
         for (ClassyNode node : paket.getChildren()) {
             if (node instanceof Diagram) {
-                ((Diagram) node).addSubscriber(this);
+                System.out.println("Lista checkova dal je Diagram");
+                node.addSubscriber(this);
                 revalidateTabbedPane((Diagram) node);
             }
         }
@@ -115,16 +116,13 @@ public class PackageView extends JPanel implements ISubscriber {
         this.stateManager.setMoveState();
     }
 
-    public void startZoomState(){
-        this.stateManager.setZoomInState();
-    }
-
     public void startSelectState(){
         this.stateManager.setSelectState();
     }
 
     public void startConnectState(){ this.stateManager.setConnectState();
     }
+    public void startMoveDiagramState() { this.stateManager.setMoveDiagramState();}
 
     public void startMousePressed(MouseEvent e, DiagramView dV) {
         stateManager.getCurrent().mousePressed(e, dV);

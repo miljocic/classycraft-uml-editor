@@ -12,6 +12,7 @@ import raf.dsw.classycraft.app.state.StateMouseManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +26,23 @@ public class DiagramView extends JPanel implements ISubscriber{
     private Diagram diagram;
     private List<ElementPainter> painters;
     private ElementPainter selected;
-    private int stroke;
-    private int color;
 
+
+    private double scalingFactor;
+    private AffineTransform transform;
+
+    private double xTranslate;
+    private double yTranslate;
 
     public DiagramView(Diagram diagram) {
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
         this.addMouseListener(new StateMouseManager(this));
-        this.stroke = 2;
-        this.color = 0x000000;
+        this.transform = new AffineTransform();
+        this.scalingFactor = 1;
+        this.xTranslate = 0;
+        this.yTranslate = 0;
 
     }
 
@@ -45,7 +52,6 @@ public class DiagramView extends JPanel implements ISubscriber{
 
         System.out.println("Received update: " + notification.toString());
         System.out.println("Notification type: " + notification.getClass());
-
         if(notification instanceof Diagram) {
             setName(((Diagram) notification).getName());
             ((MyTabbedPane)this.getParent()).setTitleAt(((MyTabbedPane)this.getParent()).indexOfComponent(this), this.getName());
@@ -71,7 +77,6 @@ public class DiagramView extends JPanel implements ISubscriber{
             repaint();
         }
     }
-
 
     private ConnectionPainter createConnectionPainter(Connection connection) {
         if (connection instanceof Dependency) {
@@ -101,21 +106,44 @@ public class DiagramView extends JPanel implements ISubscriber{
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+        g2.setTransform(transform);
         for(ElementPainter elementPainter : painters) {
             if(elementPainter.equals(selected)) elementPainter.paintSelected(g2);
             else elementPainter.paint(g2);
         }
     }
-//@Override
-//protected void paintComponent(Graphics g) {
-//    super.paintComponent(g);
-//    RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//    rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//    ((Graphics2D)g).setRenderingHints(rh);
-//    for (ElementPainter elementPainter : painters) {
-//        elementPainter.paint((Graphics2D) g);
-//    }
-//}
+
+    public void zoomIn() {
+        scalingFactor *= 1.2;
+        if(scalingFactor > 5) {
+            scalingFactor = 5;
+        }
+        System.out.println(scalingFactor);
+        setupTransform();
+    }
+
+    public void zoomOut() {
+        scalingFactor /= 1.2;
+        if (scalingFactor < 0.2) {
+            scalingFactor = 0.2;
+        }
+        System.out.println(scalingFactor);
+        setupTransform();
+    }
+
+    private void setupTransform() {
+        transform.setToIdentity();
+        transform.translate(xTranslate, yTranslate);
+        transform.scale(scalingFactor, scalingFactor);
+        repaint();
+    }
+
+    public void translate(double xTranslate, double yTranslate) {
+        this.xTranslate += xTranslate;
+        this.yTranslate += yTranslate;
+        setupTransform();
+    }
+
     public List<ElementPainter> getElementPainters() {
         return painters;
     }

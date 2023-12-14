@@ -28,6 +28,8 @@ public class AddState implements State {
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
 
+
+
         String[] options = {"Class", "Enum", "Interface"};
         int choice = JOptionPane.showOptionDialog(
                 dV,
@@ -41,7 +43,6 @@ public class AddState implements State {
         );
 
         if (choice >= 0) {
-
             String type;
             switch (choice) {
                 case 0:
@@ -57,19 +58,18 @@ public class AddState implements State {
                     type = "";
             }
 
-
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(), e.getPoint(), getVisibility(),new Dimension(200, 250));
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(), getAdjustedPoint(e, dV), getVisibility(), new Dimension(200, 250));
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), e.getPoint(), getVisibility(),new Dimension(200, 250));
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), getAdjustedPoint(e, dV), getVisibility(), new Dimension(200, 250));
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), getAdjustedPoint(e, dV), getVisibility(), new Dimension(200, 250));
                     interfaceCounter++;
                     break;
                 default:
@@ -77,16 +77,19 @@ public class AddState implements State {
             }
 
             if (element != null && !checkOverlap(element, dV.getElementPainters())) {
-
                 System.out.println("Dodat");
                 dV.getDiagram().addChild(element);
                 ClassyTreeItem parent = MainFrame.getInstance().getTree().findNode(dV.getDiagram());
                 ClassyTreeItem classyTreeItem = new ClassyTreeItem(element);
                 parent.add(classyTreeItem);
-               // MainFrame.getInstance().getProjectExplorer().expandPath(new TreePath(parent.getPath()));
-               // SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getProjectExplorer());
             }
         }
+    }
+
+    private Point getAdjustedPoint(MouseEvent e, DiagramView dV) {
+        double scaledX = e.getPoint().getX() / dV.getScalingFactor() - dV.getXTranslate();
+        double scaledY = e.getPoint().getY() / dV.getScalingFactor() - dV.getYTranslate();
+        return new Point((int) scaledX, (int) scaledY);
     }
 
 
