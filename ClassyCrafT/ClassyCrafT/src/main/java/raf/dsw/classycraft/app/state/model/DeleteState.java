@@ -22,48 +22,49 @@ public class DeleteState implements State {
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-
         Diagram diagram = dV.getDiagram();
         Point pos = e.getPoint();
-        ElementPainter deleted = null;
-        Iterator<ElementPainter> it = dV.getElementPainters().iterator();
-        while(it.hasNext()) {
+
+
+        List<ElementPainter> selectedPainters = new ArrayList<>();
+        List<ElementPainter> paintersToRemove = new ArrayList<>(dV.getElementPainters());
+
+        Iterator<ElementPainter> it = paintersToRemove.iterator();
+        while (it.hasNext()) {
             ElementPainter elementPainter = it.next();
-            if(elementPainter.elementAt(pos)) {
-                if(elementPainter.equals(dV.getSelected())) dV.setSelected(null);
+            if (elementPainter.elementAt(pos)) {
+                if (elementPainter.equals(dV.getSelected())) {
+                    dV.setSelected(null);
+                }
+                selectedPainters.add(elementPainter);
                 diagram.deleteChild(elementPainter.getElement());
-                deleted = elementPainter;
                 ClassyTreeImplementation treeImp = (ClassyTreeImplementation) MainFrame.getInstance().getTree();
                 treeImp.delete(treeImp.findNode(elementPainter.getElement()));
-                dV.getDiagram().deleteChild(elementPainter.getElement());
-                break;
             }
         }
 
-        if(deleted instanceof InterclassPainter) {
-            List<Connection> connectionList = new ArrayList<>();
-            it = dV.getElementPainters().iterator();
-            while (it.hasNext()) {
-                ElementPainter elementPainter = it.next();
-                if(elementPainter instanceof ConnectionPainter) {
-                    ConnectionPainter connectionPainter = (ConnectionPainter) elementPainter;
-                    Connection connection = (Connection) connectionPainter.getElement();
-                    if(connection.getTo().equals(deleted.getElement()) || connection.getFrom().equals(deleted.getElement())) {
-                        connectionList.add(connection);
+
+        for (ElementPainter selectedPainter : selectedPainters) {
+            if (selectedPainter instanceof InterclassPainter) {
+                Iterator<ElementPainter> connectionIterator = dV.getElementPainters().iterator();
+                while (connectionIterator.hasNext()) {
+                    ElementPainter elementPainter = connectionIterator.next();
+                    if (elementPainter instanceof ConnectionPainter) {
+                        ConnectionPainter connectionPainter = (ConnectionPainter) elementPainter;
+                        Connection connection = (Connection) connectionPainter.getElement();
+                        if (connection.getTo().equals(selectedPainter.getElement()) || connection.getFrom().equals(selectedPainter.getElement())) {
+                            paintersToRemove.add(elementPainter);
+                            diagram.deleteChild(connection);
+                        }
                     }
                 }
             }
-            for(Connection c : connectionList) {
-                diagram.deleteChild(c);
-            }
         }
 
 
-
+        dV.getElementPainters().removeAll(paintersToRemove);
+        dV.repaint();
     }
-
-
-
 
 
     @Override

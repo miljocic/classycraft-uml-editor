@@ -31,7 +31,40 @@ public class MoveState implements State {
 
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
+        if (initialPositions != null) {
+            Point2D currentPoint = e.getPoint();
+            double xTranslate = (currentPoint.getX() - startPoint.getX()) / dV.getScalingFactor();
+            double yTranslate = (currentPoint.getY() - startPoint.getY()) / dV.getScalingFactor();
+
+            for (Map.Entry<Interclass, Point2D> entry : initialPositions.entrySet()) {
+                Interclass interclass = entry.getKey();
+                Point2D initialPosition = entry.getValue();
+
+                double newX = initialPosition.getX() + xTranslate;
+                double newY = initialPosition.getY() + yTranslate;
+
+                interclass.setLocation(new Point((int) newX, (int) newY));
+            }
+
+            // Repaint the DiagramView after moving elements
+            dV.repaint();
+        }
+
+        // Reset initialPositions to null
         initialPositions = null;
+    }
+
+    private boolean isWithinSpecificRegion(Point2D position, Point targetPosition) {
+        return position.distance(targetPosition) < 50;
+    }
+
+
+    private void moveSelectedElementsToNewLocation(DiagramView dV, Point newLocation) {
+        for (Map.Entry<Interclass, Point2D> entry : initialPositions.entrySet()) {
+            Interclass interclass = entry.getKey();
+            interclass.setLocation(newLocation);
+        }
+        dV.repaint();
     }
 
     @Override

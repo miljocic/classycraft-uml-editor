@@ -209,3 +209,5 @@
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
