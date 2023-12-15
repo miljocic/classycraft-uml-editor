@@ -32,10 +32,10 @@ public abstract class ConnectionPainter extends ElementPainter {
     @Override
     public void paintSelected(Graphics2D g) {
 
-        g.setStroke(new BasicStroke(element.getStroke()));
-        g.setColor(Color.BLUE);
-        g.draw(shape);
-        g.fill(shape);
+//        g.setStroke(new BasicStroke(element.getStroke()));
+//        g.setColor(Color.BLUE);
+//        g.draw(shape);
+//        g.fill(shape);
 
     }
 }

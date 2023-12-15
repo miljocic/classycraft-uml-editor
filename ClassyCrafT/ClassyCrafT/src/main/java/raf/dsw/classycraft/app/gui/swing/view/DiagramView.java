@@ -27,6 +27,7 @@ public class DiagramView extends JPanel implements ISubscriber{
     private ElementPainter selected;
     private int stroke;
     private int color;
+    private List<ElementPainter> selectedPainters;
 
 
     public DiagramView(Diagram diagram) {
@@ -39,7 +40,7 @@ public class DiagramView extends JPanel implements ISubscriber{
         //this.addMouseListener(new StateMouseManager(this));
         this.stroke = 2;
         this.color = 0x000000;
-
+        this.selectedPainters = new ArrayList<>();
     }
 
 
@@ -93,7 +94,7 @@ public class DiagramView extends JPanel implements ISubscriber{
 
     private ElementPainter containsElementPainter(DiagramElement diagramElement) {
         for(ElementPainter elementPainter : painters) {
-            if(elementPainter.element.equals(diagramElement))
+            if( elementPainter.element!=null && elementPainter.element.equals(diagramElement))
                 return elementPainter;
         }
         return null;
@@ -104,9 +105,12 @@ public class DiagramView extends JPanel implements ISubscriber{
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-        for(ElementPainter elementPainter : painters) {
-            if(elementPainter.equals(selected)) elementPainter.paintSelected(g2);
-            else elementPainter.paint(g2);
+        for (ElementPainter elementPainter : painters) {
+            if (selectedPainters.contains(elementPainter)) {
+                //if(elementPainter.equals(selected))
+                elementPainter.paintSelected((Graphics2D) g);
+            }
+            elementPainter.paint((Graphics2D) g);
         }
     }
 //@Override

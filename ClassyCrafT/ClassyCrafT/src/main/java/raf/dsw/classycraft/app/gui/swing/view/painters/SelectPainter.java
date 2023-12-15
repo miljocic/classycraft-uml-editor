@@ -1,8 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
-import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class SelectPainter extends ElementPainter{
 
@@ -13,10 +14,12 @@ public class SelectPainter extends ElementPainter{
     private int height;
 
     public SelectPainter(int x, int y, int width, int height) {
+        Rectangle2D area = new Rectangle2D.Double(x,y,width,height);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.shape = area;
     }
 
     @Override
