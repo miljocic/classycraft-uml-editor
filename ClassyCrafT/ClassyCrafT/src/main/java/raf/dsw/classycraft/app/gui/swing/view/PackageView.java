@@ -122,7 +122,6 @@ public class PackageView extends JPanel implements ISubscriber {
 
     public void startConnectState(){ this.stateManager.setConnectState();
     }
-    public void startMoveDiagramState() { this.stateManager.setMoveDiagramState();}
 
     public void startMousePressed(MouseEvent e, DiagramView dV) {
         stateManager.getCurrent().mousePressed(e, dV);
