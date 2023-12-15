@@ -122,38 +122,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
     }
 
-
-    public void zoomIn() {
-        scalingFactor *= 1.2;
-        if (scalingFactor > 5) {
-            scalingFactor = 5;
-        }
-        System.out.println(scalingFactor);
-        setupTransform();
-    }
-
-    public void zoomOut() {
-        scalingFactor /= 1.2;
-        if (scalingFactor < 0.2) {
-            scalingFactor = 0.2;
-        }
-        System.out.println(scalingFactor);
-        setupTransform();
-    }
-
-    private void setupTransform() {
-        transform.setToIdentity();
-        transform.translate(xTranslate, yTranslate);
-        transform.scale(scalingFactor, scalingFactor);
-        repaint();
-    }
-
-    public void translate(double xTranslate, double yTranslate) {
-        this.xTranslate += xTranslate;
-        this.yTranslate += yTranslate;
-        setupTransform();
-    }
-
     public List<ElementPainter> getElementPainters() {
         return painters;
     }

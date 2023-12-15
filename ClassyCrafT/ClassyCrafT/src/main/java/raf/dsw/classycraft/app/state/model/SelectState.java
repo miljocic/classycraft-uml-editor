@@ -36,22 +36,6 @@ public class SelectState implements State {
 
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
-//        if (dV.getCurrentState() instanceof MoveState) {
-//            dV.getCurrentState().mouseReleased(e, dV);
-//            return;
-//        }
-//
-//        dV.getPainters().remove(current);
-//        for (ElementPainter elementPainter : dV.getElementPainters()) {
-//            if (elementPainter.getShape().intersects(current.shape.getBounds2D())) {
-//                dV.getSelectedPainters().add(elementPainter);
-//            }
-//        }
-//
-//        if (!dV.getSelectedPainters().contains(selected)) {
-//            dV.getSelectedPainters().add(selected);
-//        }
-//        dV.repaint();
 
         if (current != null) {
             dV.getPainters().remove(current);

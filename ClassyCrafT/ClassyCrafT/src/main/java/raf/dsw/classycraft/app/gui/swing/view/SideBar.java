@@ -16,8 +16,7 @@ public class SideBar extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getSelectStateAction());
         add(MainFrame.getInstance().getActionManager().getMoveStateAction());
 
-        add(MainFrame.getInstance().getActionManager().getZoomIn());
-        add(MainFrame.getInstance().getActionManager().getZoomOut());
+
 
 
     }

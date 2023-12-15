@@ -15,7 +15,6 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
-import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -61,15 +60,15 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(), getAdjustedPoint(e, dV), getVisibility(), new Dimension(200, 250));
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), getAdjustedPoint(e, dV), getVisibility(), new Dimension(200, 250));
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), getAdjustedPoint(e, dV), getVisibility(), new Dimension(200, 250));
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
                     interfaceCounter++;
                     break;
                 default:
@@ -85,14 +84,6 @@ public class AddState implements State {
             }
         }
     }
-
-    private Point getAdjustedPoint(MouseEvent e, DiagramView dV) {
-        double scaledX = (e.getPoint().getX() + dV.getXTranslate()) * dV.getScalingFactor();
-        double scaledY = (e.getPoint().getY() + dV.getYTranslate()) * dV.getScalingFactor();
-        return new Point((int) scaledX, (int) scaledY);
-    }
-
-
 
     private boolean checkOverlap(Interclass newElement, Iterable<ElementPainter> painters) {
         for (ElementPainter elementPainter : painters) {

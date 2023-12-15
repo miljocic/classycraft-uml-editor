@@ -23,18 +23,7 @@ public class ConnectState implements State {
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-//        System.out.println("from");
-//        for (ElementPainter elementPainter : dV.getElementPainters()) {
-//            if (elementPainter.elementAt(e.getPoint())) {
-//                if (elementPainter instanceof InterclassPainter) {
-//                    from = (InterclassPainter) elementPainter;
-//                    return;
-//                }
-//                from = null;
-//                return;
-//
-//            }
-//        }
+
 
         System.out.println("from");
         for (ElementPainter elementPainter : dV.getElementPainters()) {
