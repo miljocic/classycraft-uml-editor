@@ -122,6 +122,19 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
     }
 
+    private void setupTransform() {
+        transform.setToIdentity();
+        transform.translate(xTranslate, yTranslate);
+        transform.scale(scalingFactor, scalingFactor);
+        repaint();
+    }
+
+    public void translate(double xTranslate, double yTranslate) {
+        this.xTranslate += xTranslate;
+        this.yTranslate += yTranslate;
+        setupTransform();
+    }
+
     public List<ElementPainter> getElementPainters() {
         return painters;
     }
