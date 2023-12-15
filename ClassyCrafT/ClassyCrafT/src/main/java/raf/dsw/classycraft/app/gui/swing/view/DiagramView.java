@@ -113,12 +113,12 @@ public class DiagramView extends JPanel implements ISubscriber {
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
         g2.setTransform(transform);
+
         for (ElementPainter elementPainter : painters) {
             if (selectedPainters.contains(elementPainter)) {
-                elementPainter.paintSelected((Graphics2D) g);
+                elementPainter.paintSelected(g2);
             }
-            elementPainter.paint((Graphics2D) g);
-            g2.setTransform(transform);
+            elementPainter.paint(g2);
         }
     }
 
