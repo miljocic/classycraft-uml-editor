@@ -33,7 +33,10 @@ public class DiagramView extends JPanel implements ISubscriber{
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
-        this.addMouseListener(new StateMouseManager(this));
+        StateMouseManager stateMouseManager = new StateMouseManager(this);
+        this.addMouseListener(stateMouseManager);
+        this.addMouseMotionListener(stateMouseManager);
+        //this.addMouseListener(new StateMouseManager(this));
         this.stroke = 2;
         this.color = 0x000000;
 
