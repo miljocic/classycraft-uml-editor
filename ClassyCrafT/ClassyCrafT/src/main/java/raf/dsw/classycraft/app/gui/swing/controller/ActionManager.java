@@ -21,7 +21,6 @@ public class ActionManager {
     private DeleteStateAction deleteStateAction;
     private MoveStateAction moveStateAction;
     private SelectStateAction selectStateAction;
-    private MoveDiagramStateAction moveDiagramStateAction;
 
     private ZoomIn zoomIn;
     private ZoomOut zoomOut;
@@ -48,7 +47,6 @@ public class ActionManager {
         deleteStateAction = new DeleteStateAction();
         moveStateAction = new MoveStateAction();
         selectStateAction = new SelectStateAction();
-        moveDiagramStateAction = new MoveDiagramStateAction();
         zoomIn = new ZoomIn();
         zoomOut = new ZoomOut();
         stateMouseManager = new StateMouseManager();
