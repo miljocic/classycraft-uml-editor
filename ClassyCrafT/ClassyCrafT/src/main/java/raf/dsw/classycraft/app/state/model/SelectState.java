@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.state.model;
 
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
+import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.SelectPainter;
 import raf.dsw.classycraft.app.state.State;
 
@@ -31,11 +32,11 @@ public class SelectState implements State {
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
         dV.getPainters().remove(current);
-            for (ElementPainter elementPainter : dV.getElementPainters()) {
-                if(elementPainter.getShape().intersects( current.shape.getBounds2D())){
-                   dV.getSelectedPainters().add(elementPainter);
-                }
+        for (ElementPainter elementPainter : dV.getElementPainters()) {
+            if( elementPainter instanceof InterclassPainter && elementPainter.getShape().intersects( current.shape.getBounds2D())){
+                dV.getSelectedPainters().add(elementPainter);
             }
+        }
 
         if(!dV.getSelectedPainters().contains(selected))
         {
