@@ -48,7 +48,7 @@ public class MoveState implements State {
                 double newX = initialPosition.getX() + xTranslate;
                 double newY = initialPosition.getY() + yTranslate;
 
-                interclass.setLocation(new Point2D.Double(newX, newY));
+//                interclass.setLocation(new Point2D.Double(newX, newY));
             }
 
             startPoint = currentPoint;
