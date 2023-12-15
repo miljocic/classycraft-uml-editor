@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.state.model;
 
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.SelectPainter;
 import raf.dsw.classycraft.app.state.State;
@@ -27,6 +28,9 @@ public class SelectState implements State {
             dV.setCurrentState(moveState);
         } else {
             for (ElementPainter elementPainter : dV.getElementPainters()) {
+                if (elementPainter instanceof ConnectionPainter) {
+                    continue; // Skip ConnectionPainter instances
+                }
                 if (elementPainter.elementAt(e.getPoint())) {
                     selected = elementPainter;
                 }
@@ -40,6 +44,9 @@ public class SelectState implements State {
         if (current != null) {
             dV.getPainters().remove(current);
             for (ElementPainter elementPainter : dV.getElementPainters()) {
+                if (elementPainter instanceof ConnectionPainter) {
+                    continue; // Skip ConnectionPainter instances
+                }
                 if (elementPainter.getShape().intersects(current.shape.getBounds2D())) {
                     dV.getSelectedPainters().add(elementPainter);
                 }

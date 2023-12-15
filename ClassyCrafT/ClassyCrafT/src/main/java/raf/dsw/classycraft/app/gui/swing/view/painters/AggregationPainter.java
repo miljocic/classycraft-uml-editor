@@ -55,8 +55,4 @@ public class AggregationPainter extends ConnectionPainter {
         g.drawPolygon(xPoints, yPoints, 4);
     }
 
-
-
-
-
 }

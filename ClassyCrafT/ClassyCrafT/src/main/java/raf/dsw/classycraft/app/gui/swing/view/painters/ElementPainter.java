@@ -25,5 +25,9 @@ public abstract class ElementPainter {
 
     public abstract void paintSelected(Graphics2D g);
 
+    public Rectangle getBounds() {
+        return shape.getBounds();
+    }
+
 
 }
