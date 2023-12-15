@@ -26,7 +26,9 @@ public class DiagramView extends JPanel implements ISubscriber{
     private Diagram diagram;
     private List<ElementPainter> painters;
     private ElementPainter selected;
-
+    private int stroke;
+    private int color;
+    private List<ElementPainter> selectedPainters;
 
     private double scalingFactor;
     private AffineTransform transform;
@@ -38,6 +40,13 @@ public class DiagramView extends JPanel implements ISubscriber{
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
+        StateMouseManager stateMouseManager = new StateMouseManager(this);
+        this.addMouseListener(stateMouseManager);
+        this.addMouseMotionListener(stateMouseManager);
+        //this.addMouseListener(new StateMouseManager(this));
+        this.stroke = 2;
+        this.color = 0x000000;
+        this.selectedPainters = new ArrayList<>();
         this.addMouseListener(new StateMouseManager(this));
         this.transform = new AffineTransform();
         this.scalingFactor = 1;
@@ -52,6 +61,7 @@ public class DiagramView extends JPanel implements ISubscriber{
 
         System.out.println("Received update: " + notification.toString());
         System.out.println("Notification type: " + notification.getClass());
+
         if(notification instanceof Diagram) {
             setName(((Diagram) notification).getName());
             ((MyTabbedPane)this.getParent()).setTitleAt(((MyTabbedPane)this.getParent()).indexOfComponent(this), this.getName());
@@ -78,6 +88,7 @@ public class DiagramView extends JPanel implements ISubscriber{
         }
     }
 
+
     private ConnectionPainter createConnectionPainter(Connection connection) {
         if (connection instanceof Dependency) {
             return new DependencyPainter((Dependency) connection);
@@ -95,7 +106,7 @@ public class DiagramView extends JPanel implements ISubscriber{
 
     private ElementPainter containsElementPainter(DiagramElement diagramElement) {
         for(ElementPainter elementPainter : painters) {
-            if(elementPainter.element.equals(diagramElement))
+            if( elementPainter.element!=null && elementPainter.element.equals(diagramElement))
                 return elementPainter;
         }
         return null;
@@ -106,6 +117,12 @@ public class DiagramView extends JPanel implements ISubscriber{
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+        for (ElementPainter elementPainter : painters) {
+            if (selectedPainters.contains(elementPainter)) {
+                //if(elementPainter.equals(selected))
+                elementPainter.paintSelected((Graphics2D) g);
+            }
+            elementPainter.paint((Graphics2D) g);
         g2.setTransform(transform);
         for(ElementPainter elementPainter : painters) {
             if(elementPainter.equals(selected)) elementPainter.paintSelected(g2);

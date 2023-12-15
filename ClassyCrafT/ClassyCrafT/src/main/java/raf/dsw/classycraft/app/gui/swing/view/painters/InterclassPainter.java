@@ -4,6 +4,7 @@ package raf.dsw.classycraft.app.gui.swing.view.painters;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 public class InterclassPainter extends ElementPainter {
 
@@ -23,7 +24,7 @@ public class InterclassPainter extends ElementPainter {
         String type = determineType(interclass);
         String visibility = interclass.getVisibility();
 
-
+        this.shape = new Rectangle2D.Double((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY(), 200, 250);
         g.setColor(Color.white);
         g.fillRect((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY(), 200, 250);
         g.setColor(Color.black);
@@ -38,7 +39,7 @@ public class InterclassPainter extends ElementPainter {
 
         // Draw attributes
         for (String attribute : interclass.getAttributes()) {
-            g.drawString(attribute,(int) interclass.getLocation().getX() + 20, yOffset);
+            g.drawString(attribute, (int) interclass.getLocation().getX() + 20, yOffset);
             yOffset += 15;
         }
 
@@ -77,5 +78,6 @@ public class InterclassPainter extends ElementPainter {
         Interclass interclass = (Interclass) getElement();
         Rectangle shape = new Rectangle((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY(), 200, 250);
         g.fill(shape);
+        this.shape = shape;
     }
 }
