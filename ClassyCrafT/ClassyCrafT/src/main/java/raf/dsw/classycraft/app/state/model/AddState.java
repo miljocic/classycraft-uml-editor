@@ -87,8 +87,8 @@ public class AddState implements State {
     }
 
     private Point getAdjustedPoint(MouseEvent e, DiagramView dV) {
-        double scaledX = e.getPoint().getX() / dV.getScalingFactor() - dV.getXTranslate();
-        double scaledY = e.getPoint().getY() / dV.getScalingFactor() - dV.getYTranslate();
+        double scaledX = (e.getPoint().getX() + dV.getXTranslate()) * dV.getScalingFactor();
+        double scaledY = (e.getPoint().getY() + dV.getYTranslate()) * dV.getScalingFactor();
         return new Point((int) scaledX, (int) scaledY);
     }
 

@@ -8,7 +8,9 @@ import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.*;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
+import raf.dsw.classycraft.app.state.State;
 import raf.dsw.classycraft.app.state.StateMouseManager;
+import raf.dsw.classycraft.app.state.model.SelectState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,8 +28,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     private Diagram diagram;
     private List<ElementPainter> painters;
     private ElementPainter selected;
-    private int stroke;
-    private int color;
     private List<ElementPainter> selectedPainters;
 
     private double scalingFactor;
@@ -36,6 +36,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private double xTranslate;
     private double yTranslate;
 
+    private State currentState;
     public DiagramView(Diagram diagram) {
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
@@ -43,16 +44,12 @@ public class DiagramView extends JPanel implements ISubscriber {
         StateMouseManager stateMouseManager = new StateMouseManager(this);
         this.addMouseListener(stateMouseManager);
         this.addMouseMotionListener(stateMouseManager);
-        //this.addMouseListener(new StateMouseManager(this));
-        this.stroke = 2;
-        this.color = 0x000000;
         this.selectedPainters = new ArrayList<>();
-        this.addMouseListener(new StateMouseManager(this));
         this.transform = new AffineTransform();
         this.scalingFactor = 1;
         this.xTranslate = 0;
         this.yTranslate = 0;
-
+        this.currentState = new SelectState();
     }
 
 
@@ -115,6 +112,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+        g2.setTransform(transform);
         for (ElementPainter elementPainter : painters) {
             if (selectedPainters.contains(elementPainter)) {
                 elementPainter.paintSelected((Graphics2D) g);
