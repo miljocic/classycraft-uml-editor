@@ -19,7 +19,7 @@ public class SelectState implements State {
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
 
-        Point pos = new Point((int)
+        pos = new Point((int)
                 ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
                 (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
 
@@ -62,15 +62,28 @@ public class SelectState implements State {
 
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
+        Point currentPos = new Point((int)
+                ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
+                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor()));
 
         if (dV.getCurrentState() instanceof MoveState) {
             dV.getCurrentState().mouseDragged(e, dV);
             return;
         }
 
-        if (current != null)
+        if (current != null) {
             dV.getPainters().remove(current);
-        current = new SelectPainter((int) Double.min(e.getX(), pos.getX()), (int) Double.min(e.getY(), pos.getY()), (int) Math.abs(e.getX() - pos.getX()), (int) Math.abs(e.getY() - pos.getY()));
+        }
+
+
+        int width = (int) Math.abs(currentPos.getX() - pos.getX());
+        int height = (int) Math.abs(currentPos.getY() - pos.getY());
+
+
+        int x = (int) Math.min(currentPos.getX(), pos.getX());
+        int y = (int) Math.min(currentPos.getY(), pos.getY());
+
+        current = new SelectPainter(x, y, width, height);
         dV.getPainters().add(current);
         dV.repaint();
     }
