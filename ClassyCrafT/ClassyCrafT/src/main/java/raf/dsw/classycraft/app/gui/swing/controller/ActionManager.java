@@ -25,6 +25,9 @@ public class ActionManager {
     private StateMouseManager stateMouseManager;
     private ConnectStateAction connectStateAction;
 
+    private ZoomIn zoomInAction;
+    private ZoomOut zoomOutAction;
+
 
     public ActionManager() {
         initialiseActions();
@@ -46,6 +49,9 @@ public class ActionManager {
         selectStateAction = new SelectStateAction();
         stateMouseManager = new StateMouseManager();
         connectStateAction = new ConnectStateAction();
+
+        zoomInAction = new ZoomIn();
+        zoomOutAction = new ZoomOut();
 
 
     }

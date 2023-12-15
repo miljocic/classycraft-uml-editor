@@ -28,8 +28,14 @@ public class EditState implements State {
     }
 
     private Interclass getClickedElement(MouseEvent e, DiagramView dV) {
+
+        Point pos = new Point((int)
+                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
+                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
+
+
         for (ElementPainter elementPainter : dV.getElementPainters()) {
-            if (elementPainter.elementAt(e.getPoint())) {
+            if (elementPainter.elementAt(pos)) {
                 return (Interclass) elementPainter.getElement();
             }
         }

@@ -27,6 +27,9 @@ public class AddState implements State {
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
 
+        Point pos = new Point((int)
+                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
+                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
 
 
         String[] options = {"Class", "Enum", "Interface"};
@@ -60,15 +63,15 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(),pos, getVisibility(), new Dimension(200, 250));
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), pos, getVisibility(), new Dimension(200, 250));
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), e.getPoint(), getVisibility(), new Dimension(200, 250));
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(),pos, getVisibility(), new Dimension(200, 250));
                     interfaceCounter++;
                     break;
                 default:

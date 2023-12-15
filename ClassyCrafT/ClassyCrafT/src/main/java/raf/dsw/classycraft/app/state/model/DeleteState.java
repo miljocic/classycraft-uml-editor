@@ -22,9 +22,12 @@ public class DeleteState implements State {
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-        Diagram diagram = dV.getDiagram();
-        Point pos = e.getPoint();
 
+        Point pos = new Point((int)
+                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
+                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
+
+        Diagram diagram = dV.getDiagram();
 
         List<ElementPainter> selectedPainters = new ArrayList<>();
         List<ElementPainter> paintersToRemove = new ArrayList<>(dV.getElementPainters());

@@ -10,6 +10,7 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class ConnectState implements State {
@@ -21,13 +22,17 @@ public class ConnectState implements State {
     private InterclassPainter from;
     private InterclassPainter to;
 
+
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
 
+        Point pos =  new Point((int)
+                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
+                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
 
         System.out.println("from");
         for (ElementPainter elementPainter : dV.getElementPainters()) {
-            if (elementPainter.elementAt(e.getPoint())) {
+            if (elementPainter.elementAt(pos)) {
                 if (elementPainter instanceof InterclassPainter) {
                     from = (InterclassPainter) elementPainter;
                     return;
@@ -41,9 +46,13 @@ public class ConnectState implements State {
 
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
+
+        Point pos =  new Point((int)
+                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
+                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
         System.out.println("to");
         for (ElementPainter elementPainter : dV.getElementPainters()) {
-            if (elementPainter.elementAt(e.getPoint())) {
+            if (elementPainter.elementAt(pos)) {
                 if (elementPainter instanceof InterclassPainter) {
                     to = (InterclassPainter) elementPainter;
                 } else to = null;

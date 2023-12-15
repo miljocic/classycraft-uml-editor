@@ -135,6 +135,24 @@ public class DiagramView extends JPanel implements ISubscriber {
         setupTransform();
     }
 
+    public void zoomIn() {
+        scalingFactor *= 1.2;
+        if (scalingFactor > 5) {
+            scalingFactor = 5;
+        }
+        System.out.println(scalingFactor);
+        setupTransform();
+    }
+
+    public void zoomOut() {
+        scalingFactor /= 1.2;
+        if (scalingFactor < 0.2) {
+            scalingFactor = 0.2;
+        }
+        System.out.println(scalingFactor);
+        setupTransform();
+    }
+
     public List<ElementPainter> getElementPainters() {
         return painters;
     }

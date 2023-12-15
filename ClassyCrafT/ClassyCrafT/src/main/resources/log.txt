@@ -213,3 +213,7 @@
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
 [CANNOT_DELETE_PROJECT_EXPLORER] [null] - [Ne moze da se obrise Project Explorer!]
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]

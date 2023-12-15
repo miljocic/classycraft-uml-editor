@@ -19,8 +19,13 @@ public class SelectState implements State {
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
 
+        Point pos = new Point((int)
+                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
+                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
+
+
         dV.setSelectedPainters(new ArrayList<>());
-        pos = e.getPoint();
+
         boolean ctrlPressed = (e.getModifiersEx() & MouseEvent.CTRL_DOWN_MASK) == MouseEvent.CTRL_DOWN_MASK;
         if (ctrlPressed) {
             MoveState moveState = new MoveState();
@@ -31,7 +36,7 @@ public class SelectState implements State {
                 if (elementPainter instanceof ConnectionPainter) {
                     continue; // Skip ConnectionPainter instances
                 }
-                if (elementPainter.elementAt(e.getPoint())) {
+                if (elementPainter.elementAt(pos)) {
                     selected = elementPainter;
                 }
             }
@@ -57,6 +62,7 @@ public class SelectState implements State {
 
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
+
         if (dV.getCurrentState() instanceof MoveState) {
             dV.getCurrentState().mouseDragged(e, dV);
             return;
