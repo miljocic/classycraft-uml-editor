@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 
-public class DiagramView extends JPanel implements ISubscriber{
+public class DiagramView extends JPanel implements ISubscriber {
 
 
     private Diagram diagram;
@@ -62,16 +62,14 @@ public class DiagramView extends JPanel implements ISubscriber{
         System.out.println("Received update: " + notification.toString());
         System.out.println("Notification type: " + notification.getClass());
 
-        if(notification instanceof Diagram) {
+        if (notification instanceof Diagram) {
             setName(((Diagram) notification).getName());
-            ((MyTabbedPane)this.getParent()).setTitleAt(((MyTabbedPane)this.getParent()).indexOfComponent(this), this.getName());
-        } else if(notification instanceof DiagramElement) {
+            ((MyTabbedPane) this.getParent()).setTitleAt(((MyTabbedPane) this.getParent()).indexOfComponent(this), this.getName());
+        } else if (notification instanceof DiagramElement) {
             ElementPainter contains = containsElementPainter((DiagramElement) notification);
-            if(notification instanceof Interclass) {
-                if(contains == null)
-                    painters.add(new InterclassPainter((Interclass) notification));
-                else
-                    painters.remove(contains);
+            if (notification instanceof Interclass) {
+                if (contains == null) painters.add(new InterclassPainter((Interclass) notification));
+                else painters.remove(contains);
             } else if (notification instanceof Connection) {
                 Connection connection = (Connection) notification;
 
@@ -105,12 +103,12 @@ public class DiagramView extends JPanel implements ISubscriber{
 
 
     private ElementPainter containsElementPainter(DiagramElement diagramElement) {
-        for(ElementPainter elementPainter : painters) {
-            if( elementPainter.element!=null && elementPainter.element.equals(diagramElement))
-                return elementPainter;
+        for (ElementPainter elementPainter : painters) {
+            if (elementPainter.element != null && elementPainter.element.equals(diagramElement)) return elementPainter;
         }
         return null;
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -119,20 +117,17 @@ public class DiagramView extends JPanel implements ISubscriber{
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
         for (ElementPainter elementPainter : painters) {
             if (selectedPainters.contains(elementPainter)) {
-                //if(elementPainter.equals(selected))
                 elementPainter.paintSelected((Graphics2D) g);
             }
             elementPainter.paint((Graphics2D) g);
-        g2.setTransform(transform);
-        for(ElementPainter elementPainter : painters) {
-            if(elementPainter.equals(selected)) elementPainter.paintSelected(g2);
-            else elementPainter.paint(g2);
+            g2.setTransform(transform);
         }
     }
 
+
     public void zoomIn() {
         scalingFactor *= 1.2;
-        if(scalingFactor > 5) {
+        if (scalingFactor > 5) {
             scalingFactor = 5;
         }
         System.out.println(scalingFactor);
@@ -164,6 +159,7 @@ public class DiagramView extends JPanel implements ISubscriber{
     public List<ElementPainter> getElementPainters() {
         return painters;
     }
+
     public void setSelected(ElementPainter selected) {
         this.selected = selected;
         repaint();
