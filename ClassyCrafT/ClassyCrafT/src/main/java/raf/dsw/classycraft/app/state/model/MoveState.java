@@ -15,7 +15,7 @@ import java.util.Map;
 public class MoveState implements State {
 
     private Point2D startPoint;
-    private Map<Interclass, Point2D.Double> initialPositions;
+    private Map<Interclass, Point2D> initialPositions;
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
@@ -24,7 +24,7 @@ public class MoveState implements State {
         for (ElementPainter elementPainter : dV.getSelectedPainters()) {
             if (elementPainter instanceof InterclassPainter) {
                 Interclass interclass = (Interclass) elementPainter.getElement();
-                initialPositions.put(interclass, new Point2D.Double(interclass.getLocation().getX(), interclass.getLocation().getY()));
+                initialPositions.put(interclass, new Point((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY()));
             }
         }
     }
@@ -41,14 +41,14 @@ public class MoveState implements State {
             double xTranslate = (currentPoint.getX() - startPoint.getX()) / dV.getScalingFactor();
             double yTranslate = (currentPoint.getY() - startPoint.getY()) / dV.getScalingFactor();
 
-            for (Map.Entry<Interclass, Point2D.Double> entry : initialPositions.entrySet()) {
+            for (Map.Entry<Interclass, Point2D> entry : initialPositions.entrySet()) {
                 Interclass interclass = entry.getKey();
-                Point2D.Double initialPosition = entry.getValue();
+                Point2D initialPosition = entry.getValue();
 
                 double newX = initialPosition.getX() + xTranslate;
                 double newY = initialPosition.getY() + yTranslate;
 
-//                interclass.setLocation(new Point2D.Double(newX, newY));
+                interclass.setLocation(new Point((int) newX, (int) newY));
             }
 
             startPoint = currentPoint;
