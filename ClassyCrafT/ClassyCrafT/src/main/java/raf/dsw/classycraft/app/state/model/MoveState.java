@@ -16,52 +16,52 @@ import java.util.stream.Collectors;
 
 public class MoveState implements State {
 
-    private Point2D startPoint;
-    private Map<Interclass, Point2D> initialPositions;
+//    private Point2D startPoint;
+//    private Map<Interclass, Point2D> initialPositions;
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-        initialPositions = new HashMap<>();
-        startPoint = e.getPoint();
-        List<InterclassPainter> interclassPainters = getInterclassPainters(dV);
-        for (InterclassPainter interclassPainter : interclassPainters) {
-            Interclass interclass = (Interclass) interclassPainter.getElement();
-            initialPositions.put(interclass, new Point((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY()));
-        }
+//        initialPositions = new HashMap<>();
+//        startPoint = e.getPoint();
+//        List<InterclassPainter> interclassPainters = getInterclassPainters(dV);
+//        for (InterclassPainter interclassPainter : interclassPainters) {
+//            Interclass interclass = (Interclass) interclassPainter.getElement();
+//            initialPositions.put(interclass, new Point((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY()));
+//        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
-        initialPositions = null;
+//        initialPositions = null;
     }
 
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
-        if (initialPositions != null) {
-            Point2D currentPoint = e.getPoint();
-            double xTranslate = (currentPoint.getX() - startPoint.getX()) ;
-            double yTranslate = (currentPoint.getY() - startPoint.getY()) ;
-
-            for (Map.Entry<Interclass, Point2D> entry : initialPositions.entrySet()) {
-                Interclass interclass = entry.getKey();
-                Point2D initialPosition = entry.getValue();
-
-                double newX = initialPosition.getX() + xTranslate;
-                double newY = initialPosition.getY() + yTranslate;
-
-                interclass.setLocation(new Point((int) newX, (int) newY));
-            }
-
-            startPoint = currentPoint;
-            dV.repaint();
-        }
+//        if (initialPositions != null) {
+//            Point2D currentPoint = e.getPoint();
+//            double xTranslate = (currentPoint.getX() - startPoint.getX()) ;
+//            double yTranslate = (currentPoint.getY() - startPoint.getY()) ;
+//
+//            for (Map.Entry<Interclass, Point2D> entry : initialPositions.entrySet()) {
+//                Interclass interclass = entry.getKey();
+//                Point2D initialPosition = entry.getValue();
+//
+//                double newX = initialPosition.getX() + xTranslate;
+//                double newY = initialPosition.getY() + yTranslate;
+//
+//                interclass.setLocation(new Point((int) newX, (int) newY));
+//            }
+//
+//            startPoint = currentPoint;
+//            dV.repaint();
+//        }
     }
 
-    private List<InterclassPainter> getInterclassPainters(DiagramView dV) {
-        return dV.getElementPainters()
-                .stream()
-                .filter(elementPainter -> elementPainter instanceof InterclassPainter)
-                .map(elementPainter -> (InterclassPainter) elementPainter)
-                .collect(Collectors.toList());
-    }
+//    private List<InterclassPainter> getInterclassPainters(DiagramView dV) {
+//        return dV.getElementPainters()
+//                .stream()
+//                .filter(elementPainter -> elementPainter instanceof InterclassPainter)
+//                .map(elementPainter -> (InterclassPainter) elementPainter)
+//                .collect(Collectors.toList());
+//    }
 }
