@@ -18,6 +18,8 @@ public class Project extends ClassyNodeComposite {
     private String authorName;
     private String directory;
 
+    private boolean changed = false;
+
     public Project(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);
@@ -38,12 +40,6 @@ public class Project extends ClassyNodeComposite {
     @Override
     public void deleteChild(ClassyNode child) {
 
-//        Package paket = (Package) child;
-//        if(this.getChildren().contains(paket))
-//        {
-//            this.getChildren().remove(paket);
-//        }
-
         if(child instanceof Package) {
             Package paket = (Package) child;
             this.getChildren().remove(paket);
@@ -54,6 +50,12 @@ public class Project extends ClassyNodeComposite {
             }
         }
 
+    }
+
+
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 
 }

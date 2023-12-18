@@ -193,4 +193,9 @@ public class ClassyTreeImplementation implements ClassyTree{
         return currentItem.getClassyNode().equals(targetNode);
     }
 
+    @Override
+    public void loadProject(Project project) {
+
+    }
+
 }

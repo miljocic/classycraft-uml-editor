@@ -5,10 +5,6 @@ import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
 public class ProjectExplorerFactory extends ClassyNodeFactory{
-
-
-
-
     @Override
     ClassyNode createNode(ClassyNode parent) {
         return new ProjectExplorer("ProjectExplorer ");

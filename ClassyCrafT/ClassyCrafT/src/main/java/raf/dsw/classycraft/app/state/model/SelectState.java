@@ -26,19 +26,13 @@ public class SelectState implements State {
 
         dV.setSelectedPainters(new ArrayList<>());
 
-        boolean ctrlPressed = (e.getModifiersEx() & MouseEvent.CTRL_DOWN_MASK) == MouseEvent.CTRL_DOWN_MASK;
-        if (ctrlPressed) {
-            MoveState moveState = new MoveState();
-            moveState.mousePressed(e, dV);
-            dV.setCurrentState(moveState);
-        } else {
-            for (ElementPainter elementPainter : dV.getElementPainters()) {
-                if (elementPainter instanceof ConnectionPainter) {
-                    continue; // Skip ConnectionPainter instances
-                }
-                if (elementPainter.elementAt(pos)) {
+
+        for (ElementPainter elementPainter : dV.getElementPainters()) {
+            if (elementPainter instanceof ConnectionPainter) {
+                continue; // Skip ConnectionPainter instances
+            }
+            if (elementPainter.elementAt(pos)) {
                     selected = elementPainter;
-                }
             }
         }
     }

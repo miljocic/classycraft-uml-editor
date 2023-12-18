@@ -20,6 +20,6 @@ public class ClassyRepositoryImpl implements ClassyRepository {
 
     @Override
     public void addChild(ClassyNodeComposite parent, ClassyNode child) {
-
+        parent.addChild(child);
     }
 }

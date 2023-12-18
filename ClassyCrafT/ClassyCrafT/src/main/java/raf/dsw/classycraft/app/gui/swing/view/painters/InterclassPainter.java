@@ -1,7 +1,10 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
 
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -32,21 +35,21 @@ public class InterclassPainter extends ElementPainter {
 
         g.drawString(visibility + " " + type + ": " + name, (int) interclass.getLocation().getX() + 10, (int) interclass.getLocation().getY() + 20);
 
-        // Draw line under the name
+        // Linija ispod Imena
         g.drawLine((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY() + 35, (int) interclass.getLocation().getX() + 200, (int) interclass.getLocation().getY() + 35);
 
         int yOffset = (int) interclass.getLocation().getY() + 70;
 
-        // Draw attributes
+        // Crtanje atributa
         for (String attribute : interclass.getAttributes()) {
             g.drawString(attribute, (int) interclass.getLocation().getX() + 20, yOffset);
             yOffset += 15;
         }
 
-        // Draw line after attributes
+        // Linija ispod atributa
         g.drawLine((int) interclass.getLocation().getX(), yOffset, (int) interclass.getLocation().getX() + 200, yOffset);
 
-        // Draw methods
+        // Crtanje metoda
         yOffset += 15;
         for (String method : interclass.getMethods()) {
             g.drawString(method, (int) interclass.getLocation().getX() + 20, yOffset);
@@ -55,11 +58,11 @@ public class InterclassPainter extends ElementPainter {
     }
 
     private String determineType(Interclass interclass) {
-        if (interclass instanceof raf.dsw.classycraft.app.repository.implementation.interclassElements.Class) {
+        if (interclass instanceof Class) {
             return "C";
-        } else if (interclass instanceof raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum) {
+        } else if (interclass instanceof Enum) {
             return "E";
-        } else if (interclass instanceof raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface) {
+        } else if (interclass instanceof Interface) {
             return "I";
         } else {
             return "";
@@ -69,14 +72,16 @@ public class InterclassPainter extends ElementPainter {
     @Override
     public boolean elementAt(Point pos) {
         Interclass interclass = (Interclass) getElement();
-        return new Rectangle((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY(), 200, 250).contains(pos);
+        return new Rectangle((int) interclass.getLocation().getX(),
+                (int) interclass.getLocation().getY(), 200, 250).contains(pos);
     }
 
     @Override
     public void paintSelected(Graphics2D g) {
         g.setPaint(Color.BLUE);
         Interclass interclass = (Interclass) getElement();
-        Rectangle shape = new Rectangle((int) interclass.getLocation().getX(), (int) interclass.getLocation().getY(), 200, 250);
+        Rectangle shape = new Rectangle((int) interclass.getLocation().getX(),
+                (int) interclass.getLocation().getY(), 200, 250);
         g.fill(shape);
         this.shape = shape;
     }
