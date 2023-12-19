@@ -222,3 +222,7 @@
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
+[NO_DIAGRAM_TO_EXPORT] [null] - [Nije selektovan dijagram za exportovanje!: ]

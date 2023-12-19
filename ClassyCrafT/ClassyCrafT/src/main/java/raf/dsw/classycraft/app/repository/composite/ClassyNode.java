@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public abstract class ClassyNode implements IPublisher {
 
-    protected List<ISubscriber> subs;
+    protected transient List<ISubscriber> subs;
     private String name;
     private transient ClassyNode parent;
 

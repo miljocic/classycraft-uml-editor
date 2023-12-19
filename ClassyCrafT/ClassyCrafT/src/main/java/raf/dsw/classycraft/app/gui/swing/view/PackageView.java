@@ -23,7 +23,6 @@ public class PackageView extends JPanel implements ISubscriber {
     private JLabel projectName;
     private JLabel author;
     private Package paket;
-
     private StateManager stateManager;
 
     public PackageView() {
@@ -62,27 +61,12 @@ public class PackageView extends JPanel implements ISubscriber {
     }
     private void revalidateTabbedPane(Diagram updatedDiagram) {
 
-//        if(paket.getChildren().contains(updatedDiagram)) {
-//            DiagramView dV = new DiagramView(updatedDiagram);
-//            this.mtp.addTab(updatedDiagram.getName(), dV);
-//            this.mtp.setSelectedComponent(dV);
-//            updatedDiagram.addSubscriber(dV);
-//        } else {
-//            System.out.println(mtp);
-//            for(int i = 0; i < mtp.getTabCount(); i++) {
-//                DiagramView diagramView = (DiagramView) mtp.getComponentAt(i);
-//                if(diagramView.getDiagram().equals(updatedDiagram))
-//                    mtp.remove(diagramView);
-//            }
-//        }
-
         boolean diagramFound = false;
 
         for (int i = 0; i < mtp.getTabCount(); i++) {
             DiagramView diagramView = (DiagramView) mtp.getComponentAt(i);
 
             if (diagramView.getDiagram().equals(updatedDiagram)) {
-                // If the diagram is already in the tab, select it
                 mtp.setSelectedComponent(diagramView);
                 diagramFound = true;
                 System.out.println("Diagram found in tab. Selected existing tab.");
@@ -91,7 +75,6 @@ public class PackageView extends JPanel implements ISubscriber {
         }
 
         if (!diagramFound) {
-            // If the diagram is not in the tab, add a new tab
             DiagramView newDiagramView = new DiagramView(updatedDiagram);
             mtp.addTab(updatedDiagram.getName(), newDiagramView);
             mtp.setSelectedIndex(mtp.getTabCount() - 1);

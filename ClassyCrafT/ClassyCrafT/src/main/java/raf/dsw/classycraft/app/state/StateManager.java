@@ -47,9 +47,4 @@ public class StateManager {
 
     public void setConnectState(){current = this.connectState;}
 
-
-    public void setCurrent(State current) {
-        this.current = current;
-    }
-
 }
