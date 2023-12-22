@@ -12,6 +12,7 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Inte
 public class Diagram extends ClassyNodeComposite {
 
     private static int counter=1;
+    private final String type = "Diagram";
     public Diagram(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);
@@ -27,6 +28,7 @@ public class Diagram extends ClassyNodeComposite {
                 this.getChildren().add(interclass);
                 notifySubscribers(child);
             }
+            ((Package)getParent()).setChanged(true);
         }
     }
 
@@ -37,6 +39,7 @@ public class Diagram extends ClassyNodeComposite {
             this.getChildren().remove(diagramElement);
             notifySubscribers(child);
         }
+        ((Package)getParent()).setChanged(true);
     }
 
 

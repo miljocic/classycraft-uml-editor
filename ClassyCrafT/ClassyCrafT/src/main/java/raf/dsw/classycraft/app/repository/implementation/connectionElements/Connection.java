@@ -14,6 +14,7 @@ public abstract class Connection extends DiagramElement {
 
     private Interclass from;
     private Interclass to;
+    private final String type = "Connection";
 
     public Connection(String name, ClassyNode parent, Interclass from, Interclass to) {
         super(name, parent, Color.BLACK, 2);

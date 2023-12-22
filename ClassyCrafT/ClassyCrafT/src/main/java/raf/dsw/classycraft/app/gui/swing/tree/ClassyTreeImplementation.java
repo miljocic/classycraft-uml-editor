@@ -196,6 +196,12 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void loadProject(Project project) {
 
+        ProjectExplorer projectExplorer = (ProjectExplorer) ((ClassyTreeItem) treeModel.getRoot()).getClassyNode();
+        projectExplorer.addChild(project);
+        ((ClassyTreeItem) treeModel.getRoot()).add(new ClassyTreeItem(project));
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+
 
     }
 

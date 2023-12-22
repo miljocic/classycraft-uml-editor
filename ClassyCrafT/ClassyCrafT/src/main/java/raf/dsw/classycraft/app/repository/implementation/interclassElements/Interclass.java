@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Attribute;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.ClassContent;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Method;
@@ -22,6 +23,7 @@ public abstract class Interclass extends DiagramElement {
     private Dimension dimension;
     private Point location;
     private String visibility;
+    private final String type = "Interclass";
 
     public Interclass(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
         super(name, parent,Color.BLACK, 2);
@@ -56,5 +58,12 @@ public abstract class Interclass extends DiagramElement {
             }
         }
         return methods;
+    }
+    //za MoveState
+    public void setLocation(Point location){
+        this.location = location;
+        ((Package)getParent().getParent()).setChanged(true);
+        notifySubscribers(this);
+
     }
 }

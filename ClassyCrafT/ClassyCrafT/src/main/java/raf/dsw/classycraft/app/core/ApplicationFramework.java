@@ -51,4 +51,5 @@ public class ApplicationFramework {
         }
         return instance;
     }
+
 }

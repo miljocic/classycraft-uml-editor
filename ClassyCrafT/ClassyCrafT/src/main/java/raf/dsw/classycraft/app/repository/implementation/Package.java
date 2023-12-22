@@ -17,6 +17,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
     private static int counter = 1;
     private String author;
     private Project parentProject;
+    private boolean changed= false;
 
     public Package(String name, ClassyNode parent) {
         super(name, parent);
@@ -33,6 +34,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
                 this.getChildren().add(paket);
                 notifySubscribers(this);
             }
+            changed = true;
         }
         else if (child != null &&  child instanceof Diagram ){
             Diagram diagram = (Diagram) child;
@@ -40,6 +42,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
                 this.getChildren().add(diagram);
                 notifySubscribers(this);
             }
+            changed = true;
         }
     }
 
@@ -49,10 +52,19 @@ public class Package extends ClassyNodeComposite implements IPublisher{
             this.getChildren().remove(child);
             notifySubscribers(this);
         }
+        changed = true;
     }
 
     public String getAuthor() {
         return parentProject.getAuthorName();
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 
 }
