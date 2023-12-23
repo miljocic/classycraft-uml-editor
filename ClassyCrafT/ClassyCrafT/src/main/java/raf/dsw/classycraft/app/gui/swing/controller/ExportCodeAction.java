@@ -21,7 +21,7 @@ public class ExportCodeAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView){
-            MainFrame.getInstance().getWorkspace().getPackageView().startConnectState();
+
         }else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_TO_EXPORT_2);
         }

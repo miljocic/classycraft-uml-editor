@@ -12,9 +12,12 @@ import raf.dsw.classycraft.app.state.State;
 import raf.dsw.classycraft.app.state.StateMouseManager;
 import raf.dsw.classycraft.app.state.model.SelectState;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,5 +163,16 @@ public class DiagramView extends JPanel implements ISubscriber {
     public void setSelected(ElementPainter selected) {
         this.selected = selected;
         repaint();
+    }
+
+    public void exportImage(File imageFile) {
+        BufferedImage image = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        paint(g2);
+        try{
+            ImageIO.write(image,"jpg", imageFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
