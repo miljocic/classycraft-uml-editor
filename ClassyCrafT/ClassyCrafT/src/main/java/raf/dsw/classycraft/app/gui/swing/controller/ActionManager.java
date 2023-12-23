@@ -34,7 +34,8 @@ public class ActionManager {
     private OpenAction openAction;
     private SaveAction saveAction;
     private SaveAsAction saveAsAction;
-    private ExportAction exportAction;
+    private ExportAsImageAction exportAction;
+    private ExportCodeAction exportCodeAction;
 
     public ActionManager() {
         initialiseActions();
@@ -66,8 +67,8 @@ public class ActionManager {
         openAction = new OpenAction();
         saveAction = new SaveAction();
         saveAsAction = new SaveAsAction();
-        exportAction = new ExportAction();
-
+        exportAction = new ExportAsImageAction();
+        exportCodeAction = new ExportCodeAction();
 
     }
 

@@ -9,13 +9,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ExportAction extends AbstractClassyAction {
+public class ExportCodeAction extends AbstractClassyAction{
 
-    public ExportAction() {
+    public ExportCodeAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/export.png"));
+        putValue(SMALL_ICON, loadIcon("/images/exportAsCode.png"));
         putValue(Action.NAME, "Export project");
-        putValue(Action.SHORT_DESCRIPTION, "Export project as image");
+        putValue(Action.SHORT_DESCRIPTION, "Export project as code");
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ExportAction extends AbstractClassyAction {
         if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView){
             MainFrame.getInstance().getWorkspace().getPackageView().startConnectState();
         }else {
-            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_TO_EXPORT);
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_TO_EXPORT_2);
         }
     }
 }

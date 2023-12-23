@@ -44,9 +44,11 @@ public class MessageGeneratorImplementation implements MessageGenerator{
         }else if (ErrorType.ELEMENT_FOUND_AT_POINT.equals(errorType)) {
             createMessage("Element je pronadjen!", errorType);
         }else if (ErrorType.NODE_NOT_COMPOSITE.equals(errorType)) {
-            createMessage("Selektovani Node nije Composite!: ", errorType);
-        }else if (ErrorType.NO_DIAGRAM_TO_EXPORT.equals(errorType)) {
-        createMessage("Nije selektovan dijagram za exportovanje!: ", errorType);
+            createMessage("Selektovani Node nije Composite! ", errorType);
+        }else if (ErrorType.NO_DIAGRAM_TO_EXPORT_1.equals(errorType)) {
+            createMessage("Nije selektovan dijagram za exportovanje u sliku!", errorType);
+        }else if (ErrorType.NO_DIAGRAM_TO_EXPORT_2.equals(errorType)) {
+            createMessage("Nije selektovan dijagram za exportovanje u kod!", errorType);
         }
 
     }
