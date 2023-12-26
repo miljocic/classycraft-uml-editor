@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
 import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +20,10 @@ public class RedoAction extends AbstractClassyAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ApplicationFramework.getInstance().getGui().getCommandManager().doCommand();
+
+        DiagramView dV = (DiagramView) MainFrame.getInstance().getWorkspace().getPackageView().
+                getMtp().getSelectedComponent();
+        dV.getDiagram().getCommandManager().doCommand();
 
     }
 }

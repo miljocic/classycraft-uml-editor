@@ -65,15 +65,19 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(),pos, getVisibility(), new Dimension(200, 250));
+                    element = new Class("NewClass" + classCounter, dV.getDiagram(), pos, getVisibility(),
+                            new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
+
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), pos, getVisibility(), new Dimension(200, 250));
+                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), pos, getVisibility(),
+                            new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(),pos, getVisibility(), new Dimension(200, 250));
+                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), pos, getVisibility(),
+                            new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
                     interfaceCounter++;
                     break;
                 default:

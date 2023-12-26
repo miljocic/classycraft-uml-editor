@@ -16,11 +16,11 @@ public class DeleteElementCommand extends AbstractCommand {
     }
     @Override
     public void doCommand() {
-        //diagram.deleteChild(element);
+        diagram.addChild(element);
     }
 
     @Override
     public void undoCommand() {
-        //diagram.addChild(element);
+        diagram.deleteChild(element);
     }
 }
