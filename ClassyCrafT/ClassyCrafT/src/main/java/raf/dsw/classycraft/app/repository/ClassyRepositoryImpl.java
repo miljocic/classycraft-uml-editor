@@ -22,4 +22,10 @@ public class ClassyRepositoryImpl implements ClassyRepository {
     public void addChild(ClassyNodeComposite parent, ClassyNode child) {
         parent.addChild(child);
     }
+
+    @Override
+    public void removeChild(ClassyNodeComposite parent, ClassyNode child) {
+        parent.deleteChild(child);
+    }
+
 }

@@ -1,8 +1,14 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
+import raf.dsw.classycraft.app.core.ApplicationFramework;
+import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
+import raf.dsw.classycraft.app.logg.messages.ErrorType;
+import raf.dsw.classycraft.app.repository.implementation.Project;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 public class SaveAsAction extends AbstractClassyAction{
 
@@ -15,6 +21,25 @@ public class SaveAsAction extends AbstractClassyAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        JFileChooser jfc = new JFileChooser();
+
+        if (!(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Project)) {
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ONLY_PROJECT_SERIALIZABLE);
+            return;
+        }
+
+        Project project = (Project) MainFrame.getInstance().getTree().getSelectedNode().getClassyNode();
+        File projectFile = null;
+
+        if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+            projectFile = jfc.getSelectedFile();
+            project.setDirectory(projectFile.getPath());
+        } else {
+            return;
+        }
+        project.setChanged(false);
+        ApplicationFramework.getInstance().getSerializer().saveProject(project);
 
     }
 }

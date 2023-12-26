@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.repository.implementation;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.observer.IPublisher;
-import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
@@ -17,11 +16,13 @@ public class Package extends ClassyNodeComposite implements IPublisher{
     private static int counter = 1;
     private String author;
     private Project parentProject;
-    private boolean changed= false;
+    private String directory;
+    private boolean changed;
 
     public Package(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);
+        this.changed = true;
         counter++;
     }
 
@@ -67,4 +68,8 @@ public class Package extends ClassyNodeComposite implements IPublisher{
         this.changed = changed;
     }
 
+
+    public String getDirectory(){
+        return parentProject.getDirectory();
+    }
 }

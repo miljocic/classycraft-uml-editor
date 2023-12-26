@@ -11,6 +11,7 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.composite.NodeType;
 import raf.dsw.classycraft.app.repository.factory.Utils;
+import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
@@ -197,7 +198,16 @@ public class ClassyTreeImplementation implements ClassyTree{
     public void loadProject(Project project) {
 
         ProjectExplorer projectExplorer = (ProjectExplorer) ((ClassyTreeItem) treeModel.getRoot()).getClassyNode();
+        System.out.println(project.getChildren());
         projectExplorer.addChild(project);
+
+        ClassyTreeItem item = new ClassyTreeItem(project);
+        for(ClassyNode child : project.getChildren()) {
+            if(child instanceof Diagram) {
+                item.add(new ClassyTreeItem(child));
+            }
+        }
+
         ((ClassyTreeItem) treeModel.getRoot()).add(new ClassyTreeItem(project));
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);

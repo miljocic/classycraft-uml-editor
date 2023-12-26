@@ -9,4 +9,7 @@ public interface ClassyRepository {
     ProjectExplorer getProjectExplorer();
 
     void addChild(ClassyNodeComposite parent, ClassyNode child);
+
+    void removeChild(ClassyNodeComposite parent, ClassyNode child);
+
 }

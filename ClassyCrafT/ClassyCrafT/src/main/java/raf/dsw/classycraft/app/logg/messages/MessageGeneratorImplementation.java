@@ -49,6 +49,8 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Nije selektovan dijagram za exportovanje u sliku!", errorType);
         }else if (ErrorType.NO_DIAGRAM_TO_EXPORT_2.equals(errorType)) {
             createMessage("Nije selektovan dijagram za exportovanje u kod!", errorType);
+        }else if (ErrorType.ONLY_PROJECT_SERIALIZABLE.equals(errorType)) {
+            createMessage("Samo Project moze da se sacuva!", errorType);
         }
 
     }

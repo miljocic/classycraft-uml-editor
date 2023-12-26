@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.state.model;
 
+import raf.dsw.classycraft.app.command.commands.AddElementCommand;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
@@ -23,6 +24,7 @@ public class AddState implements State {
     private int classCounter = 0;
     private int enumCounter = 0;
     private int interfaceCounter = 0;
+    private AddElementCommand addElementCommand;
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {

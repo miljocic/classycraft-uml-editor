@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.*;
 import raf.dsw.classycraft.app.observer.ISubscriber;
+import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.*;
@@ -44,6 +45,24 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
+
+        for(ClassyNode child : diagram.getChildren()) {
+            if(child instanceof Interclass) {
+                painters.add(new InterclassPainter((Interclass) child));
+                child.addSubscriber(this);
+            } else if(child instanceof Connection){
+                if(child instanceof Aggregation){
+                    painters.add(new AggregationPainter((Aggregation) child));
+                }else if(child instanceof Composition){
+                    painters.add(new CompositionPainter((Composition) child));
+                }else if(child instanceof Dependency){
+                    painters.add(new DependencyPainter((Dependency) child));
+                }else if(child instanceof Generalization){
+                    painters.add(new GeneralizationPainter((Generalization) child));
+                }
+            }
+        }
+
         StateMouseManager stateMouseManager = new StateMouseManager(this);
         this.addMouseListener(stateMouseManager);
         this.addMouseMotionListener(stateMouseManager);
@@ -53,6 +72,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.xTranslate = 0;
         this.yTranslate = 0;
         this.currentState = new SelectState();
+        repaint();
     }
 
 

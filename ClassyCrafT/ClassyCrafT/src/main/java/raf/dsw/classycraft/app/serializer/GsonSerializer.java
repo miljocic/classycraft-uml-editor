@@ -2,7 +2,11 @@ package raf.dsw.classycraft.app.serializer;
 
 import com.google.gson.Gson;
 import raf.dsw.classycraft.app.core.Serializer;
+import raf.dsw.classycraft.app.repository.composite.ClassyNode;
+import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.Project;
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,8 +19,26 @@ public class GsonSerializer implements Serializer {
     @Override
     public Project loadProject(File file) {
         try (FileReader fileReader = new FileReader(file)) {
-            return gson.fromJson(fileReader, Project.class);
-        } catch (IOException e) {
+            Project project = gson.fromJson(fileReader, Project.class);
+            for(ClassyNode child : project.getChildren()) {
+                child.setParent(project);
+                ClassyNodeComposite childComposite = (ClassyNodeComposite) child;
+                for(ClassyNode grandchild : childComposite.getChildren()) {
+                    if(grandchild instanceof Connection) {
+                        Connection connection = (Connection) grandchild;
+                        connection.setFrom((Interclass)
+                                childComposite.getChildByName(connection.getFrom().getName()));
+                        connection.setTo((Interclass)
+                                childComposite.getChildByName(connection.getTo().getName()));
+                        System.out.println(connection.getFrom() + " " + connection.getTo());
+                    } else {
+                        System.out.println(grandchild);
+                    }
+                    grandchild.setParent(childComposite);
+                }
+            }
+            return project;
+        }catch (IOException e) {
             e.printStackTrace();
             return null;
         }

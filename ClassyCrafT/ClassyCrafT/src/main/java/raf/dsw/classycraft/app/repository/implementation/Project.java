@@ -18,12 +18,13 @@ public class Project extends ClassyNodeComposite {
     private String authorName;
     private String directory;
 
-    private boolean changed = false;
+    private boolean changed;
 
     public Project(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);
         counter++;
+        this.changed = true;
     }
 
     @Override
@@ -52,10 +53,9 @@ public class Project extends ClassyNodeComposite {
 
     }
 
-
-
-    public void setChanged(boolean changed) {
-        this.changed = changed;
+    public void setDirectory(String directory){
+        this.directory = directory;
+        changed = true;
     }
 
 }
