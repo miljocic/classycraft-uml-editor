@@ -20,6 +20,7 @@ public class ActionManager {
     private EditStateAction editStateAction;
     private DeleteStateAction deleteStateAction;
     private MoveStateAction moveStateAction;
+    private MoveElementStateAction moveElementStateAction;
     private SelectStateAction selectStateAction;
 
     private StateMouseManager stateMouseManager;
@@ -54,6 +55,7 @@ public class ActionManager {
         editStateAction = new EditStateAction();
         deleteStateAction = new DeleteStateAction();
         moveStateAction = new MoveStateAction();
+        moveElementStateAction = new MoveElementStateAction();
         selectStateAction = new SelectStateAction();
         stateMouseManager = new StateMouseManager();
         connectStateAction = new ConnectStateAction();

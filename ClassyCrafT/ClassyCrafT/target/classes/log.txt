@@ -248,3 +248,4 @@
 [NO_DIAGRAM_TO_EXPORT_1] [null] - [Nije selektovan dijagram za exportovanje u sliku!]
 [NO_DIAGRAM_TO_EXPORT_1] [null] - [Nije selektovan dijagram za exportovanje u sliku!]
 [PROJECT_NOT_SELECTED] [null] - [Nije selektovan Projekat!]
+[ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]

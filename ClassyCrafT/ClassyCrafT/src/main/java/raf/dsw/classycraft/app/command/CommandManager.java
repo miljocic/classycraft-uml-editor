@@ -25,7 +25,6 @@ public class CommandManager {
         if(pointer < commands.size()){
             commands.get(pointer++).doCommand();
             ApplicationFramework.getInstance().getGui().enableUndo();
-            // logika za impl
         }
         if(pointer == commands.size()){
             ApplicationFramework.getInstance().getGui().disableRedo();
@@ -36,8 +35,7 @@ public class CommandManager {
     public void undoCommand(){
         if(pointer > 0){
             ApplicationFramework.getInstance().getGui().enableRedo();
-            commands.get(pointer--).undoCommand();
-            // logika za impl
+            commands.get(--pointer).undoCommand();
         }
         if(pointer == 0){
             ApplicationFramework.getInstance().getGui().disableUndo();

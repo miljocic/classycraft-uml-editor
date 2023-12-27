@@ -12,6 +12,7 @@ public class StateManager {
     private DeleteState deleteState;
     private SelectState selectState;
     private MoveState moveState;
+    private MoveElementState moveElementState;
     private ConnectState connectState;
     private EditState editState;
 
@@ -21,6 +22,7 @@ public class StateManager {
         addState = new AddState();
         deleteState = new DeleteState();
         moveState = new MoveState();
+        moveElementState = new MoveElementState();
         selectState = new SelectState();
         connectState = new ConnectState();
         editState = new EditState();
@@ -42,6 +44,9 @@ public class StateManager {
     }
 
     public void setMoveState() {
+        current = this.moveState;
+    }
+    public void setMoveElementState() {
         current = this.moveState;
     }
 

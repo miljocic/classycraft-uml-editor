@@ -4,23 +4,29 @@ import raf.dsw.classycraft.app.command.AbstractCommand;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 
+import java.util.List;
+
 public class DeleteElementCommand extends AbstractCommand {
 
     private Diagram diagram;
-    private DiagramElement element;
+    private List<DiagramElement> elementsToRemove;
 
-    public DeleteElementCommand(Diagram diagram, DiagramElement element){
-        this.element = element;
+    public DeleteElementCommand(Diagram diagram, List<DiagramElement> elementsToRemove) {
+        this.elementsToRemove = elementsToRemove;
         this.diagram = diagram;
-
     }
+
     @Override
     public void doCommand() {
-        diagram.addChild(element);
+        for (DiagramElement element : elementsToRemove) {
+            diagram.deleteChild(element);
+        }
     }
 
     @Override
     public void undoCommand() {
-        diagram.deleteChild(element);
+        for (DiagramElement element : elementsToRemove) {
+            diagram.addChild(element);
+        }
     }
 }

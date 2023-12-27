@@ -18,11 +18,4 @@ public abstract class DiagramElement extends ClassyNode {
         this.color =color;
         this.stroke = stroke;
     }
-//    private double xCoordinate;
-//    private double yCoordinate;
-//    private double width;
-//    private double height;
-//    private String visibility;
-
-
 }
