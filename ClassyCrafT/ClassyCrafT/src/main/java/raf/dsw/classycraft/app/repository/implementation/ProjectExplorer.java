@@ -18,6 +18,7 @@ public class ProjectExplorer extends ClassyNodeComposite {
             Project project = (Project) child;
             if (!this.getChildren().contains(project)){
                 this.getChildren().add(project);
+                child.setParent(this);
             }
         }
     }

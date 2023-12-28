@@ -15,7 +15,10 @@ public class Diagram extends ClassyNodeComposite {
 
     private static int counter=1;
     private final String type = "Diagram";
-    private CommandManager commandManager;
+    private transient CommandManager commandManager;
+    private boolean template;
+    @Getter
+    private static final String templatePath = "/DiagramTemplates";
     public Diagram(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);
@@ -29,6 +32,7 @@ public class Diagram extends ClassyNodeComposite {
             Interclass interclass = (Interclass) child;
             if(!this.getChildren().contains(interclass)) {
                 this.getChildren().add(interclass);
+                child.setParent(this);
                 notifySubscribers(child);
             }
             ((Package)getParent()).setChanged(true);
@@ -44,6 +48,11 @@ public class Diagram extends ClassyNodeComposite {
         }
         ((Package)getParent()).setChanged(true);
 
+    }
+
+    public CommandManager getCommandManager() {
+        if(commandManager == null) commandManager = new CommandManager();
+        return commandManager;
     }
 
 }

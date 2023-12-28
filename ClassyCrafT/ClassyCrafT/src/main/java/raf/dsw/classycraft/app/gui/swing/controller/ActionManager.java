@@ -38,6 +38,9 @@ public class ActionManager {
     private ExportAsImageAction exportAction;
     private ExportCodeAction exportCodeAction;
 
+    private SaveTemplateAction saveTemplateAction;
+    private LoadTemplateAction loadTemplateAction;
+
     public ActionManager() {
         initialiseActions();
     }
@@ -71,6 +74,10 @@ public class ActionManager {
         saveAsAction = new SaveAsAction();
         exportAction = new ExportAsImageAction();
         exportCodeAction = new ExportCodeAction();
+
+        saveTemplateAction = new SaveTemplateAction();
+        loadTemplateAction = new LoadTemplateAction();
+
 
     }
 

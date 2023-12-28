@@ -51,8 +51,11 @@ public class MessageGeneratorImplementation implements MessageGenerator{
             createMessage("Nije selektovan dijagram za exportovanje u kod!", errorType);
         }else if (ErrorType.ONLY_PROJECT_SERIALIZABLE.equals(errorType)) {
             createMessage("Samo Project moze da se sacuva!", errorType);
+        }else if (ErrorType.SAVE_DIAGRAM_AS_TEMPLATE.equals(errorType)) {
+            createMessage("Samo Diagram moze da sacuva kao sablon!", errorType);
+        }else if (ErrorType.NO_PACKAGE_SELECTED.equals(errorType)) {
+            createMessage("Samo Diagram moze da sacuva kao sablon!", errorType);
         }
-
     }
 
     @Override

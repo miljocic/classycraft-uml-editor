@@ -18,11 +18,13 @@ import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -125,7 +127,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     private ClassyNode createChild(ClassyNode parent, NodeType type) {
 
-        return Utils.getFactory(type).getClassyNode(parent);
+        return Objects.requireNonNull(Utils.getFactory(type)).getClassyNode(parent);
 
 
     }
@@ -144,7 +146,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         if (parent == null) {
             //Komponenta se ne moze obrisati jer mu je roditelj nepostojeci
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_CANNOT_BE_DELETED);
-            return;
+
         }
         else{
 
@@ -180,7 +182,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         if (isMatching(currentItem, targetNode))
             return currentItem;
 
-        Enumeration children = currentItem.children();
+        Enumeration<TreeNode> children = currentItem.children();
         while (children.hasMoreElements()) {
             ClassyTreeItem child = (ClassyTreeItem) children.nextElement();
             ClassyTreeItem result = searchTree(child, targetNode);
@@ -212,7 +214,16 @@ public class ClassyTreeImplementation implements ClassyTree{
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
 
-
     }
+
+    @Override
+    public void loadTemplate(Diagram template) {
+        Package aPackage = (Package) this.getSelectedNode().getClassyNode();
+        aPackage.addChild(template);
+        this.getSelectedNode().add(new ClassyTreeItem(template));
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
 
 }

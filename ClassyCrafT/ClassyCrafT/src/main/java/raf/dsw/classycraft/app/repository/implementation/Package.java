@@ -28,16 +28,17 @@ public class Package extends ClassyNodeComposite implements IPublisher{
 
     @Override
     public void addChild(ClassyNode child) {
-        if (child != null &&  child instanceof Package ){
+        if ( child instanceof Package ){
             Package paket = (Package) child;
             paket.setParentProject(this.parentProject);
             if (!this.getChildren().contains(paket)){
                 this.getChildren().add(paket);
+                child.setParent(this);
                 notifySubscribers(this);
             }
             changed = true;
         }
-        else if (child != null &&  child instanceof Diagram ){
+        else if ( child instanceof Diagram ){
             Diagram diagram = (Diagram) child;
             if (!this.getChildren().contains(diagram)){
                 this.getChildren().add(diagram);
