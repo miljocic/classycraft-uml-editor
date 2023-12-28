@@ -7,6 +7,7 @@ import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
+import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
@@ -29,6 +30,7 @@ public class AddState implements State {
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
 
+        Diagram diagram = dV.getDiagram();
         Point pos = new Point((int)
                 ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
                 (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
@@ -65,18 +67,18 @@ public class AddState implements State {
             Interclass element;
             switch (type) {
                 case "Class":
-                    element = new Class("NewClass" + classCounter, dV.getDiagram(), pos, getVisibility(),
+                    element = new Class("NewClass" + classCounter, diagram, pos, getVisibility(),
                             new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
 
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter, dV.getDiagram(), pos, getVisibility(),
+                    element = new Enum("NewEnum" + enumCounter,diagram, pos, getVisibility(),
                             new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
                     enumCounter++;
                     break;
                 case "Interface":
-                    element = new Interface("NewInterface" + interfaceCounter, dV.getDiagram(), pos, getVisibility(),
+                    element = new Interface("NewInterface" + interfaceCounter, diagram, pos, getVisibility(),
                             new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
                     interfaceCounter++;
                     break;
@@ -86,7 +88,10 @@ public class AddState implements State {
 
             if (element != null && !checkOverlap(element, dV.getElementPainters())) {
                 System.out.println("Dodat");
-                dV.getDiagram().addChild(element);
+                addElementCommand = new AddElementCommand(diagram, element);
+                diagram.getCommandManager().addCommand(addElementCommand);
+                //ne treba vise direktno, command manager ce resiti
+                //dV.getDiagram().addChild(element);
                 ClassyTreeItem parent = MainFrame.getInstance().getTree().findNode(dV.getDiagram());
                 ClassyTreeItem classyTreeItem = new ClassyTreeItem(element);
                 parent.add(classyTreeItem);

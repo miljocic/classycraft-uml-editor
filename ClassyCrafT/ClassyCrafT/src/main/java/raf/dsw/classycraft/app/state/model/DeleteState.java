@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.state.model;
 
+import raf.dsw.classycraft.app.command.commands.DeleteElementCommand;
 import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
@@ -7,6 +8,7 @@ import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
+import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 import raf.dsw.classycraft.app.state.State;
 
@@ -19,6 +21,8 @@ import java.util.List;
 
 public class DeleteState implements State {
 
+    private DeleteElementCommand deleteElementCommand;
+
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
@@ -29,6 +33,7 @@ public class DeleteState implements State {
 
         Diagram diagram = dV.getDiagram();
 
+        List<DiagramElement> elementsToRemove = new ArrayList<>();
         List<ElementPainter> selectedPainters = new ArrayList<>();
         List<ElementPainter> paintersToRemove = new ArrayList<>(dV.getElementPainters());
 
@@ -40,6 +45,7 @@ public class DeleteState implements State {
                     dV.setSelected(null);
                 }
                 selectedPainters.add(elementPainter);
+                elementsToRemove.add(elementPainter.getElement());
                 diagram.deleteChild(elementPainter.getElement());
                 ClassyTreeImplementation treeImp = (ClassyTreeImplementation) MainFrame.getInstance().getTree();
                 treeImp.delete(treeImp.findNode(elementPainter.getElement()));
@@ -57,14 +63,16 @@ public class DeleteState implements State {
                         Connection connection = (Connection) connectionPainter.getElement();
                         if (connection.getTo().equals(selectedPainter.getElement()) || connection.getFrom().equals(selectedPainter.getElement())) {
                             paintersToRemove.add(elementPainter);
-                            diagram.deleteChild(connection);
+                            elementsToRemove.add(connection);
+                            //diagram.deleteChild(connection);
                         }
                     }
                 }
             }
         }
 
-
+        deleteElementCommand = new DeleteElementCommand(diagram, elementsToRemove);
+        diagram.getCommandManager().addCommand(deleteElementCommand);
         dV.getElementPainters().removeAll(paintersToRemove);
         dV.repaint();
     }

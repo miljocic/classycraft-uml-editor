@@ -1,9 +1,11 @@
 package raf.dsw.classycraft.app.state.model;
 
 
+import raf.dsw.classycraft.app.command.commands.AddElementCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
+import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.*;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
@@ -21,6 +23,7 @@ public class ConnectState implements State {
     private int genCounter = 0;
     private InterclassPainter from;
     private InterclassPainter to;
+    private AddElementCommand addElementCommand;
 
 
     @Override
@@ -47,6 +50,7 @@ public class ConnectState implements State {
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
 
+        Diagram diagram = dV.getDiagram();
         Point pos =  new Point((int)
                 ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
                 (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
@@ -98,19 +102,19 @@ public class ConnectState implements State {
                 Connection element;
                 switch (type) {
                     case "Aggregation":
-                        element = new Aggregation("NewAggregation" + aggCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Aggregation("NewAggregation" + aggCounter, diagram,(Interclass) from.getElement(), (Interclass) to.getElement());
                         aggCounter++;
                         break;
                     case "Composition":
-                        element = new Composition("NewComposition" + comCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Composition("NewComposition" + comCounter, diagram,(Interclass) from.getElement(), (Interclass) to.getElement());
                         comCounter++;
                         break;
                     case "Dependency":
-                        element = new Dependency("NewDependency" + depCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement() );
+                        element = new Dependency("NewDependency" + depCounter, diagram,(Interclass) from.getElement(), (Interclass) to.getElement() );
                         depCounter++;
                         break;
                     case "Generalization":
-                        element = new Generalization("NewGeneralization" + genCounter, dV.getDiagram(),(Interclass) from.getElement(), (Interclass) to.getElement());
+                        element = new Generalization("NewGeneralization" + genCounter, diagram,(Interclass) from.getElement(), (Interclass) to.getElement());
                         genCounter++;
                         break;
                     default:
@@ -121,7 +125,10 @@ public class ConnectState implements State {
 
                 if (element != null) {
                     System.out.println("Dodat");
-                    dV.getDiagram().addChild(element);
+                    addElementCommand = new AddElementCommand(diagram, element);
+                    diagram.getCommandManager().addCommand(addElementCommand);
+                    //CommandManager radi
+                    //dV.getDiagram().addChild(element);
                     dV.repaint();
                     dV.update(element);
                 }
