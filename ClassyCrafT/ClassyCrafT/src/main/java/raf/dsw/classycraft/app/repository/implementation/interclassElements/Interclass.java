@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public abstract class Interclass extends DiagramElement {
 
     private List<ClassContent> classContents;
-    private String name;
     private Dimension dimension;
     private Point location;
     private String visibility;

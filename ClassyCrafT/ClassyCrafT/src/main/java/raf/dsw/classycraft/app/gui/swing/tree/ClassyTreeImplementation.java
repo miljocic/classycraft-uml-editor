@@ -17,6 +17,8 @@ import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
 import javax.swing.*;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -38,6 +40,17 @@ public class ClassyTreeImplementation implements ClassyTree{
         ClassyTreeItem root = new ClassyTreeItem(projectExplorer);
         treeModel = new DefaultTreeModel(root);
         treeView = new ClassyTreeView(treeModel);
+        treeView.addTreeExpansionListener(new TreeExpansionListener() {
+            @Override
+            public void treeExpanded(TreeExpansionEvent event) {
+
+            }
+
+            @Override
+            public void treeCollapsed(TreeExpansionEvent event) {
+                treeView.expandPath(event.getPath());
+            }
+        });
         return treeView;
     }
 

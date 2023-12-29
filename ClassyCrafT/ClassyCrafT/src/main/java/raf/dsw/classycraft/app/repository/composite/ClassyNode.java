@@ -14,13 +14,17 @@ import java.util.List;
 public abstract class ClassyNode implements IPublisher {
 
     protected transient List<ISubscriber> subs;
-    private String name;
+    protected String name;
     private transient ClassyNode parent;
 
 
     public ClassyNode(String name, ClassyNode parent) {
         this.name = name;
         this.parent = parent;
+    }
+
+    public ClassyNode(String name) {
+        this.name = name;
     }
 
     @Override

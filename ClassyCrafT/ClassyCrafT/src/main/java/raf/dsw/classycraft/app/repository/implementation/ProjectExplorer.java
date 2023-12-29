@@ -4,12 +4,18 @@ import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
+import java.util.List;
+
 public class ProjectExplorer extends ClassyNodeComposite {
 
     // Parent == null
 
     public ProjectExplorer(String name) {
-        super(name, null);
+        super(name, (ClassyNode) null);
+    }
+
+    public ProjectExplorer(String name, List<ClassyNode> children) {
+        super(name, children);
     }
 
     @Override

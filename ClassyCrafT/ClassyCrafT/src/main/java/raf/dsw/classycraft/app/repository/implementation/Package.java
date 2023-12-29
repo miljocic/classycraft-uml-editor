@@ -15,7 +15,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
 
     private static int counter = 1;
     private String author;
-    private Project parentProject;
+    private transient Project parentProject;
     private String directory;
     private boolean changed;
 
