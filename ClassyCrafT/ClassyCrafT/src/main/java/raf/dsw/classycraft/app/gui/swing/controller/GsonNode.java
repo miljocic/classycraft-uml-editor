@@ -27,7 +27,6 @@ public class GsonNode implements JsonDeserializer<ClassyNode>{
         JsonObject jsonObject = jsonElement.getAsJsonObject();
 
         String className = jsonObject.get("className").getAsString();
-        System.out.println(className);
         GsonNodeArray arrayDeSe = new GsonNodeArray();
 
         if (Objects.equals(className, "Project")) {
