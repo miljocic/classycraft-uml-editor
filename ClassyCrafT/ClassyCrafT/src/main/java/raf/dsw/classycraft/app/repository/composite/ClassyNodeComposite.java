@@ -19,6 +19,7 @@ public abstract class ClassyNodeComposite extends ClassyNode{
 
     public ClassyNodeComposite(String name, List<ClassyNode> children) {
         super(name);
+        className = "ClassyNodeComposite";
         this.children = children;
     }
 

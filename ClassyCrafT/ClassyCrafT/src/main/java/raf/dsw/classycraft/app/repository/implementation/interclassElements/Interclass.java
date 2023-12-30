@@ -31,6 +31,16 @@ public abstract class Interclass extends DiagramElement {
         this.visibility = visibility;
         this.classContents = new ArrayList<>();
         this.dimension = dimension;
+        className = "Interclass";
+    }
+
+    public Interclass(String name, Color color, int stroke, List<ClassContent> classContents, Dimension dimension, Point location, String visibility) {
+        super(name, color, stroke);
+        this.classContents = classContents;
+        this.dimension = dimension;
+        this.location = location;
+        this.visibility = visibility;
+        className = "Interclass";
     }
 
     public void addClassContent(ClassContent content) {

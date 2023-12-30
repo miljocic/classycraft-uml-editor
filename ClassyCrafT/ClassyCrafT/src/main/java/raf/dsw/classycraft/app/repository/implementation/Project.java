@@ -9,6 +9,7 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
 import javax.swing.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,13 +18,20 @@ public class Project extends ClassyNodeComposite {
     private static int counter=1;
     private String authorName;
     private String directory;
-    private boolean changed;
+    private transient boolean changed;
 
     public Project(String name, ClassyNode parent) {
         super(name, parent);
         setName(name+counter);
         counter++;
         this.changed = true;
+    }
+
+    public Project(String name, List<ClassyNode> children, String authorName, String directory) {
+        super(name, children);
+        this.authorName = authorName;
+        this.directory = directory;
+        className = "Project";
     }
 
     @Override

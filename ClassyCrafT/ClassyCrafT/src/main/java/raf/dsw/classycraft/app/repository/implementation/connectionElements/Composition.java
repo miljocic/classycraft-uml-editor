@@ -10,6 +10,12 @@ public class Composition extends Connection {
 
     public Composition(String name, ClassyNode parent, Interclass from, Interclass to) {
         super(name, parent, from, to);
+        className = "Composition";
+    }
+
+    public Composition(String name, Color color, int stroke, Interclass from, Interclass to) {
+        super(name, color, stroke, from, to);
+        className = "Composition";
     }
 
     @Override

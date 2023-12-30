@@ -20,6 +20,14 @@ public abstract class Connection extends DiagramElement {
         super(name, parent, Color.BLACK, 2);
         this.from = from;
         this.to = to;
+        className = "Connection";
+    }
+
+    public Connection(String name, Color color, int stroke, Interclass from, Interclass to) {
+        super(name, color, stroke);
+        this.from = from;
+        this.to = to;
+        className = "Connection";
     }
 
     public abstract boolean intersectsRectangle(Rectangle rect);

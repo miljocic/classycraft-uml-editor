@@ -302,3 +302,5 @@
 [ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
 [ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
 [ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
+[ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
+[SAVE_DIAGRAM_AS_TEMPLATE] [null] - [Samo Diagram moze da sacuva kao sablon!]

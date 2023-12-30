@@ -9,5 +9,11 @@ public class Method extends ClassContent {
 
     public Method(String name, ClassyNode parent, Color color, int stroke) {
         super(name, parent, color, stroke);
+        className = "Method";
+    }
+
+    public Method(String name, Color color, int stroke) {
+        super(name, color, stroke);
+        className = "Method";
     }
 }

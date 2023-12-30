@@ -10,5 +10,11 @@ public abstract class ClassContent extends DiagramElement {
 
     public ClassContent(String name, ClassyNode parent, Color color, int stroke) {
         super(name, parent, color, stroke);
+        className = "ClassContent";
+    }
+
+    public ClassContent(String name, Color color, int stroke) {
+        super(name, color, stroke);
+        className = "ClassContent";
     }
 }

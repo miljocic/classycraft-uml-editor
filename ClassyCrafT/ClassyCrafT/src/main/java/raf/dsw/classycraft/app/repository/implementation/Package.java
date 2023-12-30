@@ -6,6 +6,7 @@ import raf.dsw.classycraft.app.observer.IPublisher;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 
+import java.util.List;
 
 
 @Getter
@@ -24,6 +25,14 @@ public class Package extends ClassyNodeComposite implements IPublisher{
         setName(name+counter);
         this.changed = true;
         counter++;
+        className = "Package";
+    }
+
+    public Package(String name, List<ClassyNode> children, String author, String directory) {
+        super(name, children);
+        this.author = author;
+        this.directory = directory;
+        className = "Package";
     }
 
     @Override

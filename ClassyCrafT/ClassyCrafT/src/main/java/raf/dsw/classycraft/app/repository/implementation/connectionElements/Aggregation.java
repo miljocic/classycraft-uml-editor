@@ -12,6 +12,11 @@ public class Aggregation extends Connection {
         super(name, parent, from, to);
     }
 
+    public Aggregation(String name, Color color, int stroke, Interclass from, Interclass to) {
+        super(name, color, stroke, from, to);
+        className = "Aggregation";
+    }
+
     @Override
     public boolean intersectsRectangle(Rectangle rect) {
 

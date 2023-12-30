@@ -9,5 +9,11 @@ public class Attribute extends ClassContent {
 
     public Attribute(String name, ClassyNode parent, Color color, int stroke) {
         super(name, parent, color, stroke);
+        className = "Attribute";
+    }
+
+    public Attribute(String name, Color color, int stroke) {
+        super(name, color, stroke);
+        className = "Attribute";
     }
 }

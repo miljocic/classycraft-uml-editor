@@ -10,6 +10,12 @@ public class Generalization extends Connection {
 
     public Generalization(String name, ClassyNode parent, Interclass from, Interclass to) {
         super(name, parent, from, to);
+        className = "Generalization";
+    }
+
+    public Generalization(String name, Color color, int stroke, Interclass from, Interclass to) {
+        super(name, color, stroke, from, to);
+        className = "Generalization";
     }
 
     @Override

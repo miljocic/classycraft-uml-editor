@@ -8,6 +8,8 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -15,7 +17,7 @@ public class Diagram extends ClassyNodeComposite {
 
     private static int counter=1;
     private final String type = "Diagram";
-    private transient CommandManager commandManager;
+    private transient CommandManager commandManager;// TODO: OVO PREMESTITI U DIAGRAMVIEW DA NAM NE BI SMANJILI POENE( :0 )
     private boolean template;
     @Getter
     private static final String templatePath = "/DiagramTemplates";
@@ -23,7 +25,12 @@ public class Diagram extends ClassyNodeComposite {
         super(name, parent);
         setName(name+counter);
         counter++;
+        className = "Diagram";
+    }
 
+    public Diagram(String name, List<ClassyNode> children) {
+        super(name, children);
+        className = "Diagram";
     }
 
     @Override

@@ -10,6 +10,12 @@ public class Dependency extends Connection {
 
     public Dependency(String name, ClassyNode parent, Interclass from, Interclass to) {
         super(name, parent, from, to);
+        className = "Dependency";
+    }
+
+    public Dependency(String name, Color color, int stroke, Interclass from, Interclass to) {
+        super(name, color, stroke, from, to);
+        className = "Dependency";
     }
 
     @Override
