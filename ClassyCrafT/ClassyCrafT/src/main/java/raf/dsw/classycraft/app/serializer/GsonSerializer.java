@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import raf.dsw.classycraft.app.core.Serializer;
 import raf.dsw.classycraft.app.gui.swing.controller.GsonColor;
+import raf.dsw.classycraft.app.gui.swing.controller.GsonNode;
+import raf.dsw.classycraft.app.gui.swing.controller.GsonNodeArray;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
@@ -16,6 +18,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class GsonSerializer implements Serializer {
@@ -26,6 +33,8 @@ public class GsonSerializer implements Serializer {
     public GsonSerializer() {
         builder.serializeNulls();
         builder.registerTypeAdapter(Color.class, new GsonColor());
+        builder.registerTypeAdapter(ClassyNode.class, new GsonNode());
+        builder.registerTypeAdapter(ArrayList.class, new GsonNodeArray());
         builder.setPrettyPrinting();
         gson = builder.create();
     }
@@ -69,11 +78,18 @@ public class GsonSerializer implements Serializer {
 
     @Override
     public void saveTemplate(Diagram diagram) {
-        System.out.println(getClass().getResource(Diagram.getTemplatePath()));
-        try (FileWriter writer = new FileWriter(Objects.requireNonNull(getClass().getResource(Diagram.getTemplatePath())).getPath()+ System.getProperty("file.separator") + diagram.getName() + ".txt")) {
-            gson.toJson(diagram, writer);
+        Path dirPath = Paths.get("./src/main/resources/DiagramSaves");
+        try {
+            Files.createDirectories(dirPath);
+            Path filePath = dirPath.resolve(diagram.getName() +".txt");
+            Files.createFile(filePath);
+            try (FileWriter writer = new FileWriter(filePath.toFile())){
+                gson.toJson(diagram, writer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
