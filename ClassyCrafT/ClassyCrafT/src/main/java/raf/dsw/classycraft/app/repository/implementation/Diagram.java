@@ -8,7 +8,9 @@ import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
+import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 
 @Getter
@@ -55,6 +57,23 @@ public class Diagram extends ClassyNodeComposite {
         }
         ((Package)getParent()).setChanged(true);
 
+    }
+    public void addAttributeOrMethod(DiagramElement element) {
+        if (element instanceof Interclass) {
+            Interclass interclass = (Interclass) element;
+            if (!this.getChildren().contains(interclass)) {
+                this.getChildren().add(interclass);
+                element.setParent(this);
+                notifySubscribers(element);
+            }
+            ((Package) getParent()).setChanged(true);
+        }
+    }
+    public void moveSelected(Map<Interclass, Point> points){
+        for(Interclass interclass : points.keySet()) {
+            Point newPoint = points.get(interclass);
+            interclass.setLocation(newPoint);
+        }
     }
 
     public CommandManager getCommandManager() {

@@ -1,9 +1,7 @@
 package raf.dsw.classycraft.app.state.model;
 
 import raf.dsw.classycraft.app.command.commands.DeleteElementCommand;
-import raf.dsw.classycraft.app.gui.swing.tree.ClassyTreeImplementation;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
-import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
@@ -18,73 +16,69 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 public class DeleteState implements State {
 
     private DeleteElementCommand deleteElementCommand;
 
-
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-
-        Point pos = new Point((int)
-                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
-                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
+        if (e.getButton() != MouseEvent.BUTTON1)
+            return;
 
         Diagram diagram = dV.getDiagram();
+        Point pos = new Point((int) ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
+                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor()));
 
-        List<DiagramElement> elementsToRemove = new ArrayList<>();
-        List<ElementPainter> selectedPainters = new ArrayList<>();
-        List<ElementPainter> paintersToRemove = new ArrayList<>(dV.getElementPainters());
+        ElementPainter deleted = null;
+        Iterator<ElementPainter> it = dV.getElementPainters().iterator();
+        List<DiagramElement> elementsToDelete = new ArrayList<>();
 
-        Iterator<ElementPainter> it = paintersToRemove.iterator();
         while (it.hasNext()) {
             ElementPainter elementPainter = it.next();
             if (elementPainter.elementAt(pos)) {
-                if (elementPainter.equals(dV.getSelected())) {
-                    dV.setSelected(null);
+                if (dV.getSelectedPainters().contains(elementPainter)) {
+                    dV.addSelected(null);
+                    break;
                 }
-                selectedPainters.add(elementPainter);
-                elementsToRemove.add(elementPainter.getElement());
-                diagram.deleteChild(elementPainter.getElement());
-                ClassyTreeImplementation treeImp = (ClassyTreeImplementation) MainFrame.getInstance().getTree();
-                treeImp.delete(treeImp.findNode(elementPainter.getElement()));
+
+                elementsToDelete.add(elementPainter.getElement());
+                deleted = elementPainter;
+                break;
             }
         }
 
+        if (deleted instanceof InterclassPainter) {
+            List<Connection> connectionList = new ArrayList<>();
+            it = dV.getElementPainters().iterator();
 
-        for (ElementPainter selectedPainter : selectedPainters) {
-            if (selectedPainter instanceof InterclassPainter) {
-                Iterator<ElementPainter> connectionIterator = dV.getElementPainters().iterator();
-                while (connectionIterator.hasNext()) {
-                    ElementPainter elementPainter = connectionIterator.next();
-                    if (elementPainter instanceof ConnectionPainter) {
-                        ConnectionPainter connectionPainter = (ConnectionPainter) elementPainter;
-                        Connection connection = (Connection) connectionPainter.getElement();
-                        if (connection.getTo().equals(selectedPainter.getElement()) || connection.getFrom().equals(selectedPainter.getElement())) {
-                            paintersToRemove.add(elementPainter);
-                            elementsToRemove.add(connection);
-                            //diagram.deleteChild(connection);
-                        }
+            while (it.hasNext()) {
+                ElementPainter elementPainter = it.next();
+                if (elementPainter instanceof ConnectionPainter) {
+                    ConnectionPainter connectionPainter = (ConnectionPainter) elementPainter;
+                    Connection connection = (Connection) connectionPainter.getElement();
+
+                    if (connection.getTo().equals(deleted.getElement()) || connection.getFrom().equals(deleted.getElement())) {
+                        connectionList.add(connection);
                     }
                 }
             }
+
+            for (Connection connection : connectionList) {
+                elementsToDelete.add(connection);
+            }
         }
 
-        deleteElementCommand = new DeleteElementCommand(diagram, elementsToRemove);
-        diagram.getCommandManager().addCommand(deleteElementCommand);
-        dV.getElementPainters().removeAll(paintersToRemove);
-        dV.repaint();
+        if (!elementsToDelete.isEmpty()) {
+            deleteElementCommand = new DeleteElementCommand(diagram, elementsToDelete);
+            diagram.getCommandManager().addCommand(deleteElementCommand);
+        }
     }
-
 
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
-
     }
 
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
-
     }
 }

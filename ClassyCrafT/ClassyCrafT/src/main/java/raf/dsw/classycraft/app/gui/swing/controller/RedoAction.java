@@ -24,6 +24,7 @@ public class RedoAction extends AbstractClassyAction{
         DiagramView dV = (DiagramView) MainFrame.getInstance().getWorkspace().getPackageView().
                 getMtp().getSelectedComponent();
         dV.getDiagram().getCommandManager().doCommand();
+        System.out.println("Redo activated");
 
     }
 }

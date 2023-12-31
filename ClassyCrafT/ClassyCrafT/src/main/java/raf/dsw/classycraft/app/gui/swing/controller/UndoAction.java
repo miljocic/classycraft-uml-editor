@@ -24,6 +24,7 @@ public class UndoAction extends AbstractClassyAction{
         DiagramView dV = (DiagramView) MainFrame.getInstance().getWorkspace().
                 getPackageView().getMtp().getSelectedComponent();
         dV.getDiagram().getCommandManager().undoCommand();
+        System.out.println("Undo activated");
 
     }
 }

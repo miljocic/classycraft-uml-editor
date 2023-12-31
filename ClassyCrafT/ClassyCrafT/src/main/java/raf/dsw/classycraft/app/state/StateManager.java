@@ -47,7 +47,7 @@ public class StateManager {
         current = this.moveState;
     }
     public void setMoveElementState() {
-        current = this.moveState;
+        current = this.moveElementState;
     }
 
     public void setConnectState(){current = this.connectState;}

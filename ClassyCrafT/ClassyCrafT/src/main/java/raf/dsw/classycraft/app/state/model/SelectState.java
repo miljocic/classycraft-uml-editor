@@ -18,28 +18,25 @@ public class SelectState implements State {
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-
-        pos = new Point((int)
-                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
-                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
-
+        pos = new Point(
+                (int) ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
+                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor())
+        );
 
         dV.setSelectedPainters(new ArrayList<>());
-
 
         for (ElementPainter elementPainter : dV.getElementPainters()) {
             if (elementPainter instanceof ConnectionPainter) {
                 continue; // Skip ConnectionPainter instances
             }
             if (elementPainter.elementAt(pos)) {
-                    selected = elementPainter;
+                selected = elementPainter;
             }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
-
         if (current != null) {
             dV.getPainters().remove(current);
             for (ElementPainter elementPainter : dV.getElementPainters()) {
@@ -56,9 +53,10 @@ public class SelectState implements State {
 
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
-        Point currentPos = new Point((int)
-                ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
-                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor()));
+        Point currentPos = new Point(
+                (int) ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
+                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor())
+        );
 
         if (dV.getCurrentState() instanceof MoveState) {
             dV.getCurrentState().mouseDragged(e, dV);
@@ -69,10 +67,8 @@ public class SelectState implements State {
             dV.getPainters().remove(current);
         }
 
-
         int width = (int) Math.abs(currentPos.getX() - pos.getX());
         int height = (int) Math.abs(currentPos.getY() - pos.getY());
-
 
         int x = (int) Math.min(currentPos.getX(), pos.getX());
         int y = (int) Math.min(currentPos.getY(), pos.getY());

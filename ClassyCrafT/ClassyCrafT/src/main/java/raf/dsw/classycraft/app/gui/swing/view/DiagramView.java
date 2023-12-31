@@ -179,6 +179,11 @@ public class DiagramView extends JPanel implements ISubscriber {
     public List<ElementPainter> getElementPainters() {
         return painters;
     }
+    public void addSelected(ElementPainter selected) {
+        if(!selectedPainters.contains(selected))
+            selectedPainters.add(selected);
+        repaint();
+    }
 
     public void setSelected(ElementPainter selected) {
         this.selected = selected;
