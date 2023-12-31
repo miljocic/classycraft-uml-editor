@@ -1,8 +1,12 @@
 package raf.dsw.classycraft.app.command.commands;
 
 import raf.dsw.classycraft.app.command.AbstractCommand;
+import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
+import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,30 +14,50 @@ import java.util.List;
 public class DeleteElementCommand extends AbstractCommand {
 
     private Diagram diagram;
-    private List<DiagramElement> elementsToRemove;
-    private List<DiagramElement> removedElements;
+    private List<DiagramElement> diagramElements;
 
-    public DeleteElementCommand(Diagram diagram, List<DiagramElement> elementsToRemove) {
-        this.elementsToRemove = elementsToRemove;
-        this.diagram = diagram;
-        this.removedElements = new ArrayList<>();
+    private List<Connection> connectionList;
+
+    public DeleteElementCommand(Diagram parent, List<DiagramElement> children, List<ConnectionPainter> connectionPainters) {
+        this.diagramElements = children;
+        this.diagram = parent;
+        this.connectionList = new ArrayList<>();
+
+        for (DiagramElement child : children) {
+            if (child instanceof Interclass) {
+                for (ClassyNode e : parent.getChildren()) {
+                    DiagramElement element = (DiagramElement) e;
+                    if (element instanceof Connection &&
+                            (((Connection) element).getFrom().equals(child) || ((Connection) element).getTo().equals(child))) {
+                        Connection connection = (Connection) element;
+                        connectionList.add(connection);
+                    }
+                }
+            }
+        }
+
+        for (ConnectionPainter connectionPainter : connectionPainters) {
+            this.connectionList.add(connectionPainter.getConnection());
+        }
     }
 
     @Override
     public void doCommand() {
-        removedElements.clear();
-
-        for (DiagramElement element : elementsToRemove) {
-            removedElements.add(element);
-            diagram.deleteChild(element);
+        for (Connection c : connectionList) {
+            diagram.deleteChild(c);
+        }
+        for (DiagramElement diagramElement : diagramElements) {
+            diagram.deleteChild(diagramElement);
         }
     }
 
     @Override
     public void undoCommand() {
-        for (DiagramElement element : removedElements) {
-            diagram.addChild(element);
+        for (DiagramElement diagramElement : diagramElements) {
+            diagram.addChild(diagramElement);
         }
-        removedElements.clear();
+        for (Connection c : connectionList) {
+            diagram.addChild(c);
+        }
     }
 }

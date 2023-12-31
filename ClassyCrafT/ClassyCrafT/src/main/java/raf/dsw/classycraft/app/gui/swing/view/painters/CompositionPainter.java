@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
 
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Aggregation;
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Composition;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
 import java.awt.*;
@@ -55,6 +57,8 @@ public class CompositionPainter extends ConnectionPainter {
 
         g.fillPolygon(xPoints, yPoints, 4);
     }
-
-
+    @Override
+    public Connection getConnection() {
+        return (Composition) getElement();
+    }
 }

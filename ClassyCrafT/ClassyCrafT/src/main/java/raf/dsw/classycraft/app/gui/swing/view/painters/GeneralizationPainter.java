@@ -1,6 +1,8 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Aggregation;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Generalization;
 
 import java.awt.*;
 import java.awt.geom.Path2D;
@@ -70,7 +72,8 @@ public class GeneralizationPainter extends ConnectionPainter {
         g.setColor(Color.BLACK);
         g.draw(arrowhead);
     }
-
-
-
+    @Override
+    public Connection getConnection() {
+        return (Generalization) getElement();
+    }
 }

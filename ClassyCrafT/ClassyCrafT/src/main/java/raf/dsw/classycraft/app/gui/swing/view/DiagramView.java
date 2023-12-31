@@ -75,7 +75,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         repaint();
     }
 
-
     @Override
     public void update(Object notification) {
 
@@ -179,17 +178,15 @@ public class DiagramView extends JPanel implements ISubscriber {
     public List<ElementPainter> getElementPainters() {
         return painters;
     }
-    public void addSelected(ElementPainter selected) {
-        if(!selectedPainters.contains(selected))
-            selectedPainters.add(selected);
-        repaint();
+
+    public List<ElementPainter> getSelectedElements() {
+        return selectedPainters;
     }
 
-    public void setSelected(ElementPainter selected) {
-        this.selected = selected;
+    public void clearSelected() {
+        selectedPainters.clear();
         repaint();
     }
-
     public void exportImage(File imageFile) {
         BufferedImage image = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();

@@ -1,5 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
+import raf.dsw.classycraft.app.repository.implementation.connectionElements.Aggregation;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
 import java.awt.*;
@@ -53,6 +54,11 @@ public class AggregationPainter extends ConnectionPainter {
         int[] yPoints = {y - size, y, y + size, y};
 
         g.drawPolygon(xPoints, yPoints, 4);
+    }
+
+    @Override
+    public Connection getConnection() {
+        return (Aggregation) getElement();
     }
 
 }
