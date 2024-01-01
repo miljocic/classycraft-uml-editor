@@ -7,9 +7,7 @@ import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 public interface ClassyRepository {
 
     ProjectExplorer getProjectExplorer();
-
     void addChild(ClassyNodeComposite parent, ClassyNode child);
 
-    void removeChild(ClassyNodeComposite parent, ClassyNode child);
 
 }

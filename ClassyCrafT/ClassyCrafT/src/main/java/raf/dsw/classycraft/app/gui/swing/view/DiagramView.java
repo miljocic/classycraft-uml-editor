@@ -78,9 +78,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     @Override
     public void update(Object notification) {
 
-        System.out.println("Received update: " + notification.toString());
-        System.out.println("Notification type: " + notification.getClass());
-
         if (notification instanceof Diagram) {
             setName(((Diagram) notification).getName());
             ((MyTabbedPane) this.getParent()).setTitleAt(((MyTabbedPane) this.getParent()).indexOfComponent(this), this.getName());
@@ -91,8 +88,6 @@ public class DiagramView extends JPanel implements ISubscriber {
                 else painters.remove(contains);
             } else if (notification instanceof Connection) {
                 Connection connection = (Connection) notification;
-
-
                 if (contains == null) {
                     ConnectionPainter connectionPainter = createConnectionPainter(connection);
                     painters.add(connectionPainter);
@@ -100,7 +95,6 @@ public class DiagramView extends JPanel implements ISubscriber {
                     painters.remove(contains);
                 }
             }
-
             repaint();
         }
     }

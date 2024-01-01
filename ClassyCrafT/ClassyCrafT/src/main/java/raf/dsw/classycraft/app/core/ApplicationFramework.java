@@ -19,18 +19,12 @@ public class ApplicationFramework {
     private MessageGenerator messageGenerator;
     private ConsoleLogger consoleLogger;
     private FileLogger fileLogger;
-
     private static ApplicationFramework instance;
     private Serializer serializer;
-
-    //buduca polja za model celog projekta
-
     private ApplicationFramework(){
 
     }
-
     public void run(){this.gui.start();}
-
     public void initialize(Gui gui, ClassyRepository classyRepository,
                            MessageGenerator messageGenerator,
                            Serializer serializer, Logger logger){
@@ -44,12 +38,10 @@ public class ApplicationFramework {
         this.messageGenerator.addSubscriber(fileLogger);
         this.messageGenerator.addSubscriber(MainFrame.getInstance());
     }
-
     public static ApplicationFramework getInstance(){
         if(instance==null){
             instance = new ApplicationFramework();
         }
         return instance;
     }
-
 }

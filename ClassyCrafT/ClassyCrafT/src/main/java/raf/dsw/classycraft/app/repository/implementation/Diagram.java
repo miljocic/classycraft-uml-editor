@@ -19,7 +19,7 @@ public class Diagram extends ClassyNodeComposite {
 
     private static int counter=1;
     private final String type = "Diagram";
-    private transient CommandManager commandManager;// TODO: OVO PREMESTITI U DIAGRAMVIEW DA NAM NE BI SMANJILI POENE( :0 )
+    private transient CommandManager commandManager;
     private boolean template;
     @Getter
     private static final String templatePath = "/DiagramTemplates";
@@ -58,21 +58,10 @@ public class Diagram extends ClassyNodeComposite {
         ((Package)getParent()).setChanged(true);
 
     }
-    public void addAttributeOrMethod(DiagramElement element) {
-        if (element instanceof Interclass) {
-            Interclass interclass = (Interclass) element;
-            if (!this.getChildren().contains(interclass)) {
-                this.getChildren().add(interclass);
-                element.setParent(this);
-                notifySubscribers(element);
-            }
-            ((Package) getParent()).setChanged(true);
-        }
-    }
     public void moveSelected(Map<Interclass, Point> points){
         for(Interclass interclass : points.keySet()) {
-            Point newPoint = points.get(interclass);
-            interclass.setLocation(newPoint);
+            interclass.setXCoordinate(points.get(interclass).getX());
+            interclass.setYCoordinate(points.get(interclass).getY());
         }
     }
 

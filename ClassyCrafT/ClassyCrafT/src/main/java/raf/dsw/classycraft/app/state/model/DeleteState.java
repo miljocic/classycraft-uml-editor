@@ -22,9 +22,6 @@ public class DeleteState implements State {
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
-        if (e.getButton() != MouseEvent.BUTTON1)
-            return;
-
         Point pos = new Point(
                 (int) ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
                 (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor())

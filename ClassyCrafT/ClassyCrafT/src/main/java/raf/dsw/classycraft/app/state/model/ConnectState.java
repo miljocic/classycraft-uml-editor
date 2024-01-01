@@ -14,6 +14,7 @@ import raf.dsw.classycraft.app.state.State;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.geom.GeneralPath;
 
 public class ConnectState implements State {
 
@@ -24,6 +25,7 @@ public class ConnectState implements State {
     private InterclassPainter from;
     private InterclassPainter to;
     private AddElementCommand addElementCommand;
+
 
 
     @Override
@@ -37,6 +39,7 @@ public class ConnectState implements State {
         for (ElementPainter elementPainter : dV.getElementPainters()) {
             if (elementPainter.elementAt(pos)) {
                 if (elementPainter instanceof InterclassPainter) {
+                    elementPainter.getElement().notifySubscribers(elementPainter);
                     from = (InterclassPainter) elementPainter;
                     return;
                 }
@@ -44,7 +47,6 @@ public class ConnectState implements State {
                 return;
             }
         }
-
     }
 
     @Override
@@ -127,10 +129,9 @@ public class ConnectState implements State {
                     System.out.println("Dodat");
                     addElementCommand = new AddElementCommand(diagram, element);
                     diagram.getCommandManager().addCommand(addElementCommand);
-                    //CommandManager radi
-                    //dV.getDiagram().addChild(element);
                     dV.repaint();
                     dV.update(element);
+                    element.notifySubscribers(dV);
                 }
 
 
@@ -138,13 +139,7 @@ public class ConnectState implements State {
 
         }
     }
-
-
-
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
-
     }
-
-
 }

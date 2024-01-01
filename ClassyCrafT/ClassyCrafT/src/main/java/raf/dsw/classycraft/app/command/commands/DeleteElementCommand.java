@@ -12,12 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteElementCommand extends AbstractCommand {
-
     private Diagram diagram;
     private List<DiagramElement> diagramElements;
-
     private List<Connection> connectionList;
-
     public DeleteElementCommand(Diagram parent, List<DiagramElement> children, List<ConnectionPainter> connectionPainters) {
         this.diagramElements = children;
         this.diagram = parent;
@@ -35,7 +32,6 @@ public class DeleteElementCommand extends AbstractCommand {
                 }
             }
         }
-
         for (ConnectionPainter connectionPainter : connectionPainters) {
             this.connectionList.add(connectionPainter.getConnection());
         }

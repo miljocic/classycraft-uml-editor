@@ -21,52 +21,54 @@ public class MoveElementState implements State {
 	public void mousePressed(MouseEvent e, DiagramView dV) {
 		map.clear();
 		startPoint = e.getPoint();
-		for (ElementPainter ep : dV.getSelectedPainters()) {
-			if (ep.getElement() instanceof Interclass) {
-				Interclass interclass = (Interclass) ep.getElement();
-				Point location = interclass.getLocation();
-				map.put(interclass, new Point(location));
+		for(ElementPainter elementPainter : dV.getSelectedElements()) {
+			if (elementPainter.getElement() instanceof Interclass) {
+				Interclass interclass = (Interclass) elementPainter.getElement();
+				Point point = new Point((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate());
+				map.put(interclass, point);
 			}
 		}
-		moveSelectedCommand = new MoveSelectedCommand(dV.getDiagram(), map);
-		dV.getDiagram().getCommandManager().addCommand(moveSelectedCommand);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e, DiagramView dV) {
-		for (ElementPainter elementPainter : dV.getSelectedPainters()) {
-			for (ElementPainter ep : dV.getElementPainters()) {
-				if (ep instanceof InterclassPainter && elementPainter instanceof InterclassPainter
-						&& !dV.getSelectedPainters().contains(ep) &&
-						elementPainter.getShape() != null && ep.getShape() != null &&
-						elementPainter.getShape().intersects(ep.getShape().getBounds())) {
-					moveSelectedCommand.undoCommand();
-					dV.getSelectedPainters().clear();
+		for (ElementPainter elementPainter : dV.getSelectedElements()) {
+			for(ElementPainter ep : dV.getElementPainters()) {
+				if(ep instanceof InterclassPainter && elementPainter instanceof InterclassPainter
+						&& !dV.getSelectedElements().contains(ep)
+						&& elementPainter.getShape().intersects(ep.getShape().getBounds())) {
+					for(Interclass interclass : map.keySet()) {
+						interclass.setXCoordinate(map.get(interclass).getX());
+						interclass.setYCoordinate(map.get(interclass).getY());
+					}
+					dV.getSelectedElements().clear();
 					dV.repaint();
 					return;
 				}
 			}
 		}
-		dV.getSelectedPainters().clear();
+		moveSelectedCommand = new MoveSelectedCommand(dV.getDiagram(), map);
+		dV.getDiagram().getCommandManager().addCommand(moveSelectedCommand);
+		dV.getSelectedElements().clear();
 		dV.repaint();
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e, DiagramView dV) {
 		HashMap<Interclass, Point> help = new HashMap<>();
-
 		Point current = e.getPoint();
-		for (ElementPainter elementPainter : dV.getSelectedPainters()) {
-			if (elementPainter.getElement() != null && elementPainter.getElement() instanceof Interclass) {
+		for (ElementPainter elementPainter : dV.getSelectedElements()) {
+			if (elementPainter.getElement() instanceof Interclass) {
 				Interclass interclass = (Interclass) elementPainter.getElement();
-				help.put(interclass, new Point((int)
-						(map.get(interclass).getX() + (current.getX() - startPoint.getX()) / dV.getScalingFactor()),
-						(int) (map.get(interclass).getY() + (current.getY() - startPoint.getY()) / dV.getScalingFactor())));
+				help.put(interclass, new Point((int) (map.get(interclass).getX() +
+						(current.getX() - startPoint.getX())
+								/dV.getScalingFactor()), (int) (map.get(interclass).getY() +
+						(current.getY() - startPoint.getY())/dV.getScalingFactor())));
 			}
 		}
-		for (Interclass i : help.keySet()) {
-			moveSelectedCommand.setCurrentPoint(help);
-			moveSelectedCommand.doCommand();
+		for (Interclass interclass : help.keySet()) {
+			interclass.setXCoordinate(help.get(interclass).getX());
+			interclass.setYCoordinate(help.get(interclass).getY());
 		}
 		dV.repaint();
 	}

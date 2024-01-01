@@ -75,4 +75,24 @@ public abstract class Interclass extends DiagramElement {
         notifySubscribers(this);
 
     }
+    public double getXCoordinate() {
+        return (int) location.getX();
+    }
+
+    public double getYCoordinate() {
+        return (int) location.getY();
+    }
+
+    public void setXCoordinate(double xCoordinate) {
+        Point newLocation = new Point((int) xCoordinate, (int) location.getY());
+        setLocation(newLocation);
+        notifySubscribers(this);
+    }
+
+    public void setYCoordinate(double yCoordinate) {
+        Point newLocation = new Point((int) location.getX(), (int) yCoordinate);
+        setLocation(newLocation);
+        notifySubscribers(this);
+    }
+
 }

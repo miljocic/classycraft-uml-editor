@@ -7,11 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommandManager {
-
     private List<AbstractCommand> commands = new ArrayList<>();
-
     private int pointer = 0;
-
     public void addCommand(AbstractCommand command){
         while(pointer < commands.size()){
             commands.remove(pointer);
@@ -20,7 +17,6 @@ public class CommandManager {
         doCommand();
 
     }
-
     public void doCommand(){
         if(pointer < commands.size()){
             commands.get(pointer++).doCommand();
@@ -31,7 +27,6 @@ public class CommandManager {
 
         }
     }
-
     public void undoCommand(){
         if(pointer > 0){
             ApplicationFramework.getInstance().getGui().enableRedo();

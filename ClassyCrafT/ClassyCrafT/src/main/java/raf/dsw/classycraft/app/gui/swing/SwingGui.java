@@ -7,12 +7,9 @@ import raf.dsw.classycraft.app.gui.swing.view.MessageOptionPane;
 import raf.dsw.classycraft.app.logg.messages.Message;
 
 public class SwingGui implements Gui {
-
     private MainFrame mainFrame;
     private CommandManager commandManager;
-
     public SwingGui(){}
-
     @Override
     public void start() {
         MainFrame mainFrame = MainFrame.getInstance();
@@ -23,36 +20,26 @@ public class SwingGui implements Gui {
 
         mainFrame.setVisible(true);
     }
-
     @Override
     public void enableUndo() {
         MainFrame.getInstance().getActionManager().getUndoAction().setEnabled(true);
 
     }
-
     @Override
     public void disableUndo() {
         MainFrame.getInstance().getActionManager().getUndoAction().setEnabled(false);
 
     }
-
     @Override
     public void enableRedo() {
         MainFrame.getInstance().getActionManager().getRedoAction().setEnabled(true);
 
     }
-
     @Override
     public void disableRedo() {
         MainFrame.getInstance().getActionManager().getRedoAction().setEnabled(false);
 
     }
-
-    @Override
-    public CommandManager getCommandManager() {
-        return null;
-    }
-
     @Override
     public void update(Object notification) {
         if(notification instanceof Message) {
