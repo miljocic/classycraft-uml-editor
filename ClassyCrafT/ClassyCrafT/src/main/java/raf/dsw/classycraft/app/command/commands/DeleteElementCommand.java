@@ -1,6 +1,7 @@
 package raf.dsw.classycraft.app.command.commands;
 
 import raf.dsw.classycraft.app.command.AbstractCommand;
+import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
@@ -13,11 +14,13 @@ import java.util.List;
 
 public class DeleteElementCommand extends AbstractCommand {
     private Diagram diagram;
+    private DiagramView diagramView;
     private List<DiagramElement> diagramElements;
     private List<Connection> connectionList;
-    public DeleteElementCommand(Diagram parent, List<DiagramElement> children, List<ConnectionPainter> connectionPainters) {
+    public DeleteElementCommand(Diagram parent, DiagramView diagramView, List<DiagramElement> children, List<ConnectionPainter> connectionPainters) {
         this.diagramElements = children;
         this.diagram = parent;
+        this.diagramView = diagramView;
         this.connectionList = new ArrayList<>();
 
         for (DiagramElement child : children) {
@@ -45,6 +48,7 @@ public class DeleteElementCommand extends AbstractCommand {
         for (DiagramElement diagramElement : diagramElements) {
             diagram.deleteChild(diagramElement);
         }
+        notifyDiagramView();
     }
 
     @Override
@@ -54,6 +58,12 @@ public class DeleteElementCommand extends AbstractCommand {
         }
         for (Connection c : connectionList) {
             diagram.addChild(c);
+        }
+        notifyDiagramView();
+    }
+    private void notifyDiagramView() {
+        if (diagramView != null) {
+            diagramView.repaint();
         }
     }
 }

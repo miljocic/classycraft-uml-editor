@@ -74,10 +74,10 @@ public class DeleteState implements State {
         }
 
         if (clicked != null && clicked instanceof SelectPainter) {
-            deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), elementsToDelete, connectionsToDelete);
+            deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
             dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
         } else {
-            deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), elementsToDelete, connectionsToDelete);
+            deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
             dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
         }
     }

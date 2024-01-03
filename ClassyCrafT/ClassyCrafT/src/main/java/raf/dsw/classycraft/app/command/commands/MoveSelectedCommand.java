@@ -29,13 +29,13 @@ public class MoveSelectedCommand extends AbstractCommand {
     @Override
     public void doCommand() {
         diagram.moveSelected(endPoints);
-        notifyDiagramView();  // Notify DiagramView to repaint
+        notifyDiagramView();
     }
 
     @Override
     public void undoCommand() {
         diagram.moveSelected(startPoints);
-        notifyDiagramView();  // Notify DiagramView to repaint
+        notifyDiagramView();
     }
 
     private void notifyDiagramView() {
