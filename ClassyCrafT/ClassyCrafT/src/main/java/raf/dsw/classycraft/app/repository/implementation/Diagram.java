@@ -12,20 +12,20 @@ import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
-
 @Getter
 @Setter
 public class Diagram extends ClassyNodeComposite {
 
-    private static int counter=1;
+    private static int counter = 1;
     private final String type = "Diagram";
     private transient CommandManager commandManager;
     private boolean template;
     @Getter
     private static final String templatePath = "/DiagramTemplates";
+
     public Diagram(String name, ClassyNode parent) {
         super(name, parent);
-        setName(name+counter);
+        setName(name + counter);
         counter++;
         className = "Diagram";
     }
@@ -37,36 +37,35 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-        if(child instanceof Interclass){
+        if (child instanceof Interclass) {
             Interclass interclass = (Interclass) child;
-            if(!this.getChildren().contains(interclass)) {
+            if (!this.getChildren().contains(interclass)) {
                 this.getChildren().add(interclass);
                 child.setParent(this);
                 notifySubscribers(child);
             }
-            ((Package)getParent()).setChanged(true);
+            ((Package) getParent()).setChanged(true);
         }
     }
 
     @Override
     public void deleteChild(ClassyNode child) {
-        if(child instanceof DiagramElement) {
+        if (child instanceof DiagramElement) {
             DiagramElement diagramElement = (DiagramElement) child;
             this.getChildren().remove(diagramElement);
             notifySubscribers(child);
         }
-        ((Package)getParent()).setChanged(true);
-
+        ((Package) getParent()).setChanged(true);
     }
-    public void moveSelected(Map<Interclass, Point> points){
-        for(Interclass interclass : points.keySet()) {
-            interclass.setXCoordinate(points.get(interclass).getX());
-            interclass.setYCoordinate(points.get(interclass).getY());
+
+    public void moveSelected(Map<Interclass, Point> points) {
+        for (Interclass interclass : points.keySet()) {
+            interclass.setLocation(points.get(interclass));
         }
     }
 
     public CommandManager getCommandManager() {
-        if(commandManager == null) commandManager = new CommandManager();
+        if (commandManager == null) commandManager = new CommandManager();
         return commandManager;
     }
 

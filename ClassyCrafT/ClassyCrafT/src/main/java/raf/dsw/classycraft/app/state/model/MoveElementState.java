@@ -21,10 +21,11 @@ public class MoveElementState implements State {
 	public void mousePressed(MouseEvent e, DiagramView dV) {
 		map.clear();
 		startPoint = e.getPoint();
-		for(ElementPainter elementPainter : dV.getSelectedElements()) {
+		for (ElementPainter elementPainter : dV.getSelectedElements()) {
 			if (elementPainter.getElement() instanceof Interclass) {
 				Interclass interclass = (Interclass) elementPainter.getElement();
-				Point point = new Point((int) interclass.getXCoordinate(), (int) interclass.getYCoordinate());
+				Point point = new Point((int) interclass.getLocation().getX(),
+						(int) interclass.getLocation().getY());
 				map.put(interclass, point);
 			}
 		}
@@ -33,13 +34,12 @@ public class MoveElementState implements State {
 	@Override
 	public void mouseReleased(MouseEvent e, DiagramView dV) {
 		for (ElementPainter elementPainter : dV.getSelectedElements()) {
-			for(ElementPainter ep : dV.getElementPainters()) {
-				if(ep instanceof InterclassPainter && elementPainter instanceof InterclassPainter
+			for (ElementPainter ep : dV.getElementPainters()) {
+				if (ep instanceof InterclassPainter && elementPainter instanceof InterclassPainter
 						&& !dV.getSelectedElements().contains(ep)
 						&& elementPainter.getShape().intersects(ep.getShape().getBounds())) {
-					for(Interclass interclass : map.keySet()) {
-						interclass.setXCoordinate(map.get(interclass).getX());
-						interclass.setYCoordinate(map.get(interclass).getY());
+					for (Interclass interclass : map.keySet()) {
+						interclass.setLocation(map.get(interclass));
 					}
 					dV.getSelectedElements().clear();
 					dV.repaint();
@@ -47,7 +47,7 @@ public class MoveElementState implements State {
 				}
 			}
 		}
-		moveSelectedCommand = new MoveSelectedCommand(dV.getDiagram(), map);
+		moveSelectedCommand = new MoveSelectedCommand(dV.getDiagram(), dV, map);  // Pass DiagramView reference
 		dV.getDiagram().getCommandManager().addCommand(moveSelectedCommand);
 		dV.getSelectedElements().clear();
 		dV.repaint();
@@ -61,16 +61,14 @@ public class MoveElementState implements State {
 			if (elementPainter.getElement() instanceof Interclass) {
 				Interclass interclass = (Interclass) elementPainter.getElement();
 				help.put(interclass, new Point((int) (map.get(interclass).getX() +
-						(current.getX() - startPoint.getX())
-								/dV.getScalingFactor()), (int) (map.get(interclass).getY() +
-						(current.getY() - startPoint.getY())/dV.getScalingFactor())));
+						(current.getX() - startPoint.getX()) / dV.getScalingFactor()),
+						(int) (map.get(interclass).getY() +
+								(current.getY() - startPoint.getY()) / dV.getScalingFactor())));
 			}
 		}
 		for (Interclass interclass : help.keySet()) {
-			interclass.setXCoordinate(help.get(interclass).getX());
-			interclass.setYCoordinate(help.get(interclass).getY());
+			interclass.setLocation(help.get(interclass));
 		}
 		dV.repaint();
 	}
-
 }

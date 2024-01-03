@@ -88,10 +88,8 @@ public class AddState implements State {
 
             if (element != null && !checkOverlap(element, dV.getElementPainters())) {
                 System.out.println("Dodat");
-                addElementCommand = new AddElementCommand(diagram, element);
+                addElementCommand = new AddElementCommand(diagram, dV, element);
                 diagram.getCommandManager().addCommand(addElementCommand);
-                //ne treba vise direktno, command manager ce resiti
-                //dV.getDiagram().addChild(element);
                 ClassyTreeItem parent = MainFrame.getInstance().getTree().findNode(dV.getDiagram());
                 ClassyTreeItem classyTreeItem = new ClassyTreeItem(element);
                 parent.add(classyTreeItem);
@@ -118,7 +116,7 @@ public class AddState implements State {
                 Connection connection = (Connection) element;
                 Rectangle newBounds = new Rectangle((int) newElement.getLocation().getX(), (int) newElement.getLocation().getY(), 200, 250);
                 if (connection.intersectsRectangle(newBounds)) {
-                    System.out.println("Usao u check dal se preseca"); //Ne valja check ovde
+                    System.out.println("Usao u check dal se preseca");
                     ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ELEMENT_FOUND_AT_POINT);
                     return true;
                 }
@@ -126,8 +124,6 @@ public class AddState implements State {
         }
         return false;
     }
-
-
 
     private String getVisibility() {
         String[] options = {"public", "private", "protected"};
@@ -163,5 +159,4 @@ public class AddState implements State {
     public void mouseDragged(MouseEvent e, DiagramView dV) {
 
     }
-
 }
