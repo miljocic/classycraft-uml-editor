@@ -3,7 +3,7 @@ package raf.dsw.classycraft.app.gui.swing.view;
 import javax.swing.*;
 
 public class MyToolBar extends JToolBar {
-    public MyToolBar(){
+    public MyToolBar() {
         super(HORIZONTAL);
         setFloatable(false);
 

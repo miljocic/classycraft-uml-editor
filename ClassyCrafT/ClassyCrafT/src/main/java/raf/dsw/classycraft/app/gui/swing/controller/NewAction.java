@@ -3,7 +3,6 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.core.ApplicationFramework;
-import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
@@ -15,7 +14,7 @@ import java.awt.event.KeyEvent;
 
 @Getter
 @Setter
-public class NewAction extends AbstractClassyAction{
+public class NewAction extends AbstractClassyAction {
 
     public NewAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
@@ -28,17 +27,15 @@ public class NewAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(MainFrame.getInstance().getTree().getSelectedNode() == null ) {
+        if (MainFrame.getInstance().getTree().getSelectedNode() == null) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_NOT_SELECTED);
-        }
-        else if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof ClassyNodeComposite) {
-            if(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Diagram) {
+        } else if (MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof ClassyNodeComposite) {
+            if (MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Diagram) {
                 ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.CANNOT_ADD_HERE);
                 return;
             }
             MainFrame.getInstance().getTree().addChild(MainFrame.getInstance().getTree().getSelectedNode());
-        }
-        else {
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_NOT_COMPOSITE);
         }
 

@@ -1,4 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
+
 import com.google.gson.*;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
@@ -14,14 +15,13 @@ import raf.dsw.classycraft.app.repository.implementation.interclassElements.Clas
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface;
+
 import java.awt.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public class GsonNode implements JsonDeserializer<ClassyNode>{
+public class GsonNode implements JsonDeserializer<ClassyNode> {
     @Override
     public ClassyNode deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -36,7 +36,7 @@ public class GsonNode implements JsonDeserializer<ClassyNode>{
         } else if (Objects.equals(className, "Diagram")) {
             return new Diagram(jsonObject.get("name").getAsString(), arrayDeSe.deserialize(jsonObject.get("children"), null, jsonDeserializationContext));
         } else if (Objects.equals(className, "Class")) {
-           return getKlasa(jsonObject, jsonDeserializationContext);
+            return getKlasa(jsonObject, jsonDeserializationContext);
         } else if (Objects.equals(className, "Enum")) {
             return getEnum(jsonObject, jsonDeserializationContext);
         } else if (Objects.equals(className, "Interface")) {
@@ -46,7 +46,7 @@ public class GsonNode implements JsonDeserializer<ClassyNode>{
         } else if (Objects.equals(className, "Dependency")) {
             return getDependency(jsonObject, jsonDeserializationContext);
         } else if (Objects.equals(className, "Generalization")) {
-           return getGeneralization(jsonObject, jsonDeserializationContext);
+            return getGeneralization(jsonObject, jsonDeserializationContext);
         } else if (Objects.equals(className, "Composition")) {
             return getComposition(jsonObject, jsonDeserializationContext);
         } else if (Objects.equals(className, "Method")) {
@@ -91,7 +91,7 @@ public class GsonNode implements JsonDeserializer<ClassyNode>{
                 jsonDeserializationContext.deserialize(jsonObject.get("to"), Interclass.class));
     }
 
-    public static Class getKlasa(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext){
+    public static Class getKlasa(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
         return new Class(jsonObject.get("name").getAsString(),
                 jsonDeserializationContext.deserialize(jsonObject.get("color"), Color.class),
                 jsonObject.get("stroke").getAsInt(),
@@ -101,7 +101,7 @@ public class GsonNode implements JsonDeserializer<ClassyNode>{
                 jsonObject.get("visibility").getAsString());
     }
 
-    public static Enum getEnum(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext){
+    public static Enum getEnum(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
         return new Enum(jsonObject.get("name").getAsString(),
                 jsonDeserializationContext.deserialize(jsonObject.get("color"), Color.class),
                 jsonObject.get("stroke").getAsInt(),
@@ -111,7 +111,7 @@ public class GsonNode implements JsonDeserializer<ClassyNode>{
                 jsonObject.get("visibility").getAsString());
     }
 
-    public static Interface getInterfejs(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext){
+    public static Interface getInterfejs(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
         return new Interface(jsonObject.get("name").getAsString(),
                 jsonDeserializationContext.deserialize(jsonObject.get("color"), Color.class),
                 jsonObject.get("stroke").getAsInt(),

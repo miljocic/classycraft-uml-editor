@@ -10,7 +10,6 @@ import raf.dsw.classycraft.app.gui.swing.worskspace.WorkSpaceImplementation;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.logg.messages.Message;
 import raf.dsw.classycraft.app.observer.ISubscriber;
-import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +33,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private WorkSpaceImplementation workspace;
 
 
-    private void initialize(){
+    private void initialize() {
 
         actionManager = new ActionManager();
         tree = new ClassyTreeImplementation();
@@ -42,7 +41,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         setIconImage(new ImageIcon(getClass().getResource("/images/applogo.png")).getImage());
         initializeGui();
     }
-    private void initializeGui(){
+
+    private void initializeGui() {
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -69,23 +69,23 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         workspace = new WorkSpaceImplementation();
 
-        JScrollPane scroll=new JScrollPane(projectExplorer);
-        scroll.setMinimumSize(new Dimension(200,150));
+        JScrollPane scroll = new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200, 150));
 
-        splitPane =new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
-        getContentPane().add(splitPane,BorderLayout.CENTER);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, desktop);
+        getContentPane().add(splitPane, BorderLayout.CENTER);
         splitPane.setDividerLocation(250);
         splitPane.setOneTouchExpandable(true);
 
 
     }
-    private MainFrame(){
+
+    private MainFrame() {
 
     }
-    public static MainFrame getInstance()
-    {
-        if(instance == null)
-        {
+
+    public static MainFrame getInstance() {
+        if (instance == null) {
             instance = new MainFrame();
             instance.initialize();
         }
@@ -99,11 +99,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         String[] dugme = {"U redu"};
         if (((Message) notification).getErrorType().equals(ErrorType.ERROR))
             update = JOptionPane.ERROR_MESSAGE;
-        else if(((Message) notification).getErrorType().equals(ErrorType.NODE_NOT_SELECTED))
+        else if (((Message) notification).getErrorType().equals(ErrorType.NODE_NOT_SELECTED))
             update = JOptionPane.INFORMATION_MESSAGE;
         else
             update = JOptionPane.WARNING_MESSAGE;
-        this.add(new JOptionPane(JOptionPane.showOptionDialog(this, ((Message)notification).getText(), "Greska", JOptionPane.YES_NO_CANCEL_OPTION, update, null, dugme, dugme[0])), BorderLayout.CENTER);
+        this.add(new JOptionPane(JOptionPane.showOptionDialog(this, ((Message) notification).getText(), "Greska", JOptionPane.YES_NO_CANCEL_OPTION, update, null, dugme, dugme[0])), BorderLayout.CENTER);
     }
 
 }

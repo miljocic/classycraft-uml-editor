@@ -19,7 +19,7 @@ public class GsonColor implements JsonSerializer<Color>, JsonDeserializer<Color>
     @Override
     public Color deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonObject jobject = jsonElement.getAsJsonObject();
-        Color color = new Color(jobject.get("red").getAsInt(), jobject.get("green").getAsInt(),jobject.get("blue").getAsInt());
+        Color color = new Color(jobject.get("red").getAsInt(), jobject.get("green").getAsInt(), jobject.get("blue").getAsInt());
         return color;
     }
 }

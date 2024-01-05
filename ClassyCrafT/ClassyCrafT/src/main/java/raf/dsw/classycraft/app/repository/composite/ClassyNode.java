@@ -30,7 +30,7 @@ public abstract class ClassyNode implements IPublisher {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof ClassyNode){
+        if (obj instanceof ClassyNode) {
             ClassyNode Obj = (ClassyNode) obj;
             return this.getName().equals(Obj.getName());
         }
@@ -43,21 +43,21 @@ public abstract class ClassyNode implements IPublisher {
     }
 
     @Override
-    public void addSubscriber(ISubscriber sub){
-        if(subs == null)
+    public void addSubscriber(ISubscriber sub) {
+        if (subs == null)
             this.subs = new ArrayList<>();
         subs.add(sub);
     }
 
     @Override
-    public void removeSubscriber(ISubscriber sub){
+    public void removeSubscriber(ISubscriber sub) {
         subs.remove(sub);
     }
 
     @Override
-    public void notifySubscribers(Object notification){
-        if(subs == null) return;
-        for(ISubscriber sub : subs){
+    public void notifySubscribers(Object notification) {
+        if (subs == null) return;
+        for (ISubscriber sub : subs) {
             sub.update(notification);
         }
     }

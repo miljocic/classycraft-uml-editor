@@ -5,10 +5,9 @@ import lombok.Setter;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 
 
-
 @Getter
 @Setter
-public class WorkSpaceImplementation implements Workspace{
+public class WorkSpaceImplementation implements Workspace {
 
     PackageView packageView;
 

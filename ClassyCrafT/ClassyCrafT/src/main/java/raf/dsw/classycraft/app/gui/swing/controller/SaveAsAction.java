@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-public class SaveAsAction extends AbstractClassyAction{
+public class SaveAsAction extends AbstractClassyAction {
 
     public SaveAsAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));

@@ -1,10 +1,9 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
+
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
-
 import java.awt.*;
-
 
 
 public abstract class ConnectionPainter extends ElementPainter {
@@ -23,11 +22,10 @@ public abstract class ConnectionPainter extends ElementPainter {
 
     @Override
     public boolean elementAt(Point pos) {
-        if(shape !=null)
-        {
-            return true ;
+        if (shape != null) {
+            return true;
         }
-      return false;
+        return false;
     }
 
     @Override

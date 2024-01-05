@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
-import raf.dsw.classycraft.app.repository.implementation.connectionElements.Aggregation;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Generalization;
 
@@ -43,7 +42,7 @@ public class GeneralizationPainter extends ConnectionPainter {
                 }
             }
         }
-        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int)  endPoint.getX(), (int) endPoint.getY());
+        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int) endPoint.getX(), (int) endPoint.getY());
         drawTriangle(g, beginningPoint, endPoint);
     }
 
@@ -72,6 +71,7 @@ public class GeneralizationPainter extends ConnectionPainter {
         g.setColor(Color.BLACK);
         g.draw(arrowhead);
     }
+
     @Override
     public Connection getConnection() {
         return (Generalization) getElement();

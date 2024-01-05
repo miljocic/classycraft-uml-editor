@@ -1,8 +1,8 @@
 package raf.dsw.classycraft.app.state;
 
 import lombok.Getter;
-
 import raf.dsw.classycraft.app.state.model.*;
+
 @Getter
 
 public class StateManager {
@@ -35,10 +35,15 @@ public class StateManager {
         current = this.addState;
         System.out.println("Current State: AddState");
     }
-    public void setEditState(){current = this.editState;}
+
+    public void setEditState() {
+        current = this.editState;
+    }
+
     public void setDeleteState() {
         current = this.deleteState;
     }
+
     public void setSelectState() {
         current = this.selectState;
     }
@@ -46,10 +51,13 @@ public class StateManager {
     public void setMoveState() {
         current = this.moveState;
     }
+
     public void setMoveElementState() {
         current = this.moveElementState;
     }
 
-    public void setConnectState(){current = this.connectState;}
+    public void setConnectState() {
+        current = this.connectState;
+    }
 
 }

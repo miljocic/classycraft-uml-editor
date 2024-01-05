@@ -1,13 +1,15 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
+
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class SaveTemplateAction extends AbstractClassyAction{
+public class SaveTemplateAction extends AbstractClassyAction {
 
     public SaveTemplateAction() {
 

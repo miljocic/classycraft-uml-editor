@@ -11,7 +11,6 @@ public class MoveState implements State {
     private Point start;
 
 
-
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
         start = e.getPoint();
@@ -27,8 +26,8 @@ public class MoveState implements State {
 
 
         Point current = e.getPoint();
-        double xTranslate = (current.getX() - start.getX())/dV.getScalingFactor();
-        double yTranslate = (current.getY() - start.getY())/dV.getScalingFactor();
+        double xTranslate = (current.getX() - start.getX()) / dV.getScalingFactor();
+        double yTranslate = (current.getY() - start.getY()) / dV.getScalingFactor();
         start = current;
         dV.translate(xTranslate, yTranslate);
 

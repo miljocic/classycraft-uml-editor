@@ -30,7 +30,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class ClassyTreeImplementation implements ClassyTree{
+public class ClassyTreeImplementation implements ClassyTree {
 
     private ClassyTreeView treeView;
     private DefaultTreeModel treeModel;
@@ -58,30 +58,26 @@ public class ClassyTreeImplementation implements ClassyTree{
     public void addChild(ClassyTreeItem parent) {
 
 
-        if (parent.getClassyNode() instanceof ProjectExplorer ){
+        if (parent.getClassyNode() instanceof ProjectExplorer) {
             ClassyNode child = this.createChild(parent.getClassyNode(), NodeType.PROJECT);
             parent.add(new ClassyTreeItem(child));
             ((ProjectExplorer) parent.getClassyNode()).addChild(child);
             treeView.expandPath(treeView.getSelectionPath());
             SwingUtilities.updateComponentTreeUI(treeView);
-        }
-
-        else if (parent.getClassyNode() instanceof Project ){
+        } else if (parent.getClassyNode() instanceof Project) {
             ClassyNode child = this.createChild(parent.getClassyNode(), NodeType.PACKAGE);
             parent.add(new ClassyTreeItem(child));
             ((Project) parent.getClassyNode()).addChild(child);
             treeView.expandPath(treeView.getSelectionPath());
             SwingUtilities.updateComponentTreeUI(treeView);
-        }
-
-        else if(parent.getClassyNode() instanceof Package ){
+        } else if (parent.getClassyNode() instanceof Package) {
             choosePackageChild(parent);
         }
 
-        
+
     }
 
-    private  void choosePackageChild(ClassyTreeItem parent) {
+    private void choosePackageChild(ClassyTreeItem parent) {
 
         JFrame packageOption = new JFrame("Izaberite paket ili dijagram");
         packageOption.setLocationRelativeTo(null);
@@ -107,7 +103,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         diagramBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 ClassyNode child = createChild(parent.getClassyNode(), NodeType.DIAGRAM);
                 System.out.println("Created child: " + child.getClass().getName());
 
@@ -123,7 +119,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         packageBtn.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 ClassyNode child = createChild(parent.getClassyNode(), NodeType.PACKAGE);
                 System.out.println("Created child: " + child.getClass().getName());
 
@@ -160,8 +156,7 @@ public class ClassyTreeImplementation implements ClassyTree{
             //Komponenta se ne moze obrisati jer mu je roditelj nepostojeci
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_CANNOT_BE_DELETED);
 
-        }
-        else{
+        } else {
 
             ClassyNode nodeToDelete = child.getClassyNode();
             //brisanje komponente
@@ -175,9 +170,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
 
 
-
     }
-
 
 
     @Override
@@ -217,8 +210,8 @@ public class ClassyTreeImplementation implements ClassyTree{
         projectExplorer.addChild(project);
 
         ClassyTreeItem item = new ClassyTreeItem(project);
-        for(ClassyNode child : project.getChildren()) {
-            if(child instanceof Diagram) {
+        for (ClassyNode child : project.getChildren()) {
+            if (child instanceof Diagram) {
                 item.add(new ClassyTreeItem(child));
             }
         }

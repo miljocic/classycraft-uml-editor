@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 public class MyMenyBar extends JMenuBar {
 
-    public MyMenyBar(){
+    public MyMenyBar() {
 
         //Kreiranje File opcije
         JMenu fileMenu = new JMenu("File");
@@ -26,7 +26,6 @@ public class MyMenyBar extends JMenuBar {
         editMenu.setMnemonic(KeyEvent.VK_E);
 
 
-
         //Kreiranje AboutUs akcije
         AboutUsAction aboutUsAction = new AboutUsAction();
         JMenuItem aboutUsMenuItem = new JMenuItem(aboutUsAction);
@@ -34,7 +33,6 @@ public class MyMenyBar extends JMenuBar {
         JMenuItem newProjectMenuItem = new JMenuItem(newAction);
         DeleteAction deleteAction = new DeleteAction();
         AuthorAction authorAction = new AuthorAction();
-
 
 
         //Dodavanje AboutUs akcije na Edit menu

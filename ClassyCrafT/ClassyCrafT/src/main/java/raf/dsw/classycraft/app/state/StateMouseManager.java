@@ -47,6 +47,7 @@ public class StateMouseManager implements MouseListener, MouseMotionListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
     @Override
     public void mouseMoved(MouseEvent e) {
 

@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 
 public class ExportAsImageAction extends AbstractClassyAction {
 
@@ -22,17 +23,21 @@ public class ExportAsImageAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView){
+        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
             PackageView packageView = (PackageView) MainFrame.getInstance().getSplitPane().getRightComponent();
-            if(packageView.getMtp().getSelectedComponent() instanceof DiagramView) {
+            if (packageView.getMtp().getSelectedComponent() instanceof DiagramView) {
                 DiagramView diagramView = (DiagramView) packageView.getMtp().getSelectedComponent();
                 JFileChooser jfc = new JFileChooser();
-                if(jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+                if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
                     File imageFile = jfc.getSelectedFile();
-                    diagramView.exportImage(imageFile);
+                    try {
+                        diagramView.exportImage(imageFile);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
-        }else {
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_TO_EXPORT_1);
         }
     }

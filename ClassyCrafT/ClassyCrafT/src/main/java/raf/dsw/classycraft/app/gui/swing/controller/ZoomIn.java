@@ -1,6 +1,5 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
-import raf.dsw.classycraft.app.gui.swing.controller.AbstractClassyAction;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
@@ -19,7 +18,7 @@ public class ZoomIn extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
+        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
             PackageView packageView = (PackageView) MainFrame.getInstance().getSplitPane().getRightComponent();
             DiagramView dV = (DiagramView) packageView.getMtp().getSelectedComponent();
             dV.zoomIn();

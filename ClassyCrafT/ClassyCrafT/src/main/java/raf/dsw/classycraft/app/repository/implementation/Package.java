@@ -12,17 +12,17 @@ import java.util.List;
 @Getter
 @Setter
 
-public class Package extends ClassyNodeComposite implements IPublisher{
+public class Package extends ClassyNodeComposite implements IPublisher {
 
     private static int counter = 1;
-    private String author;
+    private String author = "";
     private transient Project parentProject;
-    private String directory;
+    private String directory = "";
     private boolean changed;
 
     public Package(String name, ClassyNode parent) {
         super(name, parent);
-        setName(name+counter);
+        setName(name + counter);
         this.changed = true;
         counter++;
         className = "Package";
@@ -37,19 +37,18 @@ public class Package extends ClassyNodeComposite implements IPublisher{
 
     @Override
     public void addChild(ClassyNode child) {
-        if ( child instanceof Package ){
+        if (child instanceof Package) {
             Package paket = (Package) child;
             paket.setParentProject(this.parentProject);
-            if (!this.getChildren().contains(paket)){
+            if (!this.getChildren().contains(paket)) {
                 this.getChildren().add(paket);
                 child.setParent(this);
                 notifySubscribers(this);
             }
             changed = true;
-        }
-        else if ( child instanceof Diagram ){
+        } else if (child instanceof Diagram) {
             Diagram diagram = (Diagram) child;
-            if (!this.getChildren().contains(diagram)){
+            if (!this.getChildren().contains(diagram)) {
                 this.getChildren().add(diagram);
                 notifySubscribers(this);
             }
@@ -79,7 +78,7 @@ public class Package extends ClassyNodeComposite implements IPublisher{
     }
 
 
-    public String getDirectory(){
+    public String getDirectory() {
         return parentProject.getDirectory();
     }
 }

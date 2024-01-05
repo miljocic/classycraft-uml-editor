@@ -15,7 +15,7 @@ public abstract class DiagramElement extends ClassyNode {
 
     public DiagramElement(String name, ClassyNode parent, Color color, int stroke) {
         super(name, parent);
-        this.color =color;
+        this.color = color;
         this.stroke = stroke;
         className = "DiagramElement";
     }

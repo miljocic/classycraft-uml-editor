@@ -22,7 +22,7 @@ public class AddStateAction extends AbstractClassyAction {
     public void actionPerformed(ActionEvent e) {
         if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
             MainFrame.getInstance().getWorkspace().getPackageView().startAddState();
-        }else {
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_VIEW_SELECTED);
         }
         //za merge test

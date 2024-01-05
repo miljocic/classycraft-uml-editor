@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,23 +42,24 @@ public class DiagramView extends JPanel implements ISubscriber {
     private double yTranslate;
 
     private State currentState;
+
     public DiagramView(Diagram diagram) {
         this.diagram = diagram;
         this.diagram.addSubscriber(this);
         this.painters = new ArrayList<>();
 
-        for(ClassyNode child : diagram.getChildren()) {
-            if(child instanceof Interclass) {
+        for (ClassyNode child : diagram.getChildren()) {
+            if (child instanceof Interclass) {
                 painters.add(new InterclassPainter((Interclass) child));
                 child.addSubscriber(this);
-            } else if(child instanceof Connection){
-                if(child instanceof Aggregation){
+            } else if (child instanceof Connection) {
+                if (child instanceof Aggregation) {
                     painters.add(new AggregationPainter((Aggregation) child));
-                }else if(child instanceof Composition){
+                } else if (child instanceof Composition) {
                     painters.add(new CompositionPainter((Composition) child));
-                }else if(child instanceof Dependency){
+                } else if (child instanceof Dependency) {
                     painters.add(new DependencyPainter((Dependency) child));
-                }else if(child instanceof Generalization){
+                } else if (child instanceof Generalization) {
                     painters.add(new GeneralizationPainter((Generalization) child));
                 }
             }
@@ -181,14 +183,19 @@ public class DiagramView extends JPanel implements ISubscriber {
         selectedPainters.clear();
         repaint();
     }
-    public void exportImage(File imageFile) {
-        BufferedImage image = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_INT_RGB);
+
+    public void exportImage(File imageFile) throws IOException {
+        File file = new File(imageFile.getPath() + ".png");
+        file.createNewFile();
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
-        paint(g2);
-        try{
-            ImageIO.write(image,"jpg", imageFile);
+        printAll(g2);
+        g2.dispose();
+        try {
+            ImageIO.write(image, "png", file);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

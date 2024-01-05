@@ -1,14 +1,12 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.net.URL;
 
 public class ExitAction extends AbstractClassyAction {
 
-    public ExitAction(){
+    public ExitAction() {
 
 
         //bitno
@@ -17,6 +15,7 @@ public class ExitAction extends AbstractClassyAction {
         putValue(NAME, "Exit");
         putValue(SHORT_DESCRIPTION, "Exit");
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         System.exit(0);

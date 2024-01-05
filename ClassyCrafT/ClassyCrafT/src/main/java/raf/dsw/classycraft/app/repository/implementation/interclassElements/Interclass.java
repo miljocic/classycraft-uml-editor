@@ -12,7 +12,6 @@ import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Me
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -25,7 +24,7 @@ public abstract class Interclass extends DiagramElement {
     private final String type = "Interclass";
 
     public Interclass(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
-        super(name, parent,Color.BLACK, 2);
+        super(name, parent, Color.BLACK, 2);
         this.name = name;
         this.location = location;
         this.visibility = visibility;
@@ -48,7 +47,6 @@ public abstract class Interclass extends DiagramElement {
     }
 
 
-
     public List<String> getAttributes() {
         List<String> attributes = new ArrayList<>();
         for (ClassContent content : classContents) {
@@ -68,10 +66,11 @@ public abstract class Interclass extends DiagramElement {
         }
         return methods;
     }
+
     //za MoveState
-    public void setLocation(Point location){
+    public void setLocation(Point location) {
         this.location = location;
-        ((Package)getParent().getParent()).setChanged(true);
+        ((Package) getParent().getParent()).setChanged(true);
         notifySubscribers(this);
 
     }

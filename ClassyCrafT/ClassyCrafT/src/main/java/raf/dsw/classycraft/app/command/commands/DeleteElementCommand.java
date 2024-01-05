@@ -17,6 +17,7 @@ public class DeleteElementCommand extends AbstractCommand {
     private DiagramView diagramView;
     private List<DiagramElement> diagramElements;
     private List<Connection> connectionList;
+
     public DeleteElementCommand(Diagram parent, DiagramView diagramView, List<DiagramElement> children, List<ConnectionPainter> connectionPainters) {
         this.diagramElements = children;
         this.diagram = parent;
@@ -61,6 +62,7 @@ public class DeleteElementCommand extends AbstractCommand {
         }
         notifyDiagramView();
     }
+
     private void notifyDiagramView() {
         if (diagramView != null) {
             diagramView.repaint();

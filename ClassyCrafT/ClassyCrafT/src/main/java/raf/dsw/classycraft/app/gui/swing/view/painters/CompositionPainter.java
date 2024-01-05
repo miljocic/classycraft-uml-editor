@@ -1,7 +1,6 @@
 package raf.dsw.classycraft.app.gui.swing.view.painters;
 
 
-import raf.dsw.classycraft.app.repository.implementation.connectionElements.Aggregation;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Composition;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 public class CompositionPainter extends ConnectionPainter {
 
     private Connection d;
+
     public CompositionPainter(Connection connection) {
         super(connection);
         this.d = connection;
@@ -44,9 +44,10 @@ public class CompositionPainter extends ConnectionPainter {
             }
         }
         drawDiamond(g, (int) beginningPoint.getX(), (int) beginningPoint.getY());
-        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int)  endPoint.getX(), (int) endPoint.getY());
+        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int) endPoint.getX(), (int) endPoint.getY());
 
     }
+
     private void drawDiamond(Graphics2D g, int x, int y) {
         int size = 10; // Adjust the size as needed
 
@@ -57,6 +58,7 @@ public class CompositionPainter extends ConnectionPainter {
 
         g.fillPolygon(xPoints, yPoints, 4);
     }
+
     @Override
     public Connection getConnection() {
         return (Composition) getElement();

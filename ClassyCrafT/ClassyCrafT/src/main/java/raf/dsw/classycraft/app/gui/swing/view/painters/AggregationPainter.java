@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class AggregationPainter extends ConnectionPainter {
 
     private Connection d;
+
     public AggregationPainter(Connection connection) {
         super(connection);
         this.d = connection;
@@ -42,7 +43,7 @@ public class AggregationPainter extends ConnectionPainter {
             }
         }
         drawDiamond(g, (int) beginningPoint.getX(), (int) beginningPoint.getY());
-        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int)  endPoint.getX(), (int) endPoint.getY());
+        g.drawLine((int) beginningPoint.getX(), (int) beginningPoint.getY(), (int) endPoint.getX(), (int) endPoint.getY());
     }
 
     private void drawDiamond(Graphics2D g, int x, int y) {

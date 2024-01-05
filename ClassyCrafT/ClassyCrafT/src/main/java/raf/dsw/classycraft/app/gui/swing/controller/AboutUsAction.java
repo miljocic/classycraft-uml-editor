@@ -2,9 +2,8 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.net.URL;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 
 public class AboutUsAction extends AbstractClassyAction {
@@ -66,9 +65,6 @@ public class AboutUsAction extends AbstractClassyAction {
         frame.setLocation(x, y);
 
         frame.setVisible(true);
-
-
-
 
 
     }

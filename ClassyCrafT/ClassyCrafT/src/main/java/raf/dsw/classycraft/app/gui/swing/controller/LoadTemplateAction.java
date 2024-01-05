@@ -1,9 +1,11 @@
 package raf.dsw.classycraft.app.gui.swing.controller;
+
 import raf.dsw.classycraft.app.core.ApplicationFramework;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -11,7 +13,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.Objects;
 
-public class LoadTemplateAction extends AbstractClassyAction{
+public class LoadTemplateAction extends AbstractClassyAction {
 
     public LoadTemplateAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));

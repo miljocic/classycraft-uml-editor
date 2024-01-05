@@ -2,7 +2,7 @@ package raf.dsw.classycraft.app.logg.loggers;
 
 import raf.dsw.classycraft.app.logg.messages.Message;
 
-public class ConsoleLogger implements Logger{
+public class ConsoleLogger implements Logger {
 
     public ConsoleLogger() {
     }
@@ -11,7 +11,7 @@ public class ConsoleLogger implements Logger{
     @Override
     public void log(Message message) {
         System.out.println("[" + message.getErrorType() + "]" + "[" + message.getTimestamp()
-        + "[" + message.getText() + "]");
+                + "[" + message.getText() + "]");
     }
 
     @Override

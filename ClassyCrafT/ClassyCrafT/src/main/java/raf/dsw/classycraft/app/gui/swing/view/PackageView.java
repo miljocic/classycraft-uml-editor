@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classycraft.app.observer.ISubscriber;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
-
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.state.StateManager;
-
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
@@ -50,15 +48,16 @@ public class PackageView extends JPanel implements ISubscriber {
     public void update(Object notification) {
         System.out.println("Received update: " + notification.toString());
         System.out.println("Notification type: " + notification.getClass());
-        if(notification instanceof Package) {
+        if (notification instanceof Package) {
             System.out.println("Paket");
             projectName.setText(paket.getName());
             author.setText(paket.getAuthor());
-        } else if(notification instanceof Diagram) {
+        } else if (notification instanceof Diagram) {
             System.out.println("Dijagram i Krece revalidate");
             revalidateTabbedPane((Diagram) notification);
         }
     }
+
     private void revalidateTabbedPane(Diagram updatedDiagram) {
 
         boolean diagramFound = false;
@@ -84,29 +83,32 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
 
-    public void startAddState(){
+    public void startAddState() {
         this.stateManager.setAddState();
     }
-    public void startEditState(){
+
+    public void startEditState() {
         this.stateManager.setEditState();
     }
 
-    public void startDeleteState(){
+    public void startDeleteState() {
         this.stateManager.setDeleteState();
     }
 
-    public void startMoveState(){
+    public void startMoveState() {
         this.stateManager.setMoveState();
     }
-    public void startMoveElementState(){
+
+    public void startMoveElementState() {
         this.stateManager.setMoveElementState();
     }
 
-    public void startSelectState(){
+    public void startSelectState() {
         this.stateManager.setSelectState();
     }
 
-    public void startConnectState(){ this.stateManager.setConnectState();
+    public void startConnectState() {
+        this.stateManager.setConnectState();
     }
 
     public void startMousePressed(MouseEvent e, DiagramView dV) {

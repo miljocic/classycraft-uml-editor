@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-public class OpenAction  extends AbstractClassyAction{
+public class OpenAction extends AbstractClassyAction {
 
     public OpenAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));

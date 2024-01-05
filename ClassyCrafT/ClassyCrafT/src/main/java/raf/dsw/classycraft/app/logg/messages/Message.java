@@ -2,6 +2,7 @@ package raf.dsw.classycraft.app.logg.messages;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,6 +20,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return text + "["+ errorType +"]";
+        return text + "[" + errorType + "]";
     }
 }

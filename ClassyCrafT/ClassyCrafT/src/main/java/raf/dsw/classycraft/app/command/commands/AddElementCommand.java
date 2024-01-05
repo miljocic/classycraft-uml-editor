@@ -9,11 +9,13 @@ public class AddElementCommand extends AbstractCommand {
     private Diagram diagram;
     private DiagramElement element;
     private DiagramView diagramView;
-    public AddElementCommand(Diagram diagram, DiagramView diagramView, DiagramElement element){
+
+    public AddElementCommand(Diagram diagram, DiagramView diagramView, DiagramElement element) {
         this.element = element;
         this.diagram = diagram;
         this.diagramView = diagramView;
     }
+
     @Override
     public void doCommand() {
         diagram.addChild(element);
@@ -25,6 +27,7 @@ public class AddElementCommand extends AbstractCommand {
         diagram.deleteChild(element);
         notifyDiagramView();
     }
+
     private void notifyDiagramView() {
         if (diagramView != null) {
             diagramView.repaint();

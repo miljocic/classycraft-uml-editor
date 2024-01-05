@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ExportCodeAction extends AbstractClassyAction{
+public class ExportCodeAction extends AbstractClassyAction {
 
     public ExportCodeAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));
@@ -20,9 +20,9 @@ public class ExportCodeAction extends AbstractClassyAction{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView){
+        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
 
-        }else {
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_TO_EXPORT_2);
         }
     }

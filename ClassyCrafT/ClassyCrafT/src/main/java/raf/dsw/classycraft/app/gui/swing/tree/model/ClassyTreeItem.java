@@ -11,7 +11,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 @Getter
 @Setter
-public class ClassyTreeItem  extends DefaultMutableTreeNode {
+public class ClassyTreeItem extends DefaultMutableTreeNode {
 
     private ClassyNode classyNode;
 
@@ -21,13 +21,13 @@ public class ClassyTreeItem  extends DefaultMutableTreeNode {
 
     @Override
     public String toString() {
-            return classyNode.getName();
+        return classyNode.getName();
     }
 
     public void setName(String name) {
-        if(!(this.getClassyNode() instanceof ProjectExplorer)){
+        if (!(this.getClassyNode() instanceof ProjectExplorer)) {
             this.classyNode.setName(name);
-        }else{
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NODE_CANNOT_BE_RENAMED);
         }
 

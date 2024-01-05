@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Class extends Interclass{
+public class Class extends Interclass {
 
 
     public Class(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {

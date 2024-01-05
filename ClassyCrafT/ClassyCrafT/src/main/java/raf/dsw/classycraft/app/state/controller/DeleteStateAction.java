@@ -20,9 +20,9 @@ public class DeleteStateAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView){
+        if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
             MainFrame.getInstance().getWorkspace().getPackageView().startDeleteState();
-        }else {
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_VIEW_SELECTED);
         }
 

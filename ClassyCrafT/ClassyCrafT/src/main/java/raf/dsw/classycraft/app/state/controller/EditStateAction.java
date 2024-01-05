@@ -22,7 +22,7 @@ public class EditStateAction extends AbstractClassyAction {
     public void actionPerformed(ActionEvent e) {
         if (MainFrame.getInstance().getSplitPane().getRightComponent() instanceof PackageView) {
             MainFrame.getInstance().getWorkspace().getPackageView().startEditState();
-        }else {
+        } else {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_DIAGRAM_VIEW_SELECTED);
         }
 

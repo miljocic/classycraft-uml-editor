@@ -2,18 +2,10 @@ package raf.dsw.classycraft.app.gui.swing.controller;
 
 import com.google.gson.*;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
-import raf.dsw.classycraft.app.repository.implementation.Diagram;
-import raf.dsw.classycraft.app.repository.implementation.Package;
-import raf.dsw.classycraft.app.repository.implementation.Project;
-import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Attribute;
-import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Method;
 
-import java.awt.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class GsonNodeArray implements JsonDeserializer<List<ClassyNode>> {
     @Override

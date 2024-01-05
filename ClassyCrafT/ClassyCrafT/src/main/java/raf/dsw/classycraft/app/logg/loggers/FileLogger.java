@@ -1,4 +1,5 @@
 package raf.dsw.classycraft.app.logg.loggers;
+
 import raf.dsw.classycraft.app.logg.messages.Message;
 
 import java.io.File;

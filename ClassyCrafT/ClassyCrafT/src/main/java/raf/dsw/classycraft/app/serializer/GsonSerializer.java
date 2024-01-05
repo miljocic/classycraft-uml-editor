@@ -22,8 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class GsonSerializer implements Serializer {
 
@@ -43,11 +41,11 @@ public class GsonSerializer implements Serializer {
     public Project loadProject(File file) {
         try (FileReader fileReader = new FileReader(file)) {
             Project project = gson.fromJson(fileReader, Project.class);
-            for(ClassyNode child : project.getChildren()) {
+            for (ClassyNode child : project.getChildren()) {
                 child.setParent(project);
                 ClassyNodeComposite childComposite = (ClassyNodeComposite) child;
-                for(ClassyNode grandchild : childComposite.getChildren()) {
-                    if(grandchild instanceof Connection) {
+                for (ClassyNode grandchild : childComposite.getChildren()) {
+                    if (grandchild instanceof Connection) {
                         Connection connection = (Connection) grandchild;
                         connection.setFrom((Interclass)
                                 childComposite.getChildByName(connection.getFrom().getName()));
@@ -61,7 +59,7 @@ public class GsonSerializer implements Serializer {
                 }
             }
             return project;
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -81,9 +79,9 @@ public class GsonSerializer implements Serializer {
         Path dirPath = Paths.get("./src/main/resources/DiagramSaves");
         try {
             Files.createDirectories(dirPath);
-            Path filePath = dirPath.resolve(diagram.getName() +".txt");
+            Path filePath = dirPath.resolve(diagram.getName() + ".txt");
             Files.createFile(filePath);
-            try (FileWriter writer = new FileWriter(filePath.toFile())){
+            try (FileWriter writer = new FileWriter(filePath.toFile())) {
                 gson.toJson(diagram, writer);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -97,11 +95,11 @@ public class GsonSerializer implements Serializer {
     public Diagram loadTemplate(File file) {
         try (FileReader fileReader = new FileReader(file)) {
             Diagram diagram = gson.fromJson(fileReader, Diagram.class);
-            for(ClassyNode child : diagram.getChildren()) {
-                if(child instanceof Connection) {
+            for (ClassyNode child : diagram.getChildren()) {
+                if (child instanceof Connection) {
                     Connection connection = (Connection) child;
-                    connection.setFrom((Interclass)diagram.getChildByName(connection.getFrom().getName()));
-                    connection.setTo((Interclass)diagram.getChildByName(connection.getTo().getName()));
+                    connection.setFrom((Interclass) diagram.getChildByName(connection.getFrom().getName()));
+                    connection.setTo((Interclass) diagram.getChildByName(connection.getTo().getName()));
                     System.out.println(connection.getFrom() + " " + connection.getTo());
                 } else {
                     System.out.println(diagram);

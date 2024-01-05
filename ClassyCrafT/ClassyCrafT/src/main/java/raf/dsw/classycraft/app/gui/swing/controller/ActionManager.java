@@ -45,7 +45,7 @@ public class ActionManager {
         initialiseActions();
     }
 
-    private void initialiseActions(){
+    private void initialiseActions() {
 
         exitAction = new ExitAction();
         newAction = new NewAction();

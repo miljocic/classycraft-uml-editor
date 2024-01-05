@@ -21,25 +21,31 @@ public class ApplicationFramework {
     private FileLogger fileLogger;
     private static ApplicationFramework instance;
     private Serializer serializer;
-    private ApplicationFramework(){
+
+    private ApplicationFramework() {
 
     }
-    public void run(){this.gui.start();}
+
+    public void run() {
+        this.gui.start();
+    }
+
     public void initialize(Gui gui, ClassyRepository classyRepository,
                            MessageGenerator messageGenerator,
-                           Serializer serializer, Logger logger){
+                           Serializer serializer, Logger logger) {
         this.gui = gui;
         this.classyRepository = classyRepository;
         this.messageGenerator = new MessageGeneratorImplementation();
-        this.consoleLogger =  new LoggerFactory().createConsoleLogger();
+        this.consoleLogger = new LoggerFactory().createConsoleLogger();
         this.fileLogger = new LoggerFactory().createFileLogger();
         this.serializer = serializer;
         this.messageGenerator.addSubscriber(consoleLogger);
         this.messageGenerator.addSubscriber(fileLogger);
         this.messageGenerator.addSubscriber(MainFrame.getInstance());
     }
-    public static ApplicationFramework getInstance(){
-        if(instance==null){
+
+    public static ApplicationFramework getInstance() {
+        if (instance == null) {
             instance = new ApplicationFramework();
         }
         return instance;

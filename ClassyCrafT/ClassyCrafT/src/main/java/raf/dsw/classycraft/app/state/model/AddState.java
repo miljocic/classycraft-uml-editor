@@ -32,8 +32,8 @@ public class AddState implements State {
 
         Diagram diagram = dV.getDiagram();
         Point pos = new Point((int)
-                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
-                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
+                ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
+                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor()));
 
 
         String[] options = {"Class", "Enum", "Interface"};
@@ -73,7 +73,7 @@ public class AddState implements State {
                     classCounter++;
                     break;
                 case "Enum":
-                    element = new Enum("NewEnum" + enumCounter,diagram, pos, getVisibility(),
+                    element = new Enum("NewEnum" + enumCounter, diagram, pos, getVisibility(),
                             new Dimension((int) (200 * dV.getScalingFactor()), (int) (250 * dV.getScalingFactor())));
                     enumCounter++;
                     break;

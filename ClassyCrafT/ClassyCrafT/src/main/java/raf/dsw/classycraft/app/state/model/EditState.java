@@ -6,8 +6,8 @@ import raf.dsw.classycraft.app.repository.implementation.classcontentElements.At
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.Method;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Class;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Enum;
-import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
+import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interface;
 import raf.dsw.classycraft.app.state.State;
 
 import javax.swing.*;
@@ -30,8 +30,8 @@ public class EditState implements State {
     private Interclass getClickedElement(MouseEvent e, DiagramView dV) {
 
         Point pos = new Point((int)
-                ((e.getPoint().getX()-dV.getXTranslate())/dV.getScalingFactor()),
-                (int) ((e.getPoint().getY()-dV.getYTranslate())/dV.getScalingFactor()));
+                ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
+                (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor()));
 
 
         for (ElementPainter elementPainter : dV.getElementPainters()) {
@@ -47,7 +47,7 @@ public class EditState implements State {
             editClass((Class) element);
         } else if (element instanceof Interface) {
             editInterface((Interface) element);
-        }else if (element instanceof Enum){
+        } else if (element instanceof Enum) {
             editEnum((Enum) element);
         }
     }
@@ -117,7 +117,7 @@ public class EditState implements State {
         String attributetypeShort = convertAttributeTypeToShortened(attributetype);
 
         if (attributeName != null && !attributeName.isEmpty()) {
-            Attribute attribute = new Attribute(visibilitySymbol+" "+attributeName+": "+attributetypeShort, element, Color.BLACK,2 );
+            Attribute attribute = new Attribute(visibilitySymbol + " " + attributeName + ": " + attributetypeShort, element, Color.BLACK, 2);
             element.addClassContent(attribute);
             dV.repaint();
         }
@@ -126,7 +126,7 @@ public class EditState implements State {
     private void editEnumElement(Interclass element) {
         String attributeName = JOptionPane.showInputDialog("Enter Enum element name:");
         if (attributeName != null && !attributeName.isEmpty()) {
-            Attribute attribute = new Attribute(attributeName, element, Color.BLACK,2 );
+            Attribute attribute = new Attribute(attributeName, element, Color.BLACK, 2);
             element.addClassContent(attribute);
             dV.repaint();
         }
@@ -140,7 +140,7 @@ public class EditState implements State {
         String methodTypeShort = convertAttributeTypeToShortened(methodType);
 
         if (methodName != null && !methodName.isEmpty()) {
-            Method method = new Method(visibilitySymbol+" "+methodName+"(): "+methodTypeShort, element, Color.BLACK, 2);
+            Method method = new Method(visibilitySymbol + " " + methodName + "(): " + methodTypeShort, element, Color.BLACK, 2);
             element.addClassContent(method);
             dV.repaint();
         }
@@ -153,12 +153,11 @@ public class EditState implements State {
         String methodTypeShort = convertAttributeTypeToShortened(methodType);
 
         if (methodName != null && !methodName.isEmpty()) {
-            Method method = new Method(methodName+": "+methodTypeShort, element, Color.BLACK, 2);
+            Method method = new Method(methodName + ": " + methodTypeShort, element, Color.BLACK, 2);
             element.addClassContent(method);
             dV.repaint();
         }
     }
-
 
 
     private String showVisibilityPopup() {

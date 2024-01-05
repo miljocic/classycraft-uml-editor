@@ -5,7 +5,6 @@ import raf.dsw.classycraft.app.gui.swing.tree.model.ClassyTreeItem;
 import raf.dsw.classycraft.app.gui.swing.view.MainFrame;
 import raf.dsw.classycraft.app.gui.swing.view.PackageView;
 import raf.dsw.classycraft.app.logg.messages.ErrorType;
-
 import raf.dsw.classycraft.app.repository.implementation.Package;
 import raf.dsw.classycraft.app.repository.implementation.ProjectExplorer;
 
@@ -13,7 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class DeleteAction extends AbstractClassyAction{
+public class DeleteAction extends AbstractClassyAction {
 
     public DeleteAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, ActionEvent.ALT_MASK));
