@@ -25,6 +25,7 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Objects;
 
@@ -203,25 +204,39 @@ public class ClassyTreeImplementation implements ClassyTree {
     }
 
     @Override
-    public void loadProject(Project project) {
+    public void loadProject(Project node) {
+        ClassyTreeItem loadedProject = new ClassyTreeItem(node);
+        ((ClassyTreeItem)(treeModel).getRoot()).add(loadedProject);
 
-        ProjectExplorer projectExplorer = (ProjectExplorer) ((ClassyTreeItem) treeModel.getRoot()).getClassyNode();
-        System.out.println(project.getChildren());
-        projectExplorer.addChild(project);
+        ClassyNodeComposite mapNode = (ClassyNodeComposite)((ClassyTreeItem)(treeModel).getRoot()).getClassyNode();
+        addChildren(node, mapNode);
 
-        ClassyTreeItem item = new ClassyTreeItem(project);
-        for (ClassyNode child : project.getChildren()) {
-            if (child instanceof Diagram) {
-                item.add(new ClassyTreeItem(child));
-            }
-        }
-
-        ((ClassyTreeItem) treeModel.getRoot()).add(new ClassyTreeItem(project));
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
-
     }
+    public void addChildren(ClassyNode item, ClassyNodeComposite parent){
+        if(item == null)
+            return;
 
+        parent.addChild(item);
+        ClassyTreeItem childItem = new ClassyTreeItem(item);
+        ClassyTreeItem parentItem = getItem(parent);
+        if(parentItem == null)
+            return;
+
+        parentItem.add(childItem);
+        ((ClassyNodeComposite)parentItem.getClassyNode()).addChild(item);
+        treeView.expandPath(new TreePath(parentItem.getPath()));
+        SwingUtilities.updateComponentTreeUI(treeView);
+
+        if(item instanceof ClassyNodeComposite){
+            ArrayList<ClassyNode> ctChildren = new ArrayList<>(((ClassyNodeComposite) item).getChildren());
+
+            for (ClassyNode child : ctChildren) {
+                addChildren(child, (ClassyNodeComposite) item);
+            }
+        }
+    }
     @Override
     public void loadTemplate(Diagram template) {
         Package aPackage = (Package) this.getSelectedNode().getClassyNode();
@@ -231,5 +246,22 @@ public class ClassyTreeImplementation implements ClassyTree {
         SwingUtilities.updateComponentTreeUI(treeView);
     }
 
+    public ClassyTreeItem getItem(ClassyNode parent) {
+        return recursion((ClassyTreeItem) treeModel.getRoot(), parent);
+    }
+
+    private ClassyTreeItem recursion(ClassyTreeItem item, ClassyNode parent){
+        if (item.getClassyNode().equals(parent))
+            return item;
+
+        Enumeration children = item.children();
+        while(children.hasMoreElements()){
+            ClassyTreeItem child = (ClassyTreeItem) children.nextElement();
+            ClassyTreeItem next = recursion(child, parent);
+            if (next != null)
+                return next;
+        }
+        return null;
+    }
 
 }

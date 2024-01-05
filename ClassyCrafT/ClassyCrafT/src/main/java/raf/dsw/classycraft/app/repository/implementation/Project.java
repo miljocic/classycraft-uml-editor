@@ -15,8 +15,8 @@ import java.util.List;
 public class Project extends ClassyNodeComposite {
 
     private static int counter = 1;
-    private String authorName;
-    private String directory;
+    private String authorName = "";
+    private String directory = "";
     private transient boolean changed;
 
     public Project(String name, ClassyNode parent) {

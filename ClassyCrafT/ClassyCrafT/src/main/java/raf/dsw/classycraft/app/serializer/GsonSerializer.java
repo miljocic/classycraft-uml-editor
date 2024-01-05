@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import raf.dsw.classycraft.app.core.Serializer;
 import raf.dsw.classycraft.app.gui.swing.controller.GsonColor;
+import raf.dsw.classycraft.app.gui.swing.controller.GsonContent;
 import raf.dsw.classycraft.app.gui.swing.controller.GsonNode;
 import raf.dsw.classycraft.app.gui.swing.controller.GsonNodeArray;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
-import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
@@ -33,6 +33,7 @@ public class GsonSerializer implements Serializer {
         builder.registerTypeAdapter(Color.class, new GsonColor());
         builder.registerTypeAdapter(ClassyNode.class, new GsonNode());
         builder.registerTypeAdapter(ArrayList.class, new GsonNodeArray());
+        builder.registerTypeAdapter(ArrayList.class, new GsonContent());
         builder.setPrettyPrinting();
         gson = builder.create();
     }
@@ -41,23 +42,23 @@ public class GsonSerializer implements Serializer {
     public Project loadProject(File file) {
         try (FileReader fileReader = new FileReader(file)) {
             Project project = gson.fromJson(fileReader, Project.class);
-            for (ClassyNode child : project.getChildren()) {
-                child.setParent(project);
-                ClassyNodeComposite childComposite = (ClassyNodeComposite) child;
-                for (ClassyNode grandchild : childComposite.getChildren()) {
-                    if (grandchild instanceof Connection) {
-                        Connection connection = (Connection) grandchild;
-                        connection.setFrom((Interclass)
-                                childComposite.getChildByName(connection.getFrom().getName()));
-                        connection.setTo((Interclass)
-                                childComposite.getChildByName(connection.getTo().getName()));
-                        System.out.println(connection.getFrom() + " " + connection.getTo());
-                    } else {
-                        System.out.println(grandchild);
-                    }
-                    grandchild.setParent(childComposite);
-                }
-            }
+//            for (ClassyNode child : project.getChildren()) { //Todo: ako proradi ClassContent
+//                child.setParent(project);
+//                ClassyNodeComposite childComposite = (ClassyNodeComposite) child;
+//                for (ClassyNode grandchild : childComposite.getChildren()) {
+//                    if (grandchild instanceof Connection) {
+//                        Connection connection = (Connection) grandchild;
+//                        connection.setFrom((Interclass)
+//                                childComposite.getChildByName(connection.getFrom().getName()));
+//                        connection.setTo((Interclass)
+//                                childComposite.getChildByName(connection.getTo().getName()));
+//                        System.out.println(connection.getFrom() + " " + connection.getTo());
+//                    } else {
+//                        System.out.println(grandchild);
+//                    }
+//                    grandchild.setParent(childComposite);
+//                }
+//            }
             return project;
         } catch (IOException e) {
             e.printStackTrace();

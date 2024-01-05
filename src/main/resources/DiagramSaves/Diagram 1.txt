@@ -1,0 +1,72 @@
+{
+  "type": "Diagram",
+  "template": true,
+  "children": [
+    {
+      "classContents": [
+        {
+          "color": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          },
+          "stroke": 2,
+          "className": "Method",
+          "name": "+ sabiranje(): int"
+        }
+      ],
+      "dimension": {
+        "width": 200,
+        "height": 250
+      },
+      "location": {
+        "x": 145,
+        "y": 71
+      },
+      "visibility": "public",
+      "type": "Interclass",
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0
+      },
+      "stroke": 2,
+      "className": "Class",
+      "name": "NewClass0"
+    },
+    {
+      "classContents": [
+        {
+          "color": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          },
+          "stroke": 2,
+          "className": "Attribute",
+          "name": "- promenljiva: String"
+        }
+      ],
+      "dimension": {
+        "width": 200,
+        "height": 250
+      },
+      "location": {
+        "x": 409,
+        "y": 33
+      },
+      "visibility": "protected",
+      "type": "Interclass",
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0
+      },
+      "stroke": 2,
+      "className": "Interface",
+      "name": "NewInterface0"
+    }
+  ],
+  "className": "Diagram",
+  "name": "Diagram 1"
+}

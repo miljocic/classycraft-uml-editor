@@ -43,6 +43,8 @@ public class Diagram extends ClassyNodeComposite {
                 child.setParent(this);
                 notifySubscribers(child);
             }
+            if(getParent() == null)
+                return;
             ((Package) getParent()).setChanged(true);
         }
     }

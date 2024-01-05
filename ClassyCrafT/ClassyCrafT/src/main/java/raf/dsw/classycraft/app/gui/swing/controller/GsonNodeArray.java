@@ -7,7 +7,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GsonNodeArray implements JsonDeserializer<List<ClassyNode>> {
+public class GsonNodeArray implements JsonDeserializer<List<ClassyNode>>{
+
     @Override
     public List<ClassyNode> deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         JsonArray json = jsonElement.getAsJsonArray();

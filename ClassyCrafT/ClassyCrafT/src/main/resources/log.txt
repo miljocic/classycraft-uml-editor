@@ -339,3 +339,8 @@
 [NODE_NOT_SELECTED] [null] - [Nije selektovana nijedna komponenta!]
 [ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
 [ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[NO_DIAGRAM_VIEW_SELECTED] [null] - [Diagram view nije selektovan!]
+[ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
+[ONLY_PROJECT_SERIALIZABLE] [null] - [Samo Project moze da se sacuva!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]
+[ELEMENT_FOUND_AT_POINT] [null] - [Element je pronadjen!]

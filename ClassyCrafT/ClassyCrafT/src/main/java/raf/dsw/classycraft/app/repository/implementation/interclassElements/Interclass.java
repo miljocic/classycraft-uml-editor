@@ -36,6 +36,8 @@ public abstract class Interclass extends DiagramElement {
     public Interclass(String name, Color color, int stroke, List<ClassContent> classContents, Dimension dimension, Point location, String visibility) {
         super(name, color, stroke);
         this.classContents = classContents;
+        if(classContents == null)
+            classContents = new ArrayList<>();
         this.dimension = dimension;
         this.location = location;
         this.visibility = visibility;
@@ -49,6 +51,8 @@ public abstract class Interclass extends DiagramElement {
 
     public List<String> getAttributes() {
         List<String> attributes = new ArrayList<>();
+        if(classContents == null) // todo: ne radi
+            classContents = new ArrayList<>();
         for (ClassContent content : classContents) {
             if (content instanceof Attribute) {
                 attributes.add(content.getName());
@@ -59,6 +63,8 @@ public abstract class Interclass extends DiagramElement {
 
     public List<String> getMethods() {
         List<String> methods = new ArrayList<>();
+        if(classContents == null)
+            classContents = new ArrayList<>();
         for (ClassContent content : classContents) {
             if (content instanceof Method) {
                 methods.add(content.getName());

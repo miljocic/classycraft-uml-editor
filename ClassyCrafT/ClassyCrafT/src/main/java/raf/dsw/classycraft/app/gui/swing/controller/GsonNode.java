@@ -120,4 +120,6 @@ public class GsonNode implements JsonDeserializer<ClassyNode> {
                 jsonDeserializationContext.deserialize(jsonObject.get("location"), Point.class),
                 jsonObject.get("visibility").getAsString());
     }
+
+
 }
