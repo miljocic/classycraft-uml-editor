@@ -36,19 +36,16 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-        if (child instanceof Interclass) {
-            Interclass interclass = (Interclass) child;
-            if (!this.getChildren().contains(interclass)) {
-                this.getChildren().add(interclass);
+        if (child instanceof DiagramElement) {
+            DiagramElement diagramElement = (DiagramElement) child;
+            if (!this.getChildren().contains(diagramElement)) {
+                this.getChildren().add(diagramElement);
                 child.setParent(this);
                 notifySubscribers(child);
             }
-            if(getParent() == null)
-                return;
             ((Package) getParent()).setChanged(true);
         }
     }
-
     @Override
     public void deleteChild(ClassyNode child) {
         if (child instanceof DiagramElement) {

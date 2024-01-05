@@ -25,7 +25,6 @@ public class AddState implements State {
     private int classCounter = 0;
     private int enumCounter = 0;
     private int interfaceCounter = 0;
-    private AddElementCommand addElementCommand;
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
@@ -88,7 +87,7 @@ public class AddState implements State {
 
             if (element != null && !checkOverlap(element, dV.getElementPainters())) {
                 System.out.println("Dodat");
-                addElementCommand = new AddElementCommand(diagram, dV, element);
+                AddElementCommand addElementCommand = new AddElementCommand(diagram, dV, element);
                 diagram.getCommandManager().addCommand(addElementCommand);
                 ClassyTreeItem parent = MainFrame.getInstance().getTree().findNode(dV.getDiagram());
                 ClassyTreeItem classyTreeItem = new ClassyTreeItem(element);

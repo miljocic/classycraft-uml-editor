@@ -1,6 +1,6 @@
 package raf.dsw.classycraft.app.state.model;
 
-import raf.dsw.classycraft.app.command.commands.AddConnectionCommand;
+import raf.dsw.classycraft.app.command.commands.AddElementCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.InterclassPainter;
@@ -21,7 +21,6 @@ public class ConnectState implements State {
     private int genCounter = 0;
     private InterclassPainter from;
     private InterclassPainter to;
-    private AddConnectionCommand addConnectionCommand;
 
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
@@ -116,11 +115,8 @@ public class ConnectState implements State {
                 }
 
                 if (element != null) {
-                    addConnectionCommand = new AddConnectionCommand(diagram, dV, element);
-                    diagram.getCommandManager().addCommand(addConnectionCommand);
-                    dV.repaint();
-                    dV.update(element);
-                    element.notifySubscribers(dV);
+                    AddElementCommand addElementCommand = new AddElementCommand(diagram, dV, element);
+                    diagram.getCommandManager().addCommand(addElementCommand);
                 }
             }
         }

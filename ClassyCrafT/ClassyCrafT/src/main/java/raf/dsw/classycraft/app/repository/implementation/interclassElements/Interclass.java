@@ -22,7 +22,6 @@ public abstract class Interclass extends DiagramElement {
     private Point location;
     private String visibility;
     private final String type = "Interclass";
-
     public Interclass(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
         super(name, parent, Color.BLACK, 2);
         this.name = name;
@@ -32,7 +31,6 @@ public abstract class Interclass extends DiagramElement {
         this.dimension = dimension;
         className = "Interclass";
     }
-
     public Interclass(String name, Color color, int stroke, List<ClassContent> classContents, Dimension dimension, Point location, String visibility) {
         super(name, color, stroke);
         this.classContents = classContents;
@@ -43,12 +41,9 @@ public abstract class Interclass extends DiagramElement {
         this.visibility = visibility;
         className = "Interclass";
     }
-
     public void addClassContent(ClassContent content) {
         classContents.add(content);
     }
-
-
     public List<String> getAttributes() {
         List<String> attributes = new ArrayList<>();
         if(classContents == null) // todo: ne radi
@@ -60,7 +55,6 @@ public abstract class Interclass extends DiagramElement {
         }
         return attributes;
     }
-
     public List<String> getMethods() {
         List<String> methods = new ArrayList<>();
         if(classContents == null)
@@ -72,13 +66,9 @@ public abstract class Interclass extends DiagramElement {
         }
         return methods;
     }
-
-    //za MoveState
     public void setLocation(Point location) {
         this.location = location;
         ((Package) getParent().getParent()).setChanged(true);
         notifySubscribers(this);
-
     }
-
 }

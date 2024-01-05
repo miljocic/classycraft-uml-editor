@@ -17,9 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DeleteState implements State {
-
-    private DeleteElementCommand deleteElementCommand;
-
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
         Point pos = new Point(
@@ -74,10 +71,10 @@ public class DeleteState implements State {
         }
 
         if (clicked != null && clicked instanceof SelectPainter) {
-            deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
+            DeleteElementCommand deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
             dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
         } else {
-            deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
+            DeleteElementCommand deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
             dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
         }
     }

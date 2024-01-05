@@ -10,13 +10,9 @@ import raf.dsw.classycraft.app.state.State;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-
 public class MoveElementState implements State {
-
     private Point startPoint;
     private HashMap<Interclass, Point> map = new HashMap<>();
-    private MoveSelectedCommand moveSelectedCommand;
-
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
         map.clear();
@@ -47,12 +43,11 @@ public class MoveElementState implements State {
                 }
             }
         }
-        moveSelectedCommand = new MoveSelectedCommand(dV.getDiagram(), dV, map);  // Pass DiagramView reference
+        MoveSelectedCommand moveSelectedCommand = new MoveSelectedCommand(dV.getDiagram(), dV, map);
         dV.getDiagram().getCommandManager().addCommand(moveSelectedCommand);
         dV.getSelectedElements().clear();
         dV.repaint();
     }
-
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
         HashMap<Interclass, Point> help = new HashMap<>();
