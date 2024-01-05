@@ -43,10 +43,12 @@ public class DeleteElementCommand extends AbstractCommand {
 
     @Override
     public void doCommand() {
-        for (Connection c : connectionList) {
-            diagram.deleteChild(c);
-        }
         for (DiagramElement diagramElement : diagramElements) {
+            if(diagramElement instanceof Interclass) {
+                for(Connection c : connectionList) {
+                    diagram.deleteChild(c);
+                }
+            }
             diagram.deleteChild(diagramElement);
         }
         notifyDiagramView();
@@ -55,10 +57,12 @@ public class DeleteElementCommand extends AbstractCommand {
     @Override
     public void undoCommand() {
         for (DiagramElement diagramElement : diagramElements) {
+            if(diagramElement instanceof Interclass) {
+                for(Connection c : connectionList) {
+                    diagram.addChild(c);
+                }
+            }
             diagram.addChild(diagramElement);
-        }
-        for (Connection c : connectionList) {
-            diagram.addChild(c);
         }
         notifyDiagramView();
     }

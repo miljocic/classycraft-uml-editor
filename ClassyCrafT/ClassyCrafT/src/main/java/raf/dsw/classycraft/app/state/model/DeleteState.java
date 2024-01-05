@@ -4,7 +4,6 @@ import raf.dsw.classycraft.app.command.commands.DeleteElementCommand;
 import raf.dsw.classycraft.app.gui.swing.view.DiagramView;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ConnectionPainter;
 import raf.dsw.classycraft.app.gui.swing.view.painters.ElementPainter;
-import raf.dsw.classycraft.app.gui.swing.view.painters.SelectPainter;
 import raf.dsw.classycraft.app.repository.implementation.DiagramElement;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
 import raf.dsw.classycraft.app.repository.implementation.interclassElements.Interclass;
@@ -13,7 +12,7 @@ import raf.dsw.classycraft.app.state.State;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 public class DeleteState implements State {
@@ -23,18 +22,14 @@ public class DeleteState implements State {
                 (int) ((e.getPoint().getX() - dV.getXTranslate()) / dV.getScalingFactor()),
                 (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor())
         );
-
-        ElementPainter clicked = null;
-        Iterator<ElementPainter> it = dV.getElementPainters().iterator();
         List<DiagramElement> elementsToDelete = new ArrayList<>();
         List<ConnectionPainter> connectionsToDelete = new ArrayList<>();
-
-        while (it.hasNext()) {
-            ElementPainter elementPainter = it.next();
+        for (ElementPainter elementPainter : dV.getElementPainters()) {
             if (elementPainter.elementAt(pos)) {
                 if (elementPainter instanceof ConnectionPainter) {
                     connectionsToDelete.add((ConnectionPainter) elementPainter);
                 } else {
+                    Interclass selectedInterclass = null;
                     if (dV.getSelectedPainters().contains(elementPainter)) {
                         for (ElementPainter selectedPainter : dV.getSelectedPainters()) {
                             if (selectedPainter instanceof ConnectionPainter) {
@@ -46,37 +41,28 @@ public class DeleteState implements State {
                         dV.clearSelected();
                     } else {
                         elementsToDelete.add(elementPainter.getElement());
-                        clicked = elementPainter;
+                        if (elementPainter.getElement() instanceof Interclass) {
+                            selectedInterclass = (Interclass) elementPainter.getElement();
+                        }
+                    }
+                    if (selectedInterclass != null) {
+                        for (ElementPainter connectionPainter : dV.getElementPainters()) {
+                            if (connectionPainter instanceof ConnectionPainter) {
+                                ConnectionPainter connectionPainterElement = (ConnectionPainter) connectionPainter;
+                                Connection connection = connectionPainterElement.getConnection();
+                                if (connection.getTo().equals(selectedInterclass) || connection.getFrom().equals(selectedInterclass)) {
+                                    connectionsToDelete.add(connectionPainterElement);
+                                }
+                            }
+                        }
                     }
                 }
                 break;
             }
         }
 
-        for (ElementPainter selectedPainter : dV.getSelectedPainters()) {
-            if (selectedPainter.getElement() instanceof Interclass) {
-                Interclass selectedInterclass = (Interclass) selectedPainter.getElement();
-                Iterator<ElementPainter> connectionIterator = dV.getElementPainters().iterator();
-                while (connectionIterator.hasNext()) {
-                    ElementPainter elementPainter = connectionIterator.next();
-                    if (elementPainter instanceof ConnectionPainter) {
-                        ConnectionPainter connectionPainter = (ConnectionPainter) elementPainter;
-                        Connection connection = connectionPainter.getConnection();
-                        if (connection.getTo().equals(selectedInterclass) || connection.getFrom().equals(selectedInterclass)) {
-                            connectionsToDelete.add(connectionPainter);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (clicked != null && clicked instanceof SelectPainter) {
-            DeleteElementCommand deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
-            dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
-        } else {
-            DeleteElementCommand deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
-            dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
-        }
+        DeleteElementCommand deleteElementCommand = new DeleteElementCommand(dV.getDiagram(), dV, elementsToDelete, connectionsToDelete);
+        dV.getDiagram().getCommandManager().addCommand(deleteElementCommand);
     }
 
     @Override

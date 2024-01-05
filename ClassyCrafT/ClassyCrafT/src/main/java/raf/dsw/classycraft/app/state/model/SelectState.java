@@ -23,11 +23,22 @@ public class SelectState implements State {
                 (int) ((e.getPoint().getY() - dV.getYTranslate()) / dV.getScalingFactor())
         );
 
-        dV.setSelectedPainters(new ArrayList<>());
+        boolean clickedOnSelected = false;
+
+        for (ElementPainter elementPainter : dV.getSelectedPainters()) {
+            if (elementPainter.elementAt(pos)) {
+                clickedOnSelected = true;
+                break;
+            }
+        }
+
+        if (!clickedOnSelected) {
+            dV.setSelectedPainters(new ArrayList<>());
+        }
 
         for (ElementPainter elementPainter : dV.getElementPainters()) {
             if (elementPainter instanceof ConnectionPainter) {
-                continue; // Skip ConnectionPainter instances
+                continue;
             }
             if (elementPainter.elementAt(pos)) {
                 selected = elementPainter;
@@ -35,13 +46,14 @@ public class SelectState implements State {
         }
     }
 
+
     @Override
     public void mouseReleased(MouseEvent e, DiagramView dV) {
         if (current != null) {
             dV.getPainters().remove(current);
             for (ElementPainter elementPainter : dV.getElementPainters()) {
                 if (elementPainter instanceof ConnectionPainter) {
-                    continue; // Skip ConnectionPainter instances
+                    continue;
                 }
                 if (elementPainter.getShape().intersects(current.shape.getBounds2D())) {
                     dV.getSelectedPainters().add(elementPainter);
