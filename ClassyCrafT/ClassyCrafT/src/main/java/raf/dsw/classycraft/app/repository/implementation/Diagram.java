@@ -46,6 +46,7 @@ public class Diagram extends ClassyNodeComposite {
             ((Package) getParent()).setChanged(true);
         }
     }
+
     @Override
     public void deleteChild(ClassyNode child) {
         if (child instanceof DiagramElement) {

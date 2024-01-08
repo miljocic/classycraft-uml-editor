@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.gui.swing.controller;
+package raf.dsw.classycraft.app.serializer;
 
 import com.google.gson.*;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
@@ -81,6 +81,7 @@ public class GsonNode implements JsonDeserializer<ClassyNode> {
                 jsonObject.get("stroke").getAsInt(),
                 jsonDeserializationContext.deserialize(jsonObject.get("from"), Interclass.class),
                 jsonDeserializationContext.deserialize(jsonObject.get("to"), Interclass.class));
+
     }
 
     private ClassyNode getAggregation(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
@@ -120,6 +121,5 @@ public class GsonNode implements JsonDeserializer<ClassyNode> {
                 jsonDeserializationContext.deserialize(jsonObject.get("location"), Point.class),
                 jsonObject.get("visibility").getAsString());
     }
-
 
 }

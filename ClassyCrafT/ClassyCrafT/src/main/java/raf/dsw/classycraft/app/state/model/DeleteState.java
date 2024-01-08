@@ -12,7 +12,6 @@ import raf.dsw.classycraft.app.state.State;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class DeleteState implements State {

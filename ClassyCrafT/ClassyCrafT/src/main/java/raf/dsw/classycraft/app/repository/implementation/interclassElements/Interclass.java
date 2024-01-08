@@ -22,6 +22,8 @@ public abstract class Interclass extends DiagramElement {
     private Point location;
     private String visibility;
     private final String type = "Interclass";
+    private String interclassType;
+
     public Interclass(String name, ClassyNode parent, Point location, String visibility, Dimension dimension) {
         super(name, parent, Color.BLACK, 2);
         this.name = name;
@@ -31,22 +33,25 @@ public abstract class Interclass extends DiagramElement {
         this.dimension = dimension;
         className = "Interclass";
     }
+
     public Interclass(String name, Color color, int stroke, List<ClassContent> classContents, Dimension dimension, Point location, String visibility) {
         super(name, color, stroke);
         this.classContents = classContents;
-        if(classContents == null)
+        if (classContents == null)
             classContents = new ArrayList<>();
         this.dimension = dimension;
         this.location = location;
         this.visibility = visibility;
         className = "Interclass";
     }
+
     public void addClassContent(ClassContent content) {
         classContents.add(content);
     }
+
     public List<String> getAttributes() {
         List<String> attributes = new ArrayList<>();
-        if(classContents == null) // todo: ne radi
+        if (classContents == null) // todo: ne radi
             classContents = new ArrayList<>();
         for (ClassContent content : classContents) {
             if (content instanceof Attribute) {
@@ -55,9 +60,10 @@ public abstract class Interclass extends DiagramElement {
         }
         return attributes;
     }
+
     public List<String> getMethods() {
         List<String> methods = new ArrayList<>();
-        if(classContents == null)
+        if (classContents == null)
             classContents = new ArrayList<>();
         for (ClassContent content : classContents) {
             if (content instanceof Method) {
@@ -66,6 +72,7 @@ public abstract class Interclass extends DiagramElement {
         }
         return methods;
     }
+
     public void setLocation(Point location) {
         this.location = location;
         ((Package) getParent().getParent()).setChanged(true);

@@ -23,7 +23,7 @@ public class SaveTemplateAction extends AbstractClassyAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
-        if (!(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Diagram)) {
+        if ((MainFrame.getInstance().getTree().getSelectedNode() == null) || !(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Diagram)) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.SAVE_DIAGRAM_AS_TEMPLATE);
             return;
         }

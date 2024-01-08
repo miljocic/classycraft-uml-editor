@@ -24,7 +24,7 @@ public class SaveAction extends AbstractClassyAction {
 
         JFileChooser jfc = new JFileChooser();
 
-        if (!(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Project)) {
+        if ((MainFrame.getInstance().getTree().getSelectedNode() == null) || !(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Project)) {
             ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.ONLY_PROJECT_SERIALIZABLE);
             return;
         }

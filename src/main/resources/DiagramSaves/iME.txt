@@ -1,0 +1,50 @@
+{
+  "type": "Diagram",
+  "template": true,
+  "children": [
+    {
+      "classContents": [],
+      "dimension": {
+        "width": 200,
+        "height": 250
+      },
+      "location": {
+        "x": 77,
+        "y": 77
+      },
+      "visibility": "public",
+      "type": "Interclass",
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0
+      },
+      "stroke": 2,
+      "className": "Class",
+      "name": "NewClass0"
+    },
+    {
+      "classContents": [],
+      "dimension": {
+        "width": 200,
+        "height": 250
+      },
+      "location": {
+        "x": 390,
+        "y": 149
+      },
+      "visibility": "protected",
+      "type": "Interclass",
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0
+      },
+      "stroke": 2,
+      "className": "Interface",
+      "name": "NewInterface0"
+    }
+  ],
+  "className": "Diagram",
+  "name": "iME"
+}

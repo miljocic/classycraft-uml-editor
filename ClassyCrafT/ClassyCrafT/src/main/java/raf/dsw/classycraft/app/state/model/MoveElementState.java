@@ -10,9 +10,11 @@ import raf.dsw.classycraft.app.state.State;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
+
 public class MoveElementState implements State {
     private Point startPoint;
     private HashMap<Interclass, Point> map = new HashMap<>();
+
     @Override
     public void mousePressed(MouseEvent e, DiagramView dV) {
         map.clear();
@@ -48,6 +50,7 @@ public class MoveElementState implements State {
         dV.getSelectedElements().clear();
         dV.repaint();
     }
+
     @Override
     public void mouseDragged(MouseEvent e, DiagramView dV) {
         HashMap<Interclass, Point> help = new HashMap<>();

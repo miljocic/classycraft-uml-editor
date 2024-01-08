@@ -1,7 +1,8 @@
-package raf.dsw.classycraft.app.gui.swing.controller;
+package raf.dsw.classycraft.app.serializer;
 
 import com.google.gson.*;
 import raf.dsw.classycraft.app.repository.implementation.classcontentElements.ClassContent;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;

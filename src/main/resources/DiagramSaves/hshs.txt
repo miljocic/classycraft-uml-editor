@@ -1,0 +1,29 @@
+{
+  "type": "Diagram",
+  "template": true,
+  "children": [
+    {
+      "classContents": [],
+      "dimension": {
+        "width": 200,
+        "height": 250
+      },
+      "location": {
+        "x": 94,
+        "y": 83
+      },
+      "visibility": "public",
+      "type": "Interclass",
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0
+      },
+      "stroke": 2,
+      "className": "Class",
+      "name": "NewClass0"
+    }
+  ],
+  "className": "Diagram",
+  "name": "hshs"
+}

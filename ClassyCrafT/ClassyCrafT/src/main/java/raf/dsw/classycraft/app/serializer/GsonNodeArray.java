@@ -1,4 +1,4 @@
-package raf.dsw.classycraft.app.gui.swing.controller;
+package raf.dsw.classycraft.app.serializer;
 
 import com.google.gson.*;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GsonNodeArray implements JsonDeserializer<List<ClassyNode>>{
+public class GsonNodeArray implements JsonDeserializer<List<ClassyNode>> {
 
     @Override
     public List<ClassyNode> deserialize(JsonElement jsonElement, Type typeOfT, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

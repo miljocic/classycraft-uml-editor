@@ -3,11 +3,8 @@ package raf.dsw.classycraft.app.serializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import raf.dsw.classycraft.app.core.Serializer;
-import raf.dsw.classycraft.app.gui.swing.controller.GsonColor;
-import raf.dsw.classycraft.app.gui.swing.controller.GsonContent;
-import raf.dsw.classycraft.app.gui.swing.controller.GsonNode;
-import raf.dsw.classycraft.app.gui.swing.controller.GsonNodeArray;
 import raf.dsw.classycraft.app.repository.composite.ClassyNode;
+import raf.dsw.classycraft.app.repository.composite.ClassyNodeComposite;
 import raf.dsw.classycraft.app.repository.implementation.Diagram;
 import raf.dsw.classycraft.app.repository.implementation.Project;
 import raf.dsw.classycraft.app.repository.implementation.connectionElements.Connection;
@@ -42,23 +39,23 @@ public class GsonSerializer implements Serializer {
     public Project loadProject(File file) {
         try (FileReader fileReader = new FileReader(file)) {
             Project project = gson.fromJson(fileReader, Project.class);
-//            for (ClassyNode child : project.getChildren()) { //Todo: ako proradi ClassContent
-//                child.setParent(project);
-//                ClassyNodeComposite childComposite = (ClassyNodeComposite) child;
-//                for (ClassyNode grandchild : childComposite.getChildren()) {
-//                    if (grandchild instanceof Connection) {
-//                        Connection connection = (Connection) grandchild;
-//                        connection.setFrom((Interclass)
-//                                childComposite.getChildByName(connection.getFrom().getName()));
-//                        connection.setTo((Interclass)
-//                                childComposite.getChildByName(connection.getTo().getName()));
-//                        System.out.println(connection.getFrom() + " " + connection.getTo());
-//                    } else {
-//                        System.out.println(grandchild);
-//                    }
-//                    grandchild.setParent(childComposite);
-//                }
-//            }
+            for (ClassyNode child : project.getChildren()) {
+                child.setParent(project);
+                ClassyNodeComposite childComposite = (ClassyNodeComposite) child;
+                for (ClassyNode grandchild : childComposite.getChildren()) {
+                    if (grandchild instanceof Connection) {
+                        Connection connection = (Connection) grandchild;
+                        connection.setFrom((Interclass)
+                                childComposite.getChildByName(connection.getFrom().getName()));
+                        connection.setTo((Interclass)
+                                childComposite.getChildByName(connection.getTo().getName()));
+                        System.out.println(connection.getFrom() + " " + connection.getTo());
+                    } else {
+                        System.out.println(grandchild);
+                    }
+                    grandchild.setParent(childComposite);
+                }
+            }
             return project;
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,16 +78,23 @@ public class GsonSerializer implements Serializer {
         try {
             Files.createDirectories(dirPath);
             Path filePath = dirPath.resolve(diagram.getName() + ".txt");
-            Files.createFile(filePath);
-            try (FileWriter writer = new FileWriter(filePath.toFile())) {
-                gson.toJson(diagram, writer);
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            if (Files.exists(filePath)) {
+                System.out.println("File already exists. Choose a different file name.");
+            } else {
+                Files.createFile(filePath);
+                try (FileWriter writer = new FileWriter(filePath.toFile())) {
+                    gson.toJson(diagram, writer);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Template saved successfully!");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public Diagram loadTemplate(File file) {

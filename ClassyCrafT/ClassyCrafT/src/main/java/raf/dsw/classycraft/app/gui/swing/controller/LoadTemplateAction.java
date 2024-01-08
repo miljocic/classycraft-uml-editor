@@ -25,9 +25,11 @@ public class LoadTemplateAction extends AbstractClassyAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         URL templateURL = getClass().getResource(Diagram.getTemplatePath());
-        if (templateURL != null) {
+        if ((MainFrame.getInstance().getTree().getSelectedNode() == null) || !(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package)) {
+            ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_PACKAGE_SELECTED);
+        } else if (templateURL != null) {
             JFileChooser jfc = new JFileChooser(templateURL.getPath());
-            if (!(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package)) {
+            if ((MainFrame.getInstance().getTree().getSelectedNode() == null) || !(MainFrame.getInstance().getTree().getSelectedNode().getClassyNode() instanceof Package)) {
                 ApplicationFramework.getInstance().getMessageGenerator().generateMessage(ErrorType.NO_PACKAGE_SELECTED);
             }
             Package aPackage = (Package) MainFrame.getInstance().getTree().getSelectedNode().getClassyNode();
