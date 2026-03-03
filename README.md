@@ -13,7 +13,3 @@ Project Structure: app/ – application core and command system gui/ – Swing i
 How to Run: mvn clean install mvn exec:java Or open the project in IntelliJ IDEA and run the main class from AppCore.
 
 Developed as part of a Software Design course, the project focuses on applying design patterns and architectural principles in a real-world modeling tool.
-
-
-Jovan Spasojevic RN 46/21  
-Milica Jocic RN 107/23
